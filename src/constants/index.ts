@@ -1,0 +1,1 @@
+export const baseUrl = "Zde se to přidá od Marťaska"
