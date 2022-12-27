@@ -10,7 +10,7 @@ const initalState = {
       date:"5.2.2022",
       language:"python",
       rating:2,
-      comment:"Good",
+      comment:"bad",
       time:4,
       key:0
     },
@@ -20,7 +20,7 @@ const initalState = {
       rating:2,
       comment:"Good",
       time:4,
-      key:0
+      key:1
     }
   ]
 }

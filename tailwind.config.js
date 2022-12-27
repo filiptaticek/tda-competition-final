@@ -24,6 +24,10 @@ module.exports = {
         main_font: ["Poppins","sans-serif"],
         submain_font: ["Inter","sans-serif"],
       },
+      option: {
+        "text-blue-500": "blue",
+        "font-bold": "bold",
+      },
     },
   },
   plugins: [],

@@ -1,18 +1,18 @@
 import { IDiaryEntry } from "./types"
 
-export const DATA:Array<IDiaryEntry> = [{
-  date:"5-2",
-  language:"python",
+export const FAKE_DATA:Array<IDiaryEntry> = [{
+  date:"Dec 27 2022",
+  language:"Javascript",
   rating:2,
-  comment:"Good",
+  comment:"ahaha",
   time:4,
-  key:0
+  key:"2"
 },
 {
-  date:"5-2",
-  language:"python",
+  date:"Dec 27 2022",
+  language:"Javascript",
   rating:2,
-  comment:"Good",
+  comment:"Not so easy",
   time:4,
-  key:0
+  key:"3"
 }]
