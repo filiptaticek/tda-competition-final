@@ -3,26 +3,10 @@ import thunk from "redux-thunk"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { createWrapper } from "next-redux-wrapper"
 import combineReducer from "./reducers"
+import { FAKE_DATA } from "../fake_data"
 
 const initalState = {
-  records:[
-    {
-      date:"5.2.2022",
-      language:"python",
-      rating:2,
-      comment:"bad",
-      time:4,
-      key:0
-    },
-    {
-      date:"5.2.2022",
-      language:"python",
-      rating:2,
-      comment:"Good",
-      time:4,
-      key:1
-    }
-  ]
+  records:FAKE_DATA
 }
 
 const middleware = [thunk]

@@ -1,1 +1,1 @@
-export const baseUrl = "Zde se to přidá od Marťaska"
+export const baseUrl = "https://theslurfer.pythonanywhere.com/"

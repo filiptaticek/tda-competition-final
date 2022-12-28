@@ -3,9 +3,9 @@ export type Rating = 0|1|2|3|4|5
 
 export interface IDiaryEntry {
     date:string
-    language:Language
-    time:number
+    programming_language:Language
+    minutes_spent:number
     rating:Rating
-    comment:string
-    key?:string
+    description:string
+    record_id?:number
 }

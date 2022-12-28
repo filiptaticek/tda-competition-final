@@ -1,6 +1,6 @@
 import axios from "axios"
-import { baseUrl } from "../constants"
-import { IDiaryEntry } from "../types"
+import { baseUrl } from "../../constants"
+import { IDiaryEntry } from "../../types"
 
 export const postRequest = async (data: IDiaryEntry) => {
   try {

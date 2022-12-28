@@ -1,38 +1,33 @@
-import { DiaryEntry } from "../components/DiaryEntry"
-import { useSelector, useDispatch } from "react-redux"
-import { Language, Rating } from "../src/types"
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+import { useDispatch } from "react-redux"
 import { setRecords } from "../src/store/actions"
-import { AddEntryForm } from "../components/AddEntryForm"
-import { getRequest } from "../src/api_functions/get"
+import { useState } from "react"
+import { getRequest } from "../src/functions/api/get"
 import { useEffect } from "react"
+import { MainTab } from "../components/MainTab"
 
 export default function Home() {
-  const globalposts = useSelector((state:any) => state.records)
   const dispatch = useDispatch()
+  const [daysBack,setDaysBack] = useState<number>(0)
 
   useEffect(() => {
     const updateState = async () =>{
-      dispatch(setRecords(await getRequest()))
-      console.log("Worked perfectly")
+      const serverData = await getRequest()
+      dispatch(setRecords(serverData))
+      serverData.map((thing: any) => console.log(thing))
     }
     updateState()
   }, [dispatch])
 
   return (
-    <>
-      <AddEntryForm />
-      {globalposts.map((entry: { date: string; language: Language; rating: Rating; comment: string; time: number; key: string }):any=>{
-        return(
-          <DiaryEntry 
-            date={entry.date}
-            language={entry.language}
-            rating={entry.rating}
-            comment={entry.comment}
-            time={entry.time}
-            key={entry.comment}
-          />
-        )
-      })}
-    </>
+    <div className="px-4">
+      <p className="my-10 text-5xl text-center font-bold">Programming. Daily.</p>
+      <div className="w-full flex">
+        <img src="sipka_doleva.png" className="cursor-pointer mt-1 mr-2 w-min h-min" onClick={()=>setDaysBack(daysBack-7)}/>
+        <MainTab daysBack={daysBack} />
+        <img src="sipka_doprava.png" className="cursor-pointer mt-1 ml-2 w-min h-min" onClick={()=>setDaysBack(daysBack+7)}/>
+      </div>
+    </div>
   )
 }
