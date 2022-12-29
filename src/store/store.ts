@@ -6,7 +6,8 @@ import combineReducer from "./reducers"
 import { FAKE_DATA } from "../fake_data"
 
 const initalState = {
-  records:FAKE_DATA
+  records:FAKE_DATA,
+  sidebar:false
 }
 
 const middleware = [thunk]

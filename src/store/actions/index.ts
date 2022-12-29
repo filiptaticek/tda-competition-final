@@ -29,3 +29,9 @@ export const updateSingleRecord = (updatedrecord_id:number,newrecord:IDiaryEntry
     newrecord:newrecord
   }
 }
+
+export const toggleSidebarVisbility = (): AnyAction => {
+  return {
+    type: "TOGGLE_VISIBILITY"
+  }
+}

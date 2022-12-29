@@ -1,11 +1,12 @@
 import { useState } from "react"
-import { postRequest } from "../src/functions/api/post"
-import clsx from "clsx"
-import { Language, Rating } from "../src/types"
 import { useDispatch } from "react-redux"
+import clsx from "clsx"
+import { postRequest } from "../src/functions/api/post"
+import { Language, Rating } from "../src/types"
 import { addSingleRecord } from "../src/store/actions"
 import { getEstheticDate } from "../src/functions/date/esthetic_date"
 import { Description } from "./Description"
+import { designColor } from "../src/constants"
 //This form handles sending new post to the database and updating the state
 
 export const AddEntryForm = ({date}:{date:string})=>{
@@ -19,13 +20,12 @@ export const AddEntryForm = ({date}:{date:string})=>{
 
   const handleSubmit = async (event:any) => {
     event.preventDefault()
-    //const date = postDate
     const record_id = 100
     const data = { date, description, programming_language, minutes_spent, rating, record_id }
+    setShowForm(false)
     const toCoPrislo = await postRequest(data)
     dispatch(addSingleRecord(toCoPrislo))
     setProgrammingLanguage("Python"),setMinutesSpent(0),setRating(0),setDescription("")
-    setShowForm(false)
   }
 
   const sameProperties ="w-full my-[4px] rounded-md border border-black p-2 m-auto"
@@ -88,7 +88,11 @@ export const AddEntryForm = ({date}:{date:string})=>{
           </form>
         </div>
       }
-      <button className="w-full text-center border-2 border-black bg-sky-400 text-white font-bold" onClick={()=>setShowForm(!showForm)}>+</button>
+      {new Date() > new Date(date)?
+        <button className={`w-full text-center border-x-2 border-b-2 border-black ${designColor} text-white font-bold" onClick={()=>setShowForm(!showForm)}`}>+</button>
+        :
+        <div className={`w-full text-center border-x-2 border-b-2 border-black ${designColor} text-white font-bold`}>+</div>
+      }
     </div>
   )
 }

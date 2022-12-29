@@ -1,3 +1,4 @@
+//this function gives us date in format: "2022-12-29 14:16:37"
 export function getPastDate(days:number) {
   const date = new Date()
   date.setDate(date.getDate() + days)

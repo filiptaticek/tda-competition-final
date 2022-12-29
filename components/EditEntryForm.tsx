@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import clsx from "clsx"
 import { Language, Rating } from "../src/types"
-import { useDispatch } from "react-redux"
 import { removeSingleRecord, updateSingleRecord } from "../src/store/actions"
 import { getEstheticDate } from "../src/functions/date/esthetic_date"
 import { deleteRequest } from "../src/functions/api/delete"
 import { putRequest } from "../src/functions/api/put"
+import { Description } from "./Description"
 
 interface IEditEntryForm {
-    postDate:string,
+    date:string,
     postProgrammingLanguage:Language
     postMinutesSpent:number
     postRating:Rating
@@ -18,7 +19,7 @@ interface IEditEntryForm {
     postId:number
 }
 
-export const EditEntryForm = ({postId,postDate,postProgrammingLanguage,postMinutesSpent,postRating,postComment}:IEditEntryForm)=>{
+export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSpent,postRating,postComment}:IEditEntryForm)=>{
 
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>(postProgrammingLanguage)
@@ -29,7 +30,6 @@ export const EditEntryForm = ({postId,postDate,postProgrammingLanguage,postMinut
 
   const handleEditingEntry = (event:any) => {
     event.preventDefault()
-    const date = postDate
     const record_id = 1000
     const data = { date, description, programming_language, minutes_spent, rating,record_id }
     putRequest(postId,data)
@@ -44,20 +44,13 @@ export const EditEntryForm = ({postId,postDate,postProgrammingLanguage,postMinut
   }
 
   const sameProperties ="w-full my-[4px] rounded-md border border-black p-2 m-auto"
-  const Description = ({text}:{text:string})=>{
-    return(
-      <span className="font-bold text-sm">
-        {text}
-      </span>
-    )
-  }
 
   return (
     <div>
       {showForm&&
         <div className="w-screen left-0 fixed top-0 h-screen bg-black/80">
           <form className="text-left p-10 m-auto rounded-xl relative top-[120px] bg-white w-[500px] border border-black" onSubmit={handleEditingEntry}>
-            <p className="text-2xl text-center mb-5">Edit your entry from<br/> <strong>{getEstheticDate(postDate)}</strong></p>
+            <p className="text-2xl text-center mb-5">Edit your entry from<br/> <strong>{getEstheticDate(date)}</strong></p>
             <div className="w-full">
               <Description text="Programming language" />
               <select 
@@ -99,10 +92,12 @@ export const EditEntryForm = ({postId,postDate,postProgrammingLanguage,postMinut
                 onChange={(event) => setDescription(event.target.value)} />
               <br/>
               <div className="flex mt-8">
-                <button className="w-[50%] bg-emerald-200 px-5 py-2 rounded-md border border-black font-bold" type="submit">Update </button>
+                <button className="mr-2 w-[50%] bg-emerald-200 px-5 py-2 rounded-md border border-black font-bold" type="submit">Update </button>
                 <button type="button" className="w-[50%] bg-red-200 rounded-md border border-black w-full font-bold" onClick={()=>setShowForm(!showForm)}>Close</button>
               </div>
-              <button type="button" className="w-[50%] bg-emerald-200 px-5 py-2 rounded-md border border-black font-bold" onClick={handleDeletingEntry}>Delete </button>
+              <div className="flex mt-2">
+                <button type="button" className="m-auto w-[50%] bg-red-500 px-5 py-2 rounded-md border border-black font-bold" onClick={handleDeletingEntry}>Delete </button>
+              </div>
             </div>
           </form>
         </div>
