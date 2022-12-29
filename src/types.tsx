@@ -7,5 +7,5 @@ export interface IDiaryEntry {
     minutes_spent:number
     rating:Rating
     description:string
-    record_id?:number
+    record_id:number
 }

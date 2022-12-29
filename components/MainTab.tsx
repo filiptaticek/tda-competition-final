@@ -1,7 +1,7 @@
 import { DiaryEntry } from "./DiaryEntry"
 import { useSelector } from "react-redux"
-import { getPastDate } from "../src/functions/other/right_date"
-import { getEstheticDate } from "../src/functions/other/esthetic_date"
+import { getPastDate } from "../src/functions/date/right_date"
+import { getEstheticDate } from "../src/functions/date/esthetic_date"
 import { Language, Rating } from "../src/types"
 import { AddEntryForm } from "./AddEntryForm"
 
@@ -23,7 +23,8 @@ export const MainTab = ({daysBack}:{daysBack:number})=>{
       {dny_v_tydnu.map((den: { number: number, name:string})=>{
         return(
           <div className="mx-1 w-full" key={den.number}>
-            <p className="rounded-md border-2 border-black font-bold text-center text-md">{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
+            <p className="border-x-2 border-t-2 border-black font-bold text-center text-md">{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
+            <AddEntryForm date={getPastDate(den.number)} />
             {globalposts.map((entry: { date: string; programming_language: Language; rating: Rating; description: string; minutes_spent: number; record_id: number }):any=>{
               if (entry.date.substring(0,10)===getPastDate(den.number).substring(0,10)){
                 return(
@@ -34,11 +35,11 @@ export const MainTab = ({daysBack}:{daysBack:number})=>{
                     description={entry.description}
                     minutes_spent={entry.minutes_spent}
                     key={entry.record_id}
+                    record_id={entry.record_id}
                   />
                 )
               }
             })}
-            <AddEntryForm postDate={getPastDate(den.number)} />
           </div>
         )
       })}

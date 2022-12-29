@@ -1,17 +1,25 @@
 import { IDiaryEntry } from "../src/types"
+import { EditEntryForm } from "./EditEntryForm"
 
-export const DiaryEntry = ({date,programming_language,minutes_spent,rating,description}:IDiaryEntry)=>{
+export const DiaryEntry = ({programming_language,minutes_spent,rating,description, date, record_id}:IDiaryEntry)=>{
   return(
-    <div className="rounded-md text-center border border-black p-5 border border-black m-auto">
+    <div className="h-[250px] overflow-hidden text-center border-x-2 border-b-2 border-black p-5 m-auto">
       <div className="mb-5">
         <p className="font-bold text-2xl text-center">
           {programming_language}<br/>
         </p>
-        <p><span className="font-bold">{date.substring(0,10)}</span></p>
       </div>
-      <p><span className="font-bold">{minutes_spent}</span> minutes spent</p>
+      <p><span className="font-bold">{minutes_spent}</span> minutes</p>
       <p><span className="font-bold">Rating of </span>{rating}</p>
-      <p className="mt-5 italic">{description}</p>
+      <p className="h-[50px] overflow-scroll mt-5 italic">{description}</p>
+      <EditEntryForm 
+        postDate={date} 
+        postMinutesSpent={minutes_spent} 
+        postProgrammingLanguage={programming_language}
+        postRating={rating}
+        postComment={description}
+        postId={record_id}
+      />
     </div>
   )
 }

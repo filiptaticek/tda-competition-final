@@ -2,7 +2,7 @@ export function getPastDate(days:number) {
   const date = new Date()
   date.setDate(date.getDate() + days)
   const year = date.getFullYear()
-  const month = date.getMonth() + 1 // Month is 0-based, so we need to add 1 to get the correct month
+  const month = date.getMonth() + 1 
   const day = date.getDate()
   const hours = date.getHours()
   const minutes = date.getMinutes()
