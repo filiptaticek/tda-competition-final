@@ -1,10 +1,11 @@
 export type Language = "Python"|"Javascript"|"C++"
-export type Rating = 0|1|2|3|4|5
+export type Rating = 1|2|3|4|5
+export type MinutesSpent = number & { __isPositive: true };
 
 export interface IDiaryEntry {
     date:string
     programming_language:Language
-    minutes_spent:number
+    minutes_spent:MinutesSpent
     rating:Rating
     description:string
     record_id:number

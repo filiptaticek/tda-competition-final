@@ -3,17 +3,18 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import clsx from "clsx"
-import { Language, Rating } from "../src/types"
+import { Language, MinutesSpent, Rating } from "../src/types"
 import { removeSingleRecord, updateSingleRecord } from "../src/store/actions"
 import { getEstheticDate } from "../src/functions/date/esthetic_date"
 import { deleteRequest } from "../src/functions/api/delete"
 import { putRequest } from "../src/functions/api/put"
 import { Description } from "./Description"
+import { inputSameProperties } from "../src/constants"
 
 interface IEditEntryForm {
     date:string,
     postProgrammingLanguage:Language
-    postMinutesSpent:number
+    postMinutesSpent:MinutesSpent
     postRating:Rating
     postComment:string
     postId:number
@@ -23,7 +24,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
 
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>(postProgrammingLanguage)
-  const [minutes_spent, setMinutesSpent] = useState<number>(postMinutesSpent)
+  const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(postMinutesSpent)
   const [rating, setRating] = useState<Rating>(postRating)
   const [description, setDescription] = useState<string>(postComment)
   const dispatch = useDispatch()
@@ -43,8 +44,6 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
     dispatch(removeSingleRecord(postId))
   }
 
-  const sameProperties ="w-full my-[4px] rounded-md border border-black p-2 m-auto"
-
   return (
     <div>
       {showForm&&
@@ -54,7 +53,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
             <div className="w-full">
               <Description text="Programming language" />
               <select 
-                className={sameProperties} 
+                className={inputSameProperties} 
                 value={programming_language} 
                 onChange={(event) => setProgrammingLanguage(event.target.value as Language)}>
                 <option value="Python">Python</option>
@@ -64,19 +63,19 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
               <br/>
               <Description text="Time spent in minutes" />
               <input 
-                className={clsx(sameProperties,"h-10")} 
+                className={clsx(inputSameProperties,"h-10")} 
                 type="number"
+                min="1"
                 value={minutes_spent} 
-                onChange={(event) => setMinutesSpent(Number(event.target.value))} 
+                onChange={(event) => setMinutesSpent(Number(event.target.value) as MinutesSpent)} 
               />
               <br/>
               <Description text="Rating" />
               <br/>
               <select 
-                className={sameProperties} 
+                className={inputSameProperties} 
                 value={rating} 
                 onChange={(event) => setRating(parseInt(event.target.value) as Rating)}>
-                <option value={0} >0</option>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
@@ -87,7 +86,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
               <Description text="Your comment" />
               <br />
               <textarea
-                className={sameProperties} 
+                className={inputSameProperties} 
                 value={description} 
                 onChange={(event) => setDescription(event.target.value)} />
               <br/>

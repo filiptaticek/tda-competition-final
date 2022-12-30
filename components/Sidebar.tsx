@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link"
 import { designColor } from "../src/constants"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { toggleSidebarVisbility } from "../src/store/actions"
+import { SideBarLink } from "./SideBarLink"
 
 export const Sidebar = ()=>{
 
@@ -19,13 +19,13 @@ export const Sidebar = ()=>{
     >
       <div className={` ${isOpen?"block":"hidden"} text-white text-2xl`}>
         <img className="fixed top-10 cursor-pointer left-[300px] w-[20px]" src="zavrit_stranku.png" onClick={()=>dispatch(toggleSidebarVisbility())}/>
-        <Link href={"/allentries"}>All entries</Link>
+        <SideBarLink text="Home" href="/" />
         <br/>
         <br/>
-        <Link href={"/"}> Back home</Link>
+        <SideBarLink text="All Entries" href="/all_entries" />
         <br/>
         <br/>
-        <Link href={"/users"}>Users</Link>
+        <SideBarLink text="Users" href="/users" />
       </div>
     </div>
   )

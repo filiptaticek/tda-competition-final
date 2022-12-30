@@ -2,19 +2,19 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import clsx from "clsx"
 import { postRequest } from "../src/functions/api/post"
-import { Language, Rating } from "../src/types"
+import { Language, MinutesSpent, Rating } from "../src/types"
 import { addSingleRecord } from "../src/store/actions"
 import { getEstheticDate } from "../src/functions/date/esthetic_date"
 import { Description } from "./Description"
-import { designColor } from "../src/constants"
+import { designColor, inputSameProperties } from "../src/constants"
 //This form handles sending new post to the database and updating the state
 
 export const AddEntryForm = ({date}:{date:string})=>{
 
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>("Python")
-  const [minutes_spent, setMinutesSpent] = useState<number>(0)
-  const [rating, setRating] = useState<Rating>(0)
+  const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(1 as MinutesSpent)
+  const [rating, setRating] = useState<Rating>(1)
   const [description, setDescription] = useState<string>("")
   const dispatch = useDispatch()
 
@@ -25,10 +25,8 @@ export const AddEntryForm = ({date}:{date:string})=>{
     setShowForm(false)
     const toCoPrislo = await postRequest(data)
     dispatch(addSingleRecord(toCoPrislo))
-    setProgrammingLanguage("Python"),setMinutesSpent(0),setRating(0),setDescription("")
+    setProgrammingLanguage("Python"),setMinutesSpent(1 as MinutesSpent),setRating(1),setDescription("")
   }
-
-  const sameProperties ="w-full my-[4px] rounded-md border border-black p-2 m-auto"
 
   return (
     <div>
@@ -39,7 +37,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
             <div className="w-full">
               <Description text="Programming language" />
               <select 
-                className={sameProperties} 
+                className={inputSameProperties} 
                 value={programming_language} 
                 onChange={(event) => setProgrammingLanguage(event.target.value as Language)}>
                 <option value="Python">Python</option>
@@ -49,19 +47,19 @@ export const AddEntryForm = ({date}:{date:string})=>{
               <br/>
               <Description text="Time spent in minutes" />
               <input 
-                className={clsx(sameProperties,"h-10")} 
+                className={clsx(inputSameProperties,"h-10")} 
                 type="number"
+                min="1"
                 value={minutes_spent} 
-                onChange={(event) => setMinutesSpent(Number(event.target.value))} 
+                onChange={(event) => setMinutesSpent(Number(event.target.value) as MinutesSpent)} 
               />
               <br/>
               <Description text="Rating" />
               <br/>
               <select 
-                className={sameProperties} 
+                className={inputSameProperties} 
                 value={rating} 
                 onChange={(event) => setRating(parseInt(event.target.value) as Rating)}>
-                <option value={0} >0</option>
                 <option value={1}>1</option>
                 <option value={2}>2</option>
                 <option value={3}>3</option>
@@ -72,7 +70,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
               <Description text="Your comment" />
               <br />
               <textarea
-                className={sameProperties} 
+                className={inputSameProperties} 
                 value={description} 
                 onChange={(event) => setDescription(event.target.value)} />
               <br/>
@@ -89,7 +87,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
         </div>
       }
       {new Date() > new Date(date)?
-        <button className={`w-full text-center border-x-2 border-b-2 border-black ${designColor} text-white font-bold" onClick={()=>setShowForm(!showForm)}`}>+</button>
+        <button className={`w-full text-center border-x-2 border-b-2 border-black ${designColor} text-white font-bold`} onClick={()=>setShowForm(!showForm)}>+</button>
         :
         <div className={`w-full text-center border-x-2 border-b-2 border-black ${designColor} text-white font-bold`}>+</div>
       }
