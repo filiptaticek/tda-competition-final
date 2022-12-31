@@ -10,6 +10,8 @@ import { deleteRequest } from "../src/functions/api/delete"
 import { putRequest } from "../src/functions/api/put"
 import { Description } from "./Description"
 import { inputSameProperties } from "../src/constants"
+import { UniversalForm } from "./UniversalForm"
+import { FormButton } from "./FormButton"
 
 interface IEditEntryForm {
     date:string,
@@ -47,10 +49,8 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
   return (
     <div>
       {showForm&&
-        <div className="w-screen left-0 fixed top-0 h-screen bg-black/80">
-          <form className="text-left p-10 m-auto rounded-xl relative top-[120px] bg-white w-[500px] border border-black" onSubmit={handleEditingEntry}>
-            <p className="text-2xl text-center mb-5">Edit your entry from<br/> <strong>{getEstheticDate(date)}</strong></p>
-            <div className="w-full">
+          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<p>Edit your entry from <br/><strong>{getEstheticDate(date)}</strong></p>} onSubmit={handleEditingEntry}>
+            <div className="w-full text-left">
               <Description text="Programming language" />
               <select 
                 className={inputSameProperties} 
@@ -91,15 +91,11 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
                 onChange={(event) => setDescription(event.target.value)} />
               <br/>
               <div className="flex mt-8">
-                <button className="mr-2 w-[50%] bg-emerald-200 px-5 py-2 rounded-md border border-black font-bold" type="submit">Update </button>
-                <button type="button" className="w-[50%] bg-red-200 rounded-md border border-black w-full font-bold" onClick={()=>setShowForm(!showForm)}>Close</button>
-              </div>
-              <div className="flex mt-2">
-                <button type="button" className="m-auto w-[50%] bg-red-500 px-5 py-2 rounded-md border border-black font-bold" onClick={handleDeletingEntry}>Delete </button>
+                <FormButton type="submit" text="Edit form" className="mr-2 bg-emerald-200" />
+                <FormButton onClick={handleDeletingEntry} className="bg-red-500" text="Delete entry"/>
               </div>
             </div>
-          </form>
-        </div>
+          </UniversalForm>
       }
       <img src="upravit_zaznam.png" className="h-[20px] m-auto cursor-pointer mt-3 w-min h-min" onClick={()=>setShowForm(!showForm)}/>
     </div>
