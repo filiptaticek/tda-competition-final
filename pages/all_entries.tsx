@@ -18,7 +18,7 @@ export default function Home() {
   }, [dispatch])
 
   return (
-    <div className="px-4">
+    <div className="px-4 max-w-page_max m-auto">
       <Header />
       <AllEntries />
       <div className="w-full flex">

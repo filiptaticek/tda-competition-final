@@ -13,7 +13,7 @@ export const FormButton = ({className,text,onClick,type}:IFormButton)=>{
 
   return(
     <button 
-      className={clsx("m-auto w-[50%] px-5 py-2 rounded-md border border-black font-bold",className)}
+      className={clsx("m-auto w-[50%] px-5 py-2 rounded-md text-white font-bold",className)}
       onClick={onClick}
       type={tip}
     >

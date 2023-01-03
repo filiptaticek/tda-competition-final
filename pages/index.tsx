@@ -22,7 +22,7 @@ export default function Home() {
   }, [dispatch])
 
   return (
-    <div className="px-4">
+    <div className="px-4 px-4 max-w-page_max m-auto">
       <Header />
       <div className="w-full flex">
         <img src="sipka_doleva.png" className="cursor-pointer mt-1 mr-2 w-min h-min" onClick={()=>setDaysBack(daysBack-7)}/>

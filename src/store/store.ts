@@ -3,10 +3,9 @@ import thunk from "redux-thunk"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { createWrapper } from "next-redux-wrapper"
 import combineReducer from "./reducers"
-import { FAKE_DATA } from "../fake_data"
 
 const initalState = {
-  records:FAKE_DATA,
+  records:[],
   sidebar:false
 }
 

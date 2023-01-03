@@ -4,7 +4,7 @@
 interface IUniversalForm {
     header:any
     onSubmit:any
-    closeForm?:any
+    closeForm:any
     children:any
 }
 

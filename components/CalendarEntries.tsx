@@ -1,7 +1,6 @@
 import { CalendarEntry } from "./CalendarEntry"
 import { useSelector } from "react-redux"
-import { getPastDate } from "../src/functions/date/right_date"
-import { getEstheticDate } from "../src/functions/date/esthetic_date"
+import { getPastDate, getEstheticDate } from "../src/functions/index.js"
 import { Language, MinutesSpent, Rating } from "../src/types"
 import { AddEntryForm } from "./AddEntryForm"
 
@@ -20,7 +19,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
   ]
 
   return(
-    <div className="w-full flex">
+    <div className="w-full lg:flex">
       {dny_v_tydnu.map((den: { number: number, name:string})=>{
         return(
           <div className="mx-1 w-full" key={den.number}>
@@ -38,9 +37,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
                     key={entry.record_id}
                     record_id={entry.record_id}
                   />
-                )
-              }
-            })}
+                )}})}
           </div>
         )
       })}

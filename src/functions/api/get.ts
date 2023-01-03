@@ -1,6 +1,5 @@
 import axios from "axios"
 import { baseUrl } from "../../constants"
-import { FAKE_DATA } from "../../fake_data"
 
 export const getRequest = async () => {
   try {
@@ -8,6 +7,5 @@ export const getRequest = async () => {
     return(response.data)
   } catch (error) {
     //console.error(error)
-    return(FAKE_DATA)
   }
 }

@@ -9,8 +9,8 @@ export const Header = ()=>{
   return(
     <>
       <Sidebar />
-      <img className="relative top-[80px] mt-[-20px] cursor-pointer w-[30px] left-[100px]" src="otevrit_stranku.png" onClick={()=>dispatch(toggleSidebarVisbility())}/>
-      <p onClick={()=>dispatch(toggleSidebarVisbility())} className="my-10 text-5xl text-center font-bold">Programming. Daily.</p>
+      <p onClick={()=>dispatch(toggleSidebarVisbility())} className="my-10 text-5xl text-center font-bold">Programming. <span className="text-main_color">Daily.</span></p>
+      <img className="md:relative mb-10 md:mb-0 left-[100px] top-[-55px] m-auto md:m-0 md:mt-[-20px] cursor-pointer w-[30px]" src="otevrit_stranku.png" onClick={()=>dispatch(toggleSidebarVisbility())}/>
     </>
   )
 }

@@ -35,3 +35,39 @@ export const toggleSidebarVisbility = (): AnyAction => {
     type: "TOGGLE_VISIBILITY"
   }
 }
+
+export const sortEntriesFromOldest = (): AnyAction => {
+  return {
+    type: "SORT_RECORDS_FROM_OLDEST"
+  }
+}
+
+export const sortEntriesFromNewest = (): AnyAction => {
+  return {
+    type: "SORT_RECORDS_FROM_NEWEST"
+  }
+}
+
+export const sortEntriesFromLowestRating = (): AnyAction => {
+  return {
+    type: "SORT_RECORDS_FROM_LOWEST_RATING"
+  }
+}
+
+export const sortEntriesFromHighestRating = (): AnyAction => {
+  return {
+    type: "SORT_RECORDS_FROM_HIGHEST_RATING"
+  }
+}
+
+export const sortEntriesFromShortest = (): AnyAction => {
+  return {
+    type: "SORT_RECORDS_FROM_SHORTEST"
+  }
+}
+
+export const sortEntriesFromLongest = (): AnyAction => {
+  return {
+    type: "SORT_RECORDS_FROM_LONGEST"
+  }
+}
