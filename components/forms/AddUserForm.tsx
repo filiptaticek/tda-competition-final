@@ -1,18 +1,24 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { FormButton } from "../formParts/FormButton"
 import { UniversalInput } from "../formParts"
 import { UniversalForm } from "./UniversalForm"
 import { postRequest } from "../../src/functions/api/post"
+import { addSingleUser } from "../../src/store/actions"
 
 export const AddUserForm = ()=>{
 
   const [showForm,setFormShown] = useState<boolean>(false)
   const [first_name,setFirstName] = useState<string>("")
   const [surname,setSurname] = useState<string>("")
-  const handleAddingUsers = ()=>{
+  const dispatch = useDispatch()
+
+  const handleAddingUsers = async (event:any)  =>{
     event?.preventDefault()
-    postRequest({first_name,surname,programmer_id:1},"programmer")
     setFormShown(false)
+    const toCoPrislo = await postRequest({first_name,surname,programmer_id:1},"programmer")
+    dispatch(addSingleUser(toCoPrislo))
+    setFirstName(""),setSurname("")
   }
 
   const handleFirstName = (event:any) => {setFirstName(event.target.value)}

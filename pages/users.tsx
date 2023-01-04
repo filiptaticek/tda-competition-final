@@ -20,12 +20,12 @@ export default function UsersPage() {
   }, [dispatch])
 
   return (
-    <div className="px-4 max-w-page_max m-auto">
+    <div className="px-4 max-w-page_max m-auto mb-5">
       <Header />
       <AddUserForm />
       {users.map((user: { first_name: string; surname: string; programmer_id: number })=>{
         return(
-          <User firstName={user.first_name} surname={user.surname} key={user.programmer_id} />
+          <User programmer_id={user.programmer_id} firstName={user.first_name} surname={user.surname} key={user.programmer_id} />
         )
       })}
     </div>

@@ -1,6 +1,8 @@
 import { IDiaryEntry, IUser } from "../../types"
 import { AnyAction } from "redux"
 
+//RECORDS ACTIONS
+
 export const setRecords = (records:Array<IDiaryEntry>): AnyAction => {
   return {
     type: "SET_RECORDS",
@@ -27,12 +29,6 @@ export const updateSingleRecord = (updatedrecord_id:number,newrecord:IDiaryEntry
     type: "UPDATE_RECORD",
     updatedrecord_id:updatedrecord_id,
     newrecord:newrecord
-  }
-}
-
-export const toggleSidebarVisbility = (): AnyAction => {
-  return {
-    type: "TOGGLE_VISIBILITY"
   }
 }
 
@@ -72,9 +68,33 @@ export const sortEntriesFromLongest = (): AnyAction => {
   }
 }
 
+//SIDEBAR ACTIONS
+
+export const toggleSidebarVisbility = (): AnyAction => {
+  return {
+    type: "TOGGLE_VISIBILITY"
+  }
+}
+
+//USERS ACTIONS
+
 export const setUsers = (users:Array<IUser>): AnyAction => {
   return {
     type: "SET_USERS",
     users:users
+  }
+}
+
+export const addSingleUser = (newuser:IUser): AnyAction =>{
+  return {
+    type: "ADD_USER",
+    newuser:newuser
+  }
+}
+
+export const removeSingleUser = (deleteduser_id:number): AnyAction => {
+  return {
+    type: "REMOVE_USER",
+    deleteduser_id:deleteduser_id
   }
 }
