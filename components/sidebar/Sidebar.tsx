@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { useSelector, useDispatch } from "react-redux"
-import { toggleSidebarVisbility } from "../src/store/actions"
+import { toggleSidebarVisbility } from "../../src/store/actions"
 import { SideBarLink } from "./SideBarLink"
 
 export const Sidebar = ()=>{

@@ -1,6 +1,12 @@
 export type Language = "Python"|"Javascript"|"C++"
 export type Rating = 1|2|3|4|5
 export type MinutesSpent = number & { __isPositive: true };
+export type Button = "button" | "submit" | "reset"
+export interface IUser {
+    first_name:string,
+    surname:string,
+    programmer_id:number
+}
 export type Sorting = 
     "from newest"|
     "from oldest"|

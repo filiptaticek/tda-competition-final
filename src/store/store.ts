@@ -6,7 +6,8 @@ import combineReducer from "./reducers"
 
 const initalState = {
   records:[],
-  sidebar:false
+  sidebar:false,
+  users:[]
 }
 
 const middleware = [thunk]

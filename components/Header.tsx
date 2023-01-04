@@ -1,4 +1,4 @@
-import { Sidebar } from "./Sidebar"
+import { Sidebar } from "./sidebar/Sidebar"
 import { useDispatch } from "react-redux"
 import { toggleSidebarVisbility } from "../src/store/actions"
 /* eslint-disable jsx-a11y/alt-text */

@@ -1,4 +1,4 @@
-import { IDiaryEntry } from "../../types"
+import { IDiaryEntry, IUser } from "../../types"
 import { AnyAction } from "redux"
 
 export const setRecords = (records:Array<IDiaryEntry>): AnyAction => {
@@ -69,5 +69,12 @@ export const sortEntriesFromShortest = (): AnyAction => {
 export const sortEntriesFromLongest = (): AnyAction => {
   return {
     type: "SORT_RECORDS_FROM_LONGEST"
+  }
+}
+
+export const setUsers = (users:Array<IUser>): AnyAction => {
+  return {
+    type: "SET_USERS",
+    users:users
   }
 }

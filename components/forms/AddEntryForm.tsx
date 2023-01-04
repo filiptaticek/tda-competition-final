@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Language, MinutesSpent, Rating } from "../src/types"
-import { addSingleRecord } from "../src/store/actions"
-import { getEstheticDate,postRequest } from "../src/functions/index.js"
-import { Description } from "./Description"
-import { inputSameProperties } from "../src/constants"
+import { Language, MinutesSpent, Rating } from "../../src/types"
+import { addSingleRecord } from "../../src/store/actions"
+import { getEstheticDate,postRequest } from "../../src/functions/index.js"
+import { Description } from "../Description"
+import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "./FormButton"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "./formParts/index.js"
+import { FormButton } from "../formParts/FormButton"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "../formParts/index.js"
 //This form handles sending new post to the database and updating the state
 
 export const AddEntryForm = ({date}:{date:string})=>{
@@ -24,7 +24,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
     const record_id = 100
     const data = { date, description, programming_language, minutes_spent, rating, record_id }
     setShowForm(false)
-    const toCoPrislo = await postRequest(data)
+    const toCoPrislo = await postRequest(data,"record")
     dispatch(addSingleRecord(toCoPrislo))
     setProgrammingLanguage("Python"),setMinutesSpent(1 as MinutesSpent),setRating(1),setDescription("")
   }
@@ -32,7 +32,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
   return (
     <div>
       {showForm&&
-      <UniversalForm closeForm={()=>{setShowForm(false)}} header={<p>Create a new entry on day <br/><strong>{getEstheticDate(date)}</strong></p>} onSubmit={handleSubmit}>
+      <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>Create a new entry on day <br/><strong>{getEstheticDate(date)}</strong></>} onSubmit={handleSubmit}>
         <div className="w-full">
           <SelectProgrammingLanguage text="programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(event.target.value as Language)} />
           <UniversalInput type="number" text="Time spent in minutes" extrastyle="h-10" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(Number(event.target.value) as MinutesSpent)}/>

@@ -1,10 +1,10 @@
 import axios from "axios"
 import { baseUrl } from "../../constants"
-import { IDiaryEntry } from "../../types"
+import { IDiaryEntry, IUser } from "../../types"
 
-export const postRequest = async (data: IDiaryEntry) => {
+export const postRequest = async (data: IDiaryEntry|IUser,path:string) => {
   try {
-    const response = await axios.post(`${baseUrl}/record`, data)
+    const response = await axios.post(`${baseUrl}/${path}`, data)
     return(response.data)
   } catch (error) {
     console.error(error)

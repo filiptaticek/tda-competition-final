@@ -5,12 +5,12 @@ import { useEffect } from "react"
 import { AllEntries } from "../components/AllEntries"
 import { Header } from "../components/Header"
 
-export default function Home() {
+export default function AllEntriesPage() {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const updateState = async () =>{
-      const serverData = await getRequest()
+      const serverData = await getRequest("record")
       dispatch(setRecords(serverData))
       //serverData.map((thing: any) => console.log(thing))
     }

@@ -2,14 +2,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Language, MinutesSpent, Rating } from "../src/types"
-import { removeSingleRecord, updateSingleRecord } from "../src/store/actions"
-import { getEstheticDate, deleteRequest, putRequest } from "../src/functions/index.js"
-import { Description } from "./Description"
-import { inputSameProperties } from "../src/constants"
+import { Language, MinutesSpent, Rating } from "../../src/types"
+import { removeSingleRecord, updateSingleRecord } from "../../src/store/actions"
+import { getEstheticDate, deleteRequest, putRequest } from "../../src/functions/index.js"
+import { Description } from "../Description"
+import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "./FormButton"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "./formParts/index.js"
+import { FormButton } from "../formParts/FormButton"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "../formParts/index.js"
 
 interface IEditEntryForm {
     date:string,

@@ -2,10 +2,10 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import { Entry } from "./Entry"
 import { Language, MinutesSpent, Rating } from "../src/types"
-import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "./FormButton"
+import { UniversalForm } from "./forms/UniversalForm"
+import { FormButton } from "./formParts/FormButton"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "./formParts/index.js"
-import { SortEntriesForm } from "./SortEntriesForm"
+import { SortEntriesForm } from "./forms/SortEntriesForm"
 
 export const AllEntries = ()=>{
 
@@ -52,8 +52,8 @@ export const AllEntries = ()=>{
     <>
       {/*BUTTONS SETTING ON FILTERS AND RANKINGS*/}
       <div className="font-bold w-fit flex mb-2 m-auto w-[300px]">
-        <FormButton className="bg-main_color mr-2 w-[200px]" onClick={()=>setFiltersShown(true)} text="Filter entries" />
-        <FormButton className="bg-main_color w-[200px]" onClick={()=>setSortingShown(true)} text="Sort entries"  />
+        <FormButton className="bg-main_color mr-2" onClick={()=>setFiltersShown(true)} text="Filter entries" />
+        <FormButton className="bg-main_color" onClick={()=>setSortingShown(true)} text="Sort entries"  />
       </div>      
 
       {//FORM HANDLING SORTING ENTRIES
@@ -73,7 +73,7 @@ export const AllEntries = ()=>{
           <SelectRating text="Maximal rating" value={maximalRating} onChange={handleMaximalRating} />
           <div className="flex mt-8">
             <FormButton type="submit" text="Submit" className="bg-button_green mr-1" />
-            <FormButton onClick={resetFilters} text="Reset all filters" className="bg-main_color" />
+            <FormButton onClick={resetFilters} text="Reset all filters" className="bg-button_red" />
           </div>
         </UniversalForm>
       }

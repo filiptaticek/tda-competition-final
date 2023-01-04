@@ -1,5 +1,5 @@
 import { IDiaryEntry } from "../src/types"
-import { EditEntryForm } from "./EditEntryForm"
+import { EditEntryForm } from "./forms/EditEntryForm"
 import { ProgrammingLanguageLogo } from "./ProgrammingLanguageLogo"
 import { RatingLogo } from "./RatingLogo"
 

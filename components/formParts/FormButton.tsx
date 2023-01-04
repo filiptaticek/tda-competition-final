@@ -1,10 +1,11 @@
 import clsx from "clsx"
+import { Button } from "../../src/types"
 
 interface IFormButton {
     className:string
     text:string
     onClick?:any
-    type?:"button" | "submit" | "reset"
+    type?:Button
 }
 
 export const FormButton = ({className,text,onClick,type}:IFormButton)=>{
