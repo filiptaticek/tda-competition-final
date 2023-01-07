@@ -29,9 +29,9 @@ export const AllEntries = ()=>{
   const handleMinimalDate = (event:any) => {setMinimalDate(event.target.value)}
   const handleMaximalDate = (event:any) => {setMaximalDate(event.target.value)}
   const handleMinimalTime = (event:any) => {setMinimalTime(event.target.value)}
-  const handleMaximalTime = (event:any) => {setMaximalTime(event.target.value)}
-  const handleMinimalRating = (event:any) => {setMinimalRating(event.target.value)}
-  const handleMaximalRating = (event:any) => {setMaximalRating(event.target.value)}
+  const handleMaximalTime = (event:any) => {setMaximalTime(parseInt(event.target.value))}
+  const handleMinimalRating = (event:any) => {setMinimalRating(parseInt(event.target.value)as Rating)}
+  const handleMaximalRating = (event:any) => {setMaximalRating(parseInt(event.target.value) as Rating)}
   const handleProgrammingLanguage = (event:any) => {setProgrammingLanguage(event.target.value)}
   const handleTimeFilter = (event:any) => {
     event.preventDefault()
@@ -63,7 +63,7 @@ export const AllEntries = ()=>{
 
       {//FORM HANDLING FILTERING ENTRIES
         filters&&
-        <UniversalForm header={<p className="font-bold">Set some filters</p>} closeForm={()=>{setFiltersShown(false)}} onSubmit={handleTimeFilter}>
+        <UniversalForm header={<strong>Set some filters</strong>} closeForm={()=>{setFiltersShown(false)}} onSubmit={handleTimeFilter}>
           <UniversalInput text="From" type="date" value={minimalDate} onChange={handleMinimalDate} />
           <UniversalInput text="To" type="date" value={maximalDate} onChange={handleMaximalDate} />
           <UniversalInput text="Minimal time" type="number" value={minimalTime} onChange={handleMinimalTime} />
@@ -80,21 +80,21 @@ export const AllEntries = ()=>{
 
       {/*ALL THE ENTRIES*/}
       <div className="w-full lg:flex flex-wrap">
-        {globalposts.map((entry: { date: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; record_id: number }):any=>{
+        {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number }):any=>{
           const newEntry = <Entry 
-            date={entry.date}
+            datetime={entry.datetime}
             programming_language={entry.programming_language}
             rating={entry.rating}
             description={entry.description}
             minutes_spent={entry.minutes_spent}
-            key={entry.record_id}
-            record_id={entry.record_id}
+            key={entry.id}
+            id={entry.id}
           />
 
           const timeCondition = timeFilter&&entry.minutes_spent>timeFilter[0]&&entry.minutes_spent<timeFilter[1]
           const programmingLanguageCondition = programmingLanguageFilter&&entry.programming_language===programmingLanguageFilter
           const ratingCondition = entry.rating>=ratingFilter[0]&&entry.rating<=ratingFilter[1]
-          const dateCondition = dateFilter&&entry.date>=dateFilter[0]&&entry.date<=dateFilter[1]
+          const dateCondition = dateFilter&&entry.datetime>=dateFilter[0]&&entry.datetime<=dateFilter[1]
 
           if (timeFilter&&programmingLanguageFilter&&dateFilter){
             if (ratingCondition

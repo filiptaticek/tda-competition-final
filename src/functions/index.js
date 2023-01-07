@@ -5,3 +5,4 @@ export { postRequest } from "./api/post.ts"
 
 export { getEstheticDate } from "./date/esthetic_date.ts"
 export { getPastDate } from "./date/right_date.ts"
+export { sanitize } from "./other.ts"

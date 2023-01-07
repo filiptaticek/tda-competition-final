@@ -9,16 +9,16 @@ export const recordsReducer = (state:IDiaryEntry[] = [], action:any) => {
     return ([action.newrecord,...state])
   }
   case "REMOVE_RECORD":{
-    return(state.filter((record:IDiaryEntry) => record.record_id !== action.deletedrecord_id))
+    return(state.filter((record:IDiaryEntry) => record.id !== action.deletedrecord_id))
   }
   case "UPDATE_RECORD":{
-    return(state.map((record:IDiaryEntry) => record.record_id !== action.updatedrecord_id ? record : action.newrecord))
+    return(state.map((record:IDiaryEntry) => record.id !== action.updatedrecord_id ? record : action.newrecord))
   }
   case "SORT_RECORDS_FROM_OLDEST":{
-    return(state.sort((a, b) => new Date(a.date).toISOString().localeCompare(new Date(b.date).toISOString())))
+    return(state.sort((a, b) => new Date(a.datetime).toISOString().localeCompare(new Date(b.datetime).toISOString())))
   }
   case "SORT_RECORDS_FROM_NEWEST":{
-    return(state.sort((a, b) => new Date(b.date).toISOString().localeCompare(new Date(a.date).toISOString())))
+    return(state.sort((a, b) => new Date(b.datetime).toISOString().localeCompare(new Date(a.datetime).toISOString())))
   }
   case "SORT_RECORDS_FROM_LOWEST_RATING":{
     return(state.sort((a, b) => a.rating - b.rating))

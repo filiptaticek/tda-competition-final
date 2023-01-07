@@ -24,18 +24,18 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
         return(
           <div className="mx-1 w-full" key={den.number}>
             <p className="border-2 border-black font-bold text-center text-md">{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
-            <AddEntryForm date={getPastDate(den.number)} />
-            {globalposts.map((entry: { date: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; record_id: number }):any=>{
-              if (entry.date.substring(0,10)===getPastDate(den.number).substring(0,10)){
+            <AddEntryForm datetime={getPastDate(den.number)} />
+            {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number }):any=>{
+              if (entry.datetime.substring(0,10)===getPastDate(den.number).substring(0,10)){
                 return(
                   <CalendarEntry 
-                    date={entry.date}
+                    datetime={entry.datetime}
                     programming_language={entry.programming_language}
                     rating={entry.rating}
                     description={entry.description}
                     minutes_spent={entry.minutes_spent}
-                    key={entry.record_id}
-                    record_id={entry.record_id}
+                    key={entry.id}
+                    id={entry.id}
                   />
                 )}})}
           </div>

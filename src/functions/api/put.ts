@@ -1,11 +1,10 @@
 import axios from "axios"
 import { baseUrl } from "../../constants"
-import { IDiaryEntry } from "../../types"
+import { IDiaryEntry, IUser } from "../../types"
 
-export const putRequest = async (id: number, entry: IDiaryEntry)=> {
+export const putRequest = async (path:string,id: number, data: IDiaryEntry|IUser)=> {
   try {
-    //await axios.put(`${baseUrl}/records/${id}`, entry)
-    await axios.put(`${baseUrl}/record/${id}`, entry)
+    await axios.put(`${baseUrl}/${path}/${id}`, data)
   } catch (error) {
     console.error(error)
   }

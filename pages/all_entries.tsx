@@ -12,7 +12,6 @@ export default function AllEntriesPage() {
     const updateState = async () =>{
       const serverData = await getRequest("record")
       dispatch(setRecords(serverData))
-      //serverData.map((thing: any) => console.log(thing))
     }
     updateState()
   }, [dispatch])

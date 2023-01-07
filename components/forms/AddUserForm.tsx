@@ -16,7 +16,7 @@ export const AddUserForm = ()=>{
   const handleAddingUsers = async (event:any)  =>{
     event?.preventDefault()
     setFormShown(false)
-    const toCoPrislo = await postRequest({first_name,surname,programmer_id:1},"programmer")
+    const toCoPrislo = await postRequest({first_name,surname,id:1},"programmer")
     dispatch(addSingleUser(toCoPrislo))
     setFirstName(""),setSurname("")
   }

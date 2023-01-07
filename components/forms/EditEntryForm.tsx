@@ -12,7 +12,7 @@ import { FormButton } from "../formParts/FormButton"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "../formParts/index.js"
 
 interface IEditEntryForm {
-    date:string,
+    datetime:string,
     postProgrammingLanguage:Language
     postMinutesSpent:MinutesSpent
     postRating:Rating
@@ -20,7 +20,7 @@ interface IEditEntryForm {
     postId:number
 }
 
-export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSpent,postRating,postComment}:IEditEntryForm)=>{
+export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinutesSpent,postRating,postComment}:IEditEntryForm)=>{
 
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>(postProgrammingLanguage)
@@ -31,23 +31,24 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
 
   const handleEditingEntry = (event:any) => {
     event.preventDefault()
-    const record_id = 1
-    const data = { date, description, programming_language, minutes_spent, rating,record_id }
-    putRequest(postId,data)
+    const id = 1
+    const data = { datetime, description, programming_language, minutes_spent, rating,id }
+    putRequest("record",postId,data)
     dispatch(updateSingleRecord(postId,data))
     setShowForm(false)
   }
 
   const handleDeletingEntry = ()=>{
-    deleteRequest(postId)
-    setShowForm(false)
+    event?.preventDefault()
+    deleteRequest("record",postId)
     dispatch(removeSingleRecord(postId))
+    setShowForm(false)
   }
 
   return (
     <>
       {showForm&&
-          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<p>Edit your entry from <br/><strong>{getEstheticDate(date)}</strong></p>} onSubmit={handleEditingEntry}>
+          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<>Edit your entry from <br/><strong>{getEstheticDate(datetime)}</strong></>} onSubmit={handleEditingEntry}>
             <div className="w-full text-left">
               <SelectProgrammingLanguage text="Programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(event.target.value as Language)}/>
               <UniversalInput type="number" text="Time spent in minutes" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(Number(event.target.value) as MinutesSpent)} extrastyle="h-10" /> 

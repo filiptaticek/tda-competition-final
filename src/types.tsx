@@ -5,7 +5,7 @@ export type Button = "button" | "submit" | "reset"
 export interface IUser {
     first_name:string,
     surname:string,
-    programmer_id:number
+    id:number //ZMĚNA Z programmer_id
 }
 export type Sorting = 
     "from newest"|
@@ -17,10 +17,11 @@ export type Sorting =
     "no sorting"
 
 export interface IDiaryEntry {
-    date:string
+    datetime:string //ZMĚNA Z date
     programming_language:Language
     minutes_spent:MinutesSpent
     rating:Rating
     description:string
-    record_id:number
+    programmer_id?:number
+    id:number //ZMĚNA z record_id
 }

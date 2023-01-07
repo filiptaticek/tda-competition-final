@@ -98,3 +98,11 @@ export const removeSingleUser = (deleteduser_id:number): AnyAction => {
     deleteduser_id:deleteduser_id
   }
 }
+
+export const updateSingleUser = (updated_user_id:number,newrecord:IUser): AnyAction => {
+  return {
+    type: "UPDATE_USER",
+    updated_user_id:updated_user_id,
+    newrecord:newrecord
+  }
+}
