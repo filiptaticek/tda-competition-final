@@ -9,13 +9,22 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
   const globalposts = useSelector((state:any) => state.records)
   const poradiDneVTydnu = new Date().getDay()
   const dny_v_tydnu = [
-    {number:-6-poradiDneVTydnu+daysBack,name:"Monday"},
-    {number:-5-poradiDneVTydnu+daysBack,name:"Tuesday"},
-    {number:-4-poradiDneVTydnu+daysBack,name:"Wednesday"},
-    {number:-3-poradiDneVTydnu+daysBack,name:"Thursday"},
-    {number:-2-poradiDneVTydnu+daysBack,name:"Friday"},
-    {number:-1-poradiDneVTydnu+daysBack,name:"Saturday"},
-    {number:daysBack-poradiDneVTydnu,name:"Sunday"}
+    /*
+    {number:-7-poradiDneVTydnu+daysBack,name:"Monday"},
+    {number:-6-poradiDneVTydnu+daysBack,name:"Tuesday"},
+    {number:-5-poradiDneVTydnu+daysBack,name:"Wednesday"},
+    {number:-4-poradiDneVTydnu+daysBack,name:"Thursday"},
+    {number:-3-poradiDneVTydnu+daysBack,name:"Friday"},
+    {number:-2-poradiDneVTydnu+daysBack,name:"Saturday"},
+    {number:-daysBack-1+poradiDneVTydnu,name:"Sunday"}
+    */
+    {number:-7-poradiDneVTydnu+daysBack,name:"Monday"},
+    {number:-6-poradiDneVTydnu+daysBack,name:"Tuesday"},
+    {number:-5-poradiDneVTydnu+daysBack,name:"Wednesday"},
+    {number:-4-poradiDneVTydnu+daysBack,name:"Thursday"},
+    {number:-3-poradiDneVTydnu+daysBack,name:"Friday"},
+    {number:-2-poradiDneVTydnu+daysBack,name:"Saturday"},
+    {number:-daysBack-1+poradiDneVTydnu,name:"Sunday"}
   ]
 
   return(
@@ -25,7 +34,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
           <div className="mx-1 w-full" key={den.number}>
             <p className="border-2 border-black font-bold text-center text-md">{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
             <AddEntryForm datetime={getPastDate(den.number)} />
-            {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number }):any=>{
+            {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:null|number }):any=>{
               if (entry.datetime.substring(0,10)===getPastDate(den.number).substring(0,10)){
                 return(
                   <CalendarEntry 
@@ -36,6 +45,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
                     minutes_spent={entry.minutes_spent}
                     key={entry.id}
                     id={entry.id}
+                    programmer_id={entry.programmer_id}
                   />
                 )}})}
           </div>

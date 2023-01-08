@@ -3,11 +3,20 @@ import { IDiaryEntry } from "../src/types"
 import { EditEntryForm } from "./forms/EditEntryForm"
 import { ProgrammingLanguageLogo } from "./ProgrammingLanguageLogo"
 import { RatingLogo } from "./RatingLogo"
+import { useSelector } from "react-redux"
+import { IUser } from "../src/types"
 
-export const Entry = ({programming_language,minutes_spent,rating,description, datetime, id}:IDiaryEntry)=>{
+export const Entry = ({programming_language,minutes_spent,rating,description, datetime, id, programmer_id}:IDiaryEntry)=>{
+
+  const users = useSelector((state:any) => state.users)
+  const programmerObject = users.find((programmer:IUser) => programmer.id === programmer_id)
+  const programmer= programmerObject?programmerObject.first_name + " " + programmerObject.surname:""
+
+
   return(
     <div className="border-collapse h-[350px] lg:w-[20%] text-center rounded-md p-1">
-      <div className="border border-black pt-5 h-full">
+      <div className="border hover:bg-gray-100 border-black pt-5 h-full">
+        {programmer&&<p>{programmer}</p>}
         <div className="mb-5">
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>
@@ -22,6 +31,7 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
           postRating={rating}
           postComment={description}
           postId={id}
+          postProgrammerId={programmer_id}
         />
       </div>
     </div>

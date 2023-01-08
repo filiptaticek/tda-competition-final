@@ -5,6 +5,7 @@ import { UniversalInput } from "../formParts"
 import { UniversalForm } from "./UniversalForm"
 import { postRequest } from "../../src/functions/api/post"
 import { addSingleUser } from "../../src/store/actions"
+import { capitalize, isOnlyLetters } from "../../src/functions"
 
 export const AddUserForm = ()=>{
 
@@ -21,8 +22,18 @@ export const AddUserForm = ()=>{
     setFirstName(""),setSurname("")
   }
 
-  const handleFirstName = (event:any) => {setFirstName(event.target.value)}
-  const handleSurname = (event:any) => {setSurname(event.target.value)}
+  const handleFirstName = (event:any) => {
+    const word = event.target.value
+    if (isOnlyLetters(word)){
+      setFirstName(capitalize(word))
+    }
+  }
+  const handleSurname = (event:any) => {
+    const word = event.target.value
+    if (isOnlyLetters(word)){
+      setSurname(capitalize(word))
+    }
+  }
 
   return(
     <>
@@ -31,8 +42,8 @@ export const AddUserForm = ()=>{
       </div>
       {showForm&&
       <UniversalForm header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
-        <UniversalInput text="Fill in the first name" value={first_name} onChange={handleFirstName} />
-        <UniversalInput text="Fill in the surname" value={surname} onChange={handleSurname} />
+        <UniversalInput text="Fill in the first name with only one word" value={first_name} onChange={handleFirstName} />
+        <UniversalInput text="Fill in the surname with only one word" value={surname} onChange={handleSurname} />
         <div className="flex mt-8">
           <FormButton className="bg-button_green" type="submit" text="Add the user"/>
         </div>

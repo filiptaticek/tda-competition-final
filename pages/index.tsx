@@ -10,7 +10,7 @@ import { Header } from "../components/Header"
 
 export default function Home() {
   const dispatch = useDispatch()
-  const [daysBack,setDaysBack] = useState<number>(7)
+  const [daysBack,setDaysBack] = useState<number>(0)
 
   useEffect(() => {
     const updateState = async () =>{

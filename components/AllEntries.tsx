@@ -6,6 +6,8 @@ import { UniversalForm } from "./forms/UniversalForm"
 import { FormButton } from "./formParts/FormButton"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "./formParts/index.js"
 import { SortEntriesForm } from "./forms/SortEntriesForm"
+import { SelectUser } from "./formParts/SelectUser"
+import { IUser } from "../src/types"
 
 export const AllEntries = ()=>{
 
@@ -19,11 +21,14 @@ export const AllEntries = ()=>{
   const [maximalTime, setMaximalTime] = useState<number>(0)
   const [minimalRating, setMinimalRating] = useState<Rating>(1) //RATING filter inputs
   const [maximalRating, setMaximalRating] = useState<Rating>(5)
+  const [user, setUser] = useState<string>("No user filter")
   const [programmingLanguage, setProgrammingLanguage] = useState<string|"No language filter">("No language filter")//PROGRAMMING LANGUAGE filter inputs
   const [ratingFilter, setRatingFilter] = useState<[Rating,Rating]>([1,5]) //RATING FILTER
   const [timeFilter, setTimeFilter] = useState<[number,number]|undefined>(undefined) //TIME FILTER
   const [programmingLanguageFilter,setProgrammingLanguageFilter] =useState<string|undefined>(undefined) //PROGRAMMING LANGUAGE FILTER
+  const [userFilter, setUserFilter] = useState<string|undefined>(undefined)
   const [dateFilter, setDateFilter] = useState<[string,string]|undefined>(undefined) //DATE FILTER
+  const users = useSelector((state:any) => state.users)
 
   //FUNCTIONS HANDLING ALL THE INPUTS
   const handleMinimalDate = (event:any) => {setMinimalDate(event.target.value)}
@@ -32,6 +37,7 @@ export const AllEntries = ()=>{
   const handleMaximalTime = (event:any) => {setMaximalTime(parseInt(event.target.value))}
   const handleMinimalRating = (event:any) => {setMinimalRating(parseInt(event.target.value)as Rating)}
   const handleMaximalRating = (event:any) => {setMaximalRating(parseInt(event.target.value) as Rating)}
+  const handleUser = (event:any) => {setUser(event.target.value)}
   const handleProgrammingLanguage = (event:any) => {setProgrammingLanguage(event.target.value)}
   const handleTimeFilter = (event:any) => {
     event.preventDefault()
@@ -39,6 +45,8 @@ export const AllEntries = ()=>{
     if(minimalTime!==0||maximalTime!==0){setTimeFilter([minimalTime, maximalTime])}
     if(minimalDate&&maximalDate){setDateFilter([minimalDate,maximalDate])}
     if(minimalRating&&maximalRating){setRatingFilter([minimalRating, maximalRating])}
+    user==="No user filter"?setUserFilter(undefined):setUser(user)
+    console.log(user)
     programmingLanguage==="No language filter"?setProgrammingLanguageFilter(undefined):setProgrammingLanguageFilter(programmingLanguage)
   }
   const resetFilters = (event:any) =>{
@@ -66,6 +74,7 @@ export const AllEntries = ()=>{
         <UniversalForm header={<strong>Set some filters</strong>} closeForm={()=>{setFiltersShown(false)}} onSubmit={handleTimeFilter}>
           <UniversalInput text="From" type="date" value={minimalDate} onChange={handleMinimalDate} />
           <UniversalInput text="To" type="date" value={maximalDate} onChange={handleMaximalDate} />
+          <SelectUser text="Choose the user" value={user} onChange={handleUser} />
           <UniversalInput text="Minimal time" type="number" value={minimalTime} onChange={handleMinimalTime} />
           <UniversalInput text="Maximal time" type="number" value={maximalTime} onChange={handleMaximalTime} />
           <SelectProgrammingLanguage text="Programming language" value={programmingLanguage} onChange={handleProgrammingLanguage} bonusOption={true} />
@@ -80,7 +89,7 @@ export const AllEntries = ()=>{
 
       {/*ALL THE ENTRIES*/}
       <div className="w-full lg:flex flex-wrap">
-        {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number }):any=>{
+        {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:number|null }):any=>{
           const newEntry = <Entry 
             datetime={entry.datetime}
             programming_language={entry.programming_language}
@@ -89,12 +98,14 @@ export const AllEntries = ()=>{
             minutes_spent={entry.minutes_spent}
             key={entry.id}
             id={entry.id}
+            programmer_id={entry.programmer_id}
           />
 
           const timeCondition = timeFilter&&entry.minutes_spent>timeFilter[0]&&entry.minutes_spent<timeFilter[1]
           const programmingLanguageCondition = programmingLanguageFilter&&entry.programming_language===programmingLanguageFilter
           const ratingCondition = entry.rating>=ratingFilter[0]&&entry.rating<=ratingFilter[1]
           const dateCondition = dateFilter&&entry.datetime>=dateFilter[0]&&entry.datetime<=dateFilter[1]
+          const userConidition = userFilter&&entry.programmer_id===users.find((programmer:IUser) => programmer.surname === user.split(" ")[0]).id
 
           if (timeFilter&&programmingLanguageFilter&&dateFilter){
             if (ratingCondition

@@ -3,7 +3,7 @@ import { IDiaryEntry } from "../../types"
 export const recordsReducer = (state:IDiaryEntry[] = [], action:any) => {
   switch (action.type) {
   case "SET_RECORDS":{
-    return (action.records)
+    return (action.records?action.records:[])
   }
   case "ADD_RECORD":{
     return ([action.newrecord,...state])

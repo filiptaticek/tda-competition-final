@@ -17,11 +17,11 @@ export type Sorting =
     "no sorting"
 
 export interface IDiaryEntry {
-    datetime:string //ZMĚNA Z date
+    datetime:string
     programming_language:Language
     minutes_spent:MinutesSpent
     rating:Rating
     description:string
-    programmer_id?:number
-    id:number //ZMĚNA z record_id
+    programmer_id:number|null
+    id:number
 }
