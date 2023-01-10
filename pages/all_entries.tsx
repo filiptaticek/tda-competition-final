@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { setRecords } from "../src/store/actions"
 import { getRequest } from "../src/functions/api/get"
 import { useEffect } from "react"
-import { AllEntries } from "../components/AllEntries"
+import { Entries } from "../components/Entries"
 import { Header } from "../components/Header"
 
 export default function AllEntriesPage() {
@@ -19,7 +19,7 @@ export default function AllEntriesPage() {
   return (
     <div className="px-4 max-w-page_max m-auto">
       <Header />
-      <AllEntries />
+      <Entries />
       <div className="w-full flex">
       </div>
     </div>

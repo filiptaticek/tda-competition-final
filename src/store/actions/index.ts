@@ -1,4 +1,4 @@
-import { IDiaryEntry, IUser } from "../../types"
+import { IDiaryEntry, ITag, IUser } from "../../types"
 import { AnyAction } from "redux"
 
 //RECORDS ACTIONS
@@ -104,5 +104,36 @@ export const updateSingleUser = (updated_user_id:number,newrecord:IUser): AnyAct
     type: "UPDATE_USER",
     updated_user_id:updated_user_id,
     newrecord:newrecord
+  }
+}
+
+//TAGS ACTIONS
+
+export const setTags = (tags:Array<ITag>): AnyAction => {
+  return {
+    type: "SET_TAGS",
+    tags:tags
+  }
+}
+
+export const addSingleTag = (newtag:ITag): AnyAction =>{
+  return {
+    type: "ADD_TAG",
+    newtag:newtag
+  }
+}
+
+export const removeSingleTag = (deleted_tag_id:number): AnyAction => {
+  return {
+    type: "REMOVE_TAG",
+    deleted_tag_id:deleted_tag_id
+  }
+}
+
+export const updateSingleTag = (updated_tag_id:number,new_tag:ITag): AnyAction => {
+  return {
+    type: "UPDATE_TAG",
+    updated_tag_id:updated_tag_id,
+    new_tag:new_tag
   }
 }

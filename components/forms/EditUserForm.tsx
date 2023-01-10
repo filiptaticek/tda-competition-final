@@ -6,10 +6,10 @@ import { useState } from "react"
 import { putRequest,capitalize, deleteRequest, isOnlyLetters  } from "../../src/functions"
 import { UniversalInput } from "../formParts"
 
-export const EditUserForm = ({closeForm,id,firstName,surname}:{closeForm:any,id:number,firstName:string,surname:string})=>{
+export const EditUserForm = ({closeForm,id,name,surname}:{closeForm:any,id:number,name:string,surname:string})=>{
 
   const dispatch = useDispatch()
-  const [firstNameState, setFirstName] = useState<string>(firstName)
+  const [firstNameState, setFirstName] = useState<string>(name)
   const [surnameState, setSurname] = useState<string>(surname)
 
   const handleFirstName = (event:any) => {
@@ -29,7 +29,7 @@ export const EditUserForm = ({closeForm,id,firstName,surname}:{closeForm:any,id:
   const handleEditingUser = (event:any)=>{
     event?.preventDefault()
     const updatedProgrammer = {
-      first_name:firstNameState,
+      name:firstNameState,
       surname:surnameState,
       id:id
     }
@@ -48,7 +48,7 @@ export const EditUserForm = ({closeForm,id,firstName,surname}:{closeForm:any,id:
   }
 
   return(
-    <UniversalForm header={<>Edit user <strong> {firstName} {surname}</strong></>} onSubmit={handleEditingUser} closeForm={closeForm}>
+    <UniversalForm header={<>Edit user <strong> {name} {surname}</strong></>} onSubmit={handleEditingUser} closeForm={closeForm}>
       <UniversalInput text="Edit the first name of the user" value={firstNameState} onChange={handleFirstName}/> 
       <UniversalInput text="Edit the surname of the user" value={surnameState} onChange={handleSurname}/> 
       <div className="flex mt-8">

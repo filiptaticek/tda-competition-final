@@ -24,6 +24,9 @@ export const Sidebar = ()=>{
         <br/>
         <br/>
         <SideBarLink text="Users" href="/users" />
+        <br/>
+        <br/>
+        <SideBarLink text="Tags" href="/tags" />
       </div>
     </div>
   )

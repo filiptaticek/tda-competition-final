@@ -10,14 +10,14 @@ import { capitalize, isOnlyLetters } from "../../src/functions"
 export const AddUserForm = ()=>{
 
   const [showForm,setFormShown] = useState<boolean>(false)
-  const [first_name,setFirstName] = useState<string>("")
+  const [name,setFirstName] = useState<string>("")
   const [surname,setSurname] = useState<string>("")
   const dispatch = useDispatch()
 
   const handleAddingUsers = async (event:any)  =>{
     event?.preventDefault()
     setFormShown(false)
-    const toCoPrislo = await postRequest({first_name,surname,id:1},"programmer")
+    const toCoPrislo = await postRequest({name,surname,id:1},"programmer")
     dispatch(addSingleUser(toCoPrislo))
     setFirstName(""),setSurname("")
   }
@@ -42,7 +42,7 @@ export const AddUserForm = ()=>{
       </div>
       {showForm&&
       <UniversalForm header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
-        <UniversalInput text="Fill in the first name with only one word" value={first_name} onChange={handleFirstName} />
+        <UniversalInput text="Fill in the first name with only one word" value={name} onChange={handleFirstName} />
         <UniversalInput text="Fill in the surname with only one word" value={surname} onChange={handleSurname} />
         <div className="flex mt-8">
           <FormButton className="bg-button_green" type="submit" text="Add the user"/>

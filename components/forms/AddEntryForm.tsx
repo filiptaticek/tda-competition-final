@@ -1,17 +1,3 @@
-/*
-  const handleSubmit = async (event:any) => {
-    event.preventDefault()
-    const id = 100
-    //const programmer_id = (users.filter((person:IUser) => person.first_name === user.substr(0, user.indexOf(" ")))).id
-    const data = { datetime, description, programming_language, minutes_spent, rating ,id }
-    console.log(data,"Toto jsem právě poslal na backend")
-    setShowForm(false)
-    const toCoPrislo = await postRequest(data,"record")
-    dispatch(addSingleRecord(toCoPrislo))
-    console.log(toCoPrislo)
-    setProgrammingLanguage("Python"),setMinutesSpent(1 as MinutesSpent),setRating(1),setDescription("")
-*/
-
 import { useState } from "react"
 import { SelectUser } from "../formParts/SelectUser"
 import { useDispatch, useSelector } from "react-redux"
@@ -41,13 +27,10 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
 
   const handleSubmit = async (event:any) => {
     event.preventDefault()
-    const id = 100
-    const programmer_id = users.find((person:IUser) => person.first_name === user.substr(0, user.indexOf(" "))).id
-    const data = { datetime, description, programming_language, programmer_id, minutes_spent,rating, id }
-    console.log("Toto se posílá na server: ",data)
+    const programmer_id = user===""||user==="No user"||user===null?null:(users.find((person:IUser) => person.name === user.substr(0, user.indexOf(" "))).id)
+    const data = { datetime, description, programming_language, programmer_id, minutes_spent,rating, id:100 }
     setShowForm(false)
     const toCoPrislo = await postRequest(data,"record")
-    console.log("Toto se vrací ze serveru: ",toCoPrislo)
     dispatch(addSingleRecord(toCoPrislo))
     setProgrammingLanguage("Python"),setMinutesSpent(1 as MinutesSpent),setRating(1),setDescription("")
   }
