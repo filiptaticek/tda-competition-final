@@ -81,7 +81,7 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
             </div>
           </UniversalForm>
       }
-      <img src="upravit_zaznam.png" className="h-[20px] m-auto cursor-pointer mt-3 w-min h-min" onClick={handleOpeningForm}/>
+      <img src="upravit_zaznam.png" className="h-[30px] m-auto cursor-pointer mt-1 w-min h-min" onClick={handleOpeningForm}/>
     </div>
   )
 }

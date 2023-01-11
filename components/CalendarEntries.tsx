@@ -1,7 +1,7 @@
 import { CalendarEntry } from "./CalendarEntry"
 import { useSelector } from "react-redux"
 import { getPastDate, getEstheticDate } from "../src/functions/index.js"
-import { Language, MinutesSpent, Rating } from "../src/types"
+import { ITag, Language, MinutesSpent, Rating } from "../src/types"
 import { AddEntryForm } from "./forms/AddEntryForm"
 
 export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
@@ -25,7 +25,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
           <div className="mx-1 mb-10 w-full" key={den.number}>
             <p className="border-2 border-black font-bold text-center text-md">{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
             <AddEntryForm datetime={getPastDate(den.number)} />
-            {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:null|number }):any=>{
+            {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:null|number,tag_ids:[number]}):any=>{
               if (entry.datetime.substring(0,10)===getPastDate(den.number).substring(0,10)){
                 return(
                   <CalendarEntry 
@@ -37,6 +37,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
                     key={entry.id}
                     id={entry.id}
                     programmer_id={entry.programmer_id}
+                    tag_ids={entry.tag_ids}
                   />
                 )}})}
           </div>

@@ -31,8 +31,8 @@ export const AddTagForm = ()=>{
 
   return(
     <>
-      <div className="flex mb-2">
-        <FormButton className="bg-main_color w-[150px] m-auto" onClick={()=>setFormShown(true)} text="Add tags" />
+      <div className="flex mb-10">
+        <FormButton className="bg-main_color w-[151px] m-auto" onClick={()=>setFormShown(true)} text="Add tags" />
       </div>
       {showForm&&
       <UniversalForm header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>

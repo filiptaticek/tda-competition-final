@@ -9,7 +9,7 @@ import { useState } from "react"
 import { UniversalForm } from "./forms/UniversalForm"
 import { getEstheticDate } from "../src/functions"
 
-export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id}:IDiaryEntry)=>{
+export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id, tag_ids}:IDiaryEntry)=>{
   
   const users = useSelector((state:any) => state.users)
   const [showDetail, setDetailShown] = useState<boolean>(false) //NA CELOU VĚC KDYŽ SE KLIKNE TAK SE ROZBALÍ DETAIL TOHO PŘÍSPĚVKU 
@@ -48,6 +48,7 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
         <div className="mb-5">
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>
+        {tag_ids&&<p>{JSON.stringify(tag_ids)}</p>}
         <p><span className="font-bold">{minutes_spent}</span> minutes</p>
         <RatingLogo rating={rating} />
         <p className="mt-5 italic">{description}</p>

@@ -25,11 +25,13 @@ export default function TagsPage() {
     <div>
       <Header />
       <AddTagForm />
-      {tags.map((tag:ITag)=>{
-        return(
-          <Tag name={tag.name} color={tag.color} id={tag.id} key={tag.id} description={tag.description} />
-        )
-      })}
+      <div className="flex w-[1110px] flex-wrap m-auto mb-10">
+        {tags.map((tag:ITag)=>{
+          return(
+            <Tag name={tag.name} color={tag.color} id={tag.id} key={tag.id} description={tag.description} />
+          )
+        })}
+      </div>
     </div>
   )
 }

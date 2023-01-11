@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import { Entry } from "./Entry"
-import { IDiaryEntry, Language, MinutesSpent, Rating } from "../src/types"
+import { Language, MinutesSpent, Rating } from "../src/types"
 import { UniversalForm } from "./forms/UniversalForm"
 import { FormButton } from "./formParts/FormButton"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "./formParts/index.js"

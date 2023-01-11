@@ -4,17 +4,22 @@ import { store, wrapper } from "../src/store/store"
 import { Provider,useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { getRequest } from "../src/functions"
-import { setUsers } from "../src/store/actions"
+import { setUsers, setTags } from "../src/store/actions"
 
 function App({ Component, pageProps }: AppProps) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const updateState = async () =>{
+    const updateUsers = async () =>{
       const serverData = await getRequest("programmer")
       dispatch(setUsers(serverData))
     }
-    updateState()
+    updateUsers()
+    const updateTags = async () =>{
+      const serverData = await getRequest("tag")
+      dispatch(setTags(serverData))
+    }
+    updateTags()
   }, [dispatch])
 
 

@@ -10,9 +10,9 @@ export interface IDiaryEntry {
     minutes_spent:MinutesSpent
     rating:Rating
     description:string
-    programmer_id?:number|null
+    programmer_id:number|null
     id:number
-    tags?:[ITag]
+    tag_ids:[number]
 }
 
 export interface IUser {
