@@ -90,7 +90,7 @@ export const Entries = ()=>{
 
       {/*ALL THE ENTRIES FILTERE*/}
       <div className="w-full lg:flex flex-wrap">
-        {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:number|null}):any=>{
+        {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:number|null,tag_ids:number[]}):any=>{
           if (programmingLanguageFilter&&entry.programming_language!==programmingLanguageFilter){return false}
           if (userFilter&&!(entry.programmer_id===(users.find((programmer:IUser) => programmer.name === user.split(" ")[0]).id))) {return false}
           if (dateFilter&&!(entry.datetime>=dateFilter[0]&&entry.datetime<=dateFilter[1])){return false}
@@ -107,6 +107,7 @@ export const Entries = ()=>{
               key={entry.id}
               id={entry.id}
               programmer_id={entry.programmer_id}
+              tag_ids={entry.tag_ids}
             />
           )
         })}

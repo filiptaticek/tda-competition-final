@@ -2,19 +2,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 import clsx from "clsx"
 import { useState } from "react"
-import { Color,ITag } from "../src/types"
+import { ITag } from "../src/types"
 import { EditTagForm } from "./forms/EditTagForm"
+import { returnTagColor } from "../src/functions/other"
 
 export const Tag = ({name,color,description,id}:ITag)=>{
 
   const [showForm, setFormShown] = useState<boolean>(false)
-
-  const returnTagColor = (color:Color)=> {switch (color) {
-  case "orange":return("bg-[#FFAA00]");case "red":return("bg-[#FF5562]")
-  case "blue":return("bg-[#001BFF]");case "green":return("bg-[#59D957]")
-  case "purple":return("bg-main_color");case "pink":return("bg-[#FE62EE]")
-  case "yellow":return("bg-[#F3E400]")
-  }}
 
   return(
     <div className={clsx("w-min m-1 py-5 w-[150px] h-[300px] border border-black",returnTagColor(color))}>

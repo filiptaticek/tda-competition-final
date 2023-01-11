@@ -1,16 +1,13 @@
 import { useState } from "react"
-import { SelectUser } from "../formParts/SelectUser"
 import { useDispatch, useSelector } from "react-redux"
-import { Language, MinutesSpent, Rating } from "../../src/types"
+import { Language, MinutesSpent, Rating, IUser, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
 import { getEstheticDate,postRequest } from "../../src/functions/index.js"
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "../formParts/index.js"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "../formParts/index.js"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton,SelectUser } from "../formParts/index.js"
 import clsx from "clsx"
-import { IUser, ITag } from "../../src/types"
 //This form handles sending new post to the database and updating the state
 
 export const AddEntryForm = ({datetime}:{datetime:string})=>{
@@ -26,6 +23,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   const users = useSelector((state:any) => state.users)
   const tags = useSelector((state:any) => state.tags)
   const addPostButtonProps = "w-full text-center border-x-2 border-b-2 border-black bg-main_color text-white font-bold"
+
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
       setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))} 
@@ -33,7 +31,6 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
       setPicked([...picked, tag])
     }
   }
-
 
   const handleSubmit = async (event:any) => {
     event.preventDefault()
@@ -57,7 +54,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
           <SelectUser text="Choose the user" value={user} onChange={(event:any)=>setUser(event.target.value)} />
           <UniversalInput type="number" text="Time spent in minutes" extrastyle="h-10" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(Number(event.target.value) as MinutesSpent)}/>
           <SelectRating text="Rating" value={rating} onChange={(event:any) => setRating(parseInt(event.target.value) as Rating)}/>
-          <Description text="Check the tags for your entry" />
+          <Description text="Pick the tags for your entry" />
           <div className={inputSameProperties}>
             {tags.map((tag: ITag) => (
               <div key={tag.id}>

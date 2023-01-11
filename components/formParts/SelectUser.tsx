@@ -9,9 +9,10 @@ interface ISelectUser {
     onChange:any,
     bonusOption?:boolean
     actualUser?:boolean
+    actualUserValue?:string
 }
 
-export const SelectUser = ({text,value,onChange,actualUser}:ISelectUser)=>{
+export const SelectUser = ({text,value,onChange,actualUser,actualUserValue}:ISelectUser)=>{
 
   const users = useSelector((state:any) => state.users)
 
@@ -23,13 +24,14 @@ export const SelectUser = ({text,value,onChange,actualUser}:ISelectUser)=>{
         onChange={onChange}
         className={inputSameProperties}
       >
-        {actualUser&&<option disabled key={1} value={"Actual user"}>{"Actual user"}</option>}
-        <option key={2} value={"No user"}>{"No user"}</option>
+        {actualUser&&<option key={1} value={actualUserValue}>{actualUserValue}</option>}
+        {actualUserValue!=="No user"&&<option key={2} value={"No user"}>{"No user"}</option>}
         {users.map((user:IUser)=>{
           const userFullName = user.name+" "+user.surname
-          return(
+          {if (actualUserValue!==userFullName){return(
             <option key={user.id} value={userFullName}>{userFullName}</option>
           )
+          }}
         })}
       </select>
         

@@ -12,7 +12,7 @@ export interface IDiaryEntry {
     description:string
     programmer_id:number|null
     id:number
-    tag_ids:[number]
+    tag_ids:number[]
 }
 
 export interface IUser {

@@ -8,6 +8,7 @@ import { IUser } from "../src/types"
 import { useState } from "react"
 import { UniversalForm } from "./forms/UniversalForm"
 import { getEstheticDate } from "../src/functions"
+import { MiniTag } from "./MiniTag"
 
 export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id, tag_ids}:IDiaryEntry)=>{
   
@@ -41,6 +42,7 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
           postComment={description}
           postId={id}
           postProgrammerId={programmer_id}
+          postTagIds={tag_ids}
         />
       </div>
       {showDetail&&
@@ -48,7 +50,7 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
         <div className="mb-5">
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>
-        {tag_ids&&<p>{JSON.stringify(tag_ids)}</p>}
+        {tag_ids&&<div className="w-fit m-auto my-10 flex flex-wrap">{tag_ids.map(tag_id => {return(<MiniTag key={tag_id} id={tag_id} />)})}</div>}
         <p><span className="font-bold">{minutes_spent}</span> minutes</p>
         <RatingLogo rating={rating} />
         <p className="mt-5 italic">{description}</p>

@@ -20,7 +20,7 @@ export const SelectTags = () =>{
 
   return (
     <div className={inputSameProperties}>
-      <Description text="Check the tags for your entry" />
+      <Description text="Pick the for your entry" />
       {tags.map((tag: ITag) => (
         <div key={tag.id}>
           <input
