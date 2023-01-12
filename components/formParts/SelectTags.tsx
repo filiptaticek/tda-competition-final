@@ -4,8 +4,6 @@ import { useSelector } from "react-redux"
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 
-
-
 export const SelectTags = () =>{
   const [picked, setPicked] = useState<ITag[]>([])
   const tags = useSelector((state:any) => state.tags)

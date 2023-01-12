@@ -35,10 +35,8 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   const handleSubmit = async (event:any) => {
     event.preventDefault()
     const tag_ids = picked.length!==0?picked.map(obj => obj.id):null
-    console.log(tag_ids)
     const programmer_id = user===""||user==="No user"||user===null?null:(users.find((person:IUser) => person.name === user.substr(0, user.indexOf(" "))).id)
     const data = { datetime, description, programming_language, programmer_id, minutes_spent,rating, id:100, tag_ids }
-    console.log(data)
     setShowForm(false)
     const toCoPrislo = await postRequest(data,"record")
     dispatch(addSingleRecord(toCoPrislo))

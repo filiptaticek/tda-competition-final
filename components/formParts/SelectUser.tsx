@@ -33,8 +33,7 @@ export const SelectUser = ({text,value,onChange,actualUser,actualUserValue}:ISel
           )
           }}
         })}
-      </select>
-        
+      </select> 
     </>
   )
 }

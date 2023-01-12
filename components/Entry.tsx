@@ -14,7 +14,7 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
 
   return(
     <>
-      <div className="border-collapse h-[550px] lg:w-[20%] text-center rounded-md p-1">
+      <div className="border-collapse h-[350px] lg:w-[20%] text-center rounded-md p-1">
         <div className="border hover:bg-gray-100 border-black pt-5 h-full">
           <p className="font-bold">{programmer?programmer:"No user"}</p>
           <div className="mb-5">

@@ -7,12 +7,15 @@ import { FormButton } from "./formParts/FormButton"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "./formParts/index.js"
 import { SortEntriesForm } from "./forms/SortEntriesForm"
 import { SelectUser } from "./formParts/SelectUser"
-import { IUser } from "../src/types"
+import { IUser, ITag } from "../src/types"
+import { inputSameProperties } from "../src/constants"
+import { Description } from "./Description"
 
 export const Entries = ()=>{
 
   //STATE
   const users = useSelector((state:any) => state.users) //all the users
+  const tags = useSelector((state:any) => state.tags)
   const globalposts = useSelector((state:any) => state.records) //all the entries
   const [filters,setFiltersShown] = useState<boolean>(false) //should the filters form be shown? 
   const [sorting,setSortingShown] = useState<boolean>(false) //should the filters form be shown? 
@@ -20,6 +23,7 @@ export const Entries = ()=>{
   const [maximalDate, setMaximalDate] = useState<string|undefined>(undefined)
   const [minimalTime, setMinimalTime] = useState<number>(0) //TIME filter inputs
   const [maximalTime, setMaximalTime] = useState<number>(0)
+  const [picked, setPicked] = useState<Array<ITag>>([])
   const [minimalRating, setMinimalRating] = useState<Rating>(1) //RATING filter inputs
   const [maximalRating, setMaximalRating] = useState<Rating>(5)
   const [user, setUser] = useState<string>("No user filter") //USER filter input
@@ -29,6 +33,7 @@ export const Entries = ()=>{
   const [programmingLanguageFilter,setProgrammingLanguageFilter] =useState<string|undefined>(undefined) //PROGRAMMING LANGUAGE FILTER
   const [userFilter, setUserFilter] = useState<string|undefined>(undefined) //USER FILTER
   const [dateFilter, setDateFilter] = useState<[string,string]|undefined>(undefined) //DATE FILTER
+  const [tagsFilter, setTagsFilter] = useState<Array<any>|undefined>(undefined)
 
   //FUNCTIONS HANDLING ALL THE INPUTS
   const handleMinimalDate = (event:any) => {setMinimalDate(event.target.value)}
@@ -39,6 +44,7 @@ export const Entries = ()=>{
   const handleMaximalRating = (event:any) => {setMaximalRating(parseInt(event.target.value) as Rating)}
   const handleUser = (event:any) => {setUser(event.target.value)}
   const handleProgrammingLanguage = (event:any) => {setProgrammingLanguage(event.target.value)}
+  const handleTags = (tag:ITag) => {if (picked.includes(tag)) {setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))} else {setPicked([...picked, tag])}}
 
   const submitFilters = (event:any) => {
     event.preventDefault()
@@ -46,6 +52,9 @@ export const Entries = ()=>{
     if(minimalTime!==0||maximalTime!==0){setTimeFilter([minimalTime, maximalTime])}
     if(minimalDate&&maximalDate){setDateFilter([minimalDate,maximalDate])}
     if(minimalRating&&maximalRating){setRatingFilter([minimalRating, maximalRating])}
+    picked.length>0&&setTagsFilter(picked)
+    console.log(picked)
+    console.log(tagsFilter)
     user==="No user filter"?setUserFilter(undefined):setUserFilter(user)
     programmingLanguage==="No language filter"?setProgrammingLanguageFilter(undefined):setProgrammingLanguageFilter(programmingLanguage)
   }
@@ -81,6 +90,20 @@ export const Entries = ()=>{
           <SelectProgrammingLanguage text="Programming language" value={programmingLanguage} onChange={handleProgrammingLanguage} bonusOption={true} />
           <SelectRating text="Minimal rating" value={minimalRating} onChange={handleMinimalRating} />
           <SelectRating text="Maximal rating" value={maximalRating} onChange={handleMaximalRating} />
+          <Description text="Pick the tags for your entry" />
+          <div className={inputSameProperties}>
+            {tags.map((tag: ITag) => (
+              <div key={tag.id}>
+                <input
+                  type="checkbox"
+                  value={tag.name}
+                  checked={picked.includes(tag)}
+                  onChange={() => handleTags(tag)}
+                />
+                {tag.name}
+              </div>
+            ))}
+          </div>
           <div className="flex mt-8">
             <FormButton type="submit" text="Submit" className="bg-button_green mr-1" />
             <FormButton onClick={resetFilters} text="Reset all filters" className="bg-button_red" />
@@ -95,6 +118,7 @@ export const Entries = ()=>{
           if (userFilter&&!(entry.programmer_id===(users.find((programmer:IUser) => programmer.name === user.split(" ")[0]).id))) {return false}
           if (dateFilter&&!(entry.datetime>=dateFilter[0]&&entry.datetime<=dateFilter[1])){return false}
           if  (timeFilter&&!(entry.minutes_spent>timeFilter[0]&&entry.minutes_spent<timeFilter[1])) {return false}
+          if  (picked&&picked.some(tag => (entry.tag_ids || []).includes(tag.id))){return false}
           if (!(entry.rating>=ratingFilter[0]&&entry.rating<=ratingFilter[1])){return false}
 
           else return(

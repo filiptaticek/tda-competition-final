@@ -1,10 +1,9 @@
 import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "../formParts/FormButton"
 import { useDispatch } from "react-redux"
 import { removeSingleTag, updateSingleTag } from "../../src/store/actions"
 import { useState } from "react"
 import { deleteRequest, putRequest  } from "../../src/functions"
-import { SelectColor, UniversalInput } from "../formParts"
+import { SelectColor, UniversalInput, FormButton } from "../formParts"
 import { Color } from "../../src/types"
 
 export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{

@@ -1,11 +1,9 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { FormButton } from "../formParts/FormButton"
-import { UniversalInput } from "../formParts"
+import { UniversalInput,FormButton } from "../formParts"
 import { UniversalForm } from "./UniversalForm"
-import { postRequest } from "../../src/functions/api/post"
 import { addSingleUser } from "../../src/store/actions"
-import { capitalize, isOnlyLetters } from "../../src/functions"
+import { capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 
 export const AddUserForm = ()=>{
 

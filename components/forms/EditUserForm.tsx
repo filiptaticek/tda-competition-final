@@ -1,10 +1,9 @@
 import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "../formParts/FormButton"
 import { useDispatch } from "react-redux"
 import { removeSingleUser, updateSingleUser } from "../../src/store/actions"
 import { useState } from "react"
 import { putRequest,capitalize, deleteRequest, isOnlyLetters  } from "../../src/functions"
-import { UniversalInput } from "../formParts"
+import { UniversalInput, FormButton } from "../formParts"
 
 export const EditUserForm = ({closeForm,id,name,surname}:{closeForm:any,id:number,name:string,surname:string})=>{
 

@@ -2,16 +2,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useState, useEffect } from "react"
 import { useDispatch,useSelector } from "react-redux"
-import { Language, MinutesSpent, Rating } from "../../src/types"
+import { Language, MinutesSpent, Rating, ITag, IUser } from "../../src/types"
 import { removeSingleRecord, updateSingleRecord } from "../../src/store/actions"
 import { getEstheticDate, deleteRequest, putRequest } from "../../src/functions/index.js"
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
-import { FormButton } from "../formParts/FormButton"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage } from "../formParts/index.js"
-import { SelectUser } from "../formParts/SelectUser"
-import { ITag, IUser } from "../../src/types"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage, SelectUser,FormButton } from "../formParts/index.js"
 
 interface IEditEntryForm {
     datetime:string,
@@ -26,16 +23,16 @@ interface IEditEntryForm {
 
 export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinutesSpent,postRating, postComment, postProgrammerId, postTagIds}:IEditEntryForm)=>{
 
+  const tags = useSelector((state:any) => state.tags)
+  const users = useSelector((state:any) => state.users)
+  const dispatch = useDispatch()
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>(postProgrammingLanguage)
   const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(postMinutesSpent)
   const [rating, setRating] = useState<Rating>(postRating)
   const [description, setDescription] = useState<string>(postComment)
   const [user, setUser] = useState<string>("No user")
-  const tags = useSelector((state:any) => state.tags)
   const [picked, setPicked] = useState<any>([])
-  const users = useSelector((state:any) => state.users)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     const setInitialPicked = ()=>setTimeout(() => {
@@ -44,13 +41,19 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
         setPicked(filteredTags)
       }
     }, 5)
-    const setInitialUser = ()=>setTimeout(() => {
-      if(postProgrammerId) {
-        const filteredUser = users.find((user:IUser) => user.id === postProgrammerId)
-        console.log(postProgrammerId, filteredUser)
-        setUser(filteredUser.name+" "+filteredUser.surname)
-      }
-    }, 5)
+    const setInitialUser = () =>
+      setTimeout(() => {
+        if (postProgrammerId) {
+          const filteredUser = users.find(
+            (user: IUser) => user.id === postProgrammerId
+          )
+          if (filteredUser) {
+            setUser(filteredUser.name + " " + filteredUser.surname)
+          } else {
+            console.log("User not found")
+          }
+        }
+      }, 5)
     setInitialPicked()
     setInitialUser()
   }, [postProgrammerId, postTagIds, tags, users])
