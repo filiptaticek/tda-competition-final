@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { UniversalForm } from "./UniversalForm"
 import { addSingleTag } from "../../src/store/actions"
-import { capitalize, isOnlyLetters, postRequest } from "../../src/functions"
+import { capitalize, postRequest } from "../../src/functions"
 import { Color } from "../../src/types"
 import { SelectColor, FormButton, UniversalInput } from "../formParts"
 
