@@ -47,7 +47,7 @@ export const EditUserForm = ({closeForm,id,name,surname}:{closeForm:any,id:numbe
   }
 
   return(
-    <UniversalForm header={<>Edit user <strong> {name} {surname}</strong></>} onSubmit={handleEditingUser} closeForm={closeForm}>
+    <UniversalForm className="pt-[150px]" header={<>Edit user <strong> {name} {surname}</strong></>} onSubmit={handleEditingUser} closeForm={closeForm}>
       <UniversalInput text="Edit the first name of the user" value={firstNameState} onChange={handleFirstName}/> 
       <UniversalInput text="Edit the surname of the user" value={surnameState} onChange={handleSurname}/> 
       <div className="flex mt-8">

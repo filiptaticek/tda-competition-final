@@ -33,7 +33,7 @@ export const Entries = ()=>{
   const [programmingLanguageFilter,setProgrammingLanguageFilter] =useState<string|undefined>(undefined) //PROGRAMMING LANGUAGE FILTER
   const [userFilter, setUserFilter] = useState<string|undefined>(undefined) //USER FILTER
   const [dateFilter, setDateFilter] = useState<[string,string]|undefined>(undefined) //DATE FILTER
-  const [tagsFilter, setTagsFilter] = useState<Array<any>|undefined>(undefined)
+  const [tagsFilter, setTagsFilter] = useState<Array<ITag>|undefined>(undefined)
 
   //FUNCTIONS HANDLING ALL THE INPUTS
   const handleMinimalDate = (event:any) => {setMinimalDate(event.target.value)}
@@ -53,16 +53,15 @@ export const Entries = ()=>{
     if(minimalDate&&maximalDate){setDateFilter([minimalDate,maximalDate])}
     if(minimalRating&&maximalRating){setRatingFilter([minimalRating, maximalRating])}
     picked.length>0&&setTagsFilter(picked)
-    console.log(picked)
-    console.log(tagsFilter)
+    picked.length===0&&setTagsFilter(undefined)
     user==="No user filter"?setUserFilter(undefined):setUserFilter(user)
     programmingLanguage==="No language filter"?setProgrammingLanguageFilter(undefined):setProgrammingLanguageFilter(programmingLanguage)
   }
 
   const resetFilters = (event:any) =>{
     event.preventDefault()
-    setMinimalTime(0),setMaximalTime(0),setMinimalRating(1),setMaximalRating(5),setProgrammingLanguage("No language filter"),setMinimalDate(undefined),setMaximalDate(undefined),setUser("No user filter")
-    setTimeFilter(undefined),setRatingFilter([1,5]),setProgrammingLanguageFilter(undefined),setDateFilter(undefined),setUserFilter(undefined)
+    setMinimalTime(0),setMaximalTime(0),setMinimalRating(1),setMaximalRating(5),setProgrammingLanguage("No language filter"),setMinimalDate(undefined),setMaximalDate(undefined),setUser("No user filter"),setPicked([])
+    setTimeFilter(undefined),setRatingFilter([1,5]),setProgrammingLanguageFilter(undefined),setDateFilter(undefined),setUserFilter(undefined),setTagsFilter(undefined)
   }
 
   //BODY
@@ -118,8 +117,9 @@ export const Entries = ()=>{
           if (userFilter&&!(entry.programmer_id===(users.find((programmer:IUser) => programmer.name === user.split(" ")[0]).id))) {return false}
           if (dateFilter&&!(entry.datetime>=dateFilter[0]&&entry.datetime<=dateFilter[1])){return false}
           if  (timeFilter&&!(entry.minutes_spent>timeFilter[0]&&entry.minutes_spent<timeFilter[1])) {return false}
-          if  (picked&&picked.some(tag => (entry.tag_ids || []).includes(tag.id))){return false}
           if (!(entry.rating>=ratingFilter[0]&&entry.rating<=ratingFilter[1])){return false}
+          if (tagsFilter&&!entry.tag_ids){return false}
+          if (tagsFilter&&tagsFilter.some(tag => entry.tag_ids.includes(tag.id)===false)){return false}
 
           else return(
             <Entry 

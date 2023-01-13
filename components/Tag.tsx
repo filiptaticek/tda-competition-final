@@ -4,14 +4,14 @@ import clsx from "clsx"
 import { useState } from "react"
 import { ITag } from "../src/types"
 import { EditTagForm } from "./forms/EditTagForm"
-import { returnTagColor } from "../src/functions/other"
+import { returnTagColor } from "./MiniTagIcon"
 
 export const Tag = ({name,color,description,id}:ITag)=>{
 
   const [showForm, setFormShown] = useState<boolean>(false)
 
   return(
-    <div className={clsx("w-min m-1 py-5 w-[150px] h-[300px] border border-black",returnTagColor(color))}>
+    <div className={clsx("rounded-sm w-min m-1 px-2 py-5 w-[150px] h-[300px]",returnTagColor(color))}>
       <p className="text-xl text-center font-bold text-white w-full">{name}</p>
       <p className="text-xl text-center h-[200px] text-white">{description}</p>
       <div className="h-fit w-full">

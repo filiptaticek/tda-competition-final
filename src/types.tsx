@@ -3,7 +3,7 @@ export type Rating = 1|2|3|4|5
 export type MinutesSpent = number & { __isPositive: true };
 export type Button = "button" | "submit" | "reset"
 export type Sorting = "from newest" | "from oldest" | "from best rating" | "from worst rating" | "from shortest"| "from longest"| "no sorting"
-export type Color = "red" | "orange" | "blue" | "yellow" | "green" | "purple" | "pink"
+export type Color = "red" | "orange" | "blue" | "yellow" | "green" | "purple" | "pink" | "brown"
 export interface IDiaryEntry {
     datetime:string
     programming_language:Language

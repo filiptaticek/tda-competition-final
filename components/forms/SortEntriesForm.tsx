@@ -39,7 +39,7 @@ export const SortEntriesForm = ({onClick}:{onClick:any})=>{
   }
 
   return(
-    <UniversalForm header="Sort entries" closeForm={onClick} onSubmit={handleSorting}>
+    <UniversalForm className="pt-[150px]" header="Sort entries" closeForm={onClick} onSubmit={handleSorting}>
       <Description text={"Pick how you want to sort your entries"} />
       <select 
         className={inputSameProperties} 

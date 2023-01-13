@@ -35,11 +35,11 @@ export const AddUserForm = ()=>{
 
   return(
     <>
-      <div className="flex mb-2">
-        <FormButton className="bg-main_color w-[150px] m-auto" onClick={()=>setFormShown(true)} text="Add users" />
+      <div className="flex m-auto w-[300px] mb-2">
+        <FormButton className="bg-main_color w-min m-auto" onClick={()=>setFormShown(true)} text="Add users" />
       </div>
       {showForm&&
-      <UniversalForm header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
+      <UniversalForm className="pt-[150px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
         <UniversalInput text="Fill in the first name with only one word" value={name} onChange={handleFirstName} />
         <UniversalInput text="Fill in the surname with only one word" value={surname} onChange={handleSurname} />
         <div className="flex mt-8">

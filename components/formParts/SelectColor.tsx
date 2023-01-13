@@ -1,5 +1,6 @@
 import { Description } from "../Description"
-import { inputSameProperties, colors } from "../../src/constants"
+import { inputSameProperties, colorsNames } from "../../src/constants"
+import { useSelector } from "react-redux"
 
 interface ISelectColor {
     text:string
@@ -9,6 +10,8 @@ interface ISelectColor {
 }
 
 export const SelectColor = ({text,value,onChange}:ISelectColor)=>{
+  const tags = useSelector((state:any) => state.tags)
+  
   return(
     <>
       <Description text={text} />
@@ -16,7 +19,7 @@ export const SelectColor = ({text,value,onChange}:ISelectColor)=>{
         className={inputSameProperties} 
         value={value} 
         onChange={onChange}>
-        {colors.map(color =>{
+        {colorsNames.map(color =>{
           return(
             <option key={color} value={color}>{color}</option>
           )

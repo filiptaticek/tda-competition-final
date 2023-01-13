@@ -37,8 +37,8 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
   }
 
   return(
-    <UniversalForm header={<>Edit tag <strong> {name}</strong></>} onSubmit={handleEditingTag} closeForm={closeForm}>
-      <UniversalInput text="Edit the name of the tag" value={tagName} onChange={(event:any)=>{setName(event.target.value)}}/> 
+    <UniversalForm className="pt-[150px]" header={<>Edit tag <strong> {name}</strong></>} onSubmit={handleEditingTag} closeForm={closeForm}>
+      <UniversalInput max={true} text="Edit the name of the tag" value={tagName} onChange={(event:any)=>{setName(event.target.value)}}/> 
       <UniversalInput text="Edit the description of the tag" value={tagDescription} onChange={(event:any)=>{setDescription(event.target.value)}}/> 
       <SelectColor value={tagColor} onChange={(event:any)=>{setColor(event.target.value)}} text="Edit the color of your tag" />
       <div className="flex mt-8">

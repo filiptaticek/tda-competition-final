@@ -23,10 +23,7 @@ export const AddTagForm = ()=>{
   }
 
   const handleName = (event:any) => {
-    const word = event.target.value
-    if (isOnlyLetters(word)){
-      setName(capitalize(word))
-    }
+    setName(capitalize(event.target.value))
   }
 
   return(
@@ -35,8 +32,8 @@ export const AddTagForm = ()=>{
         <FormButton className="bg-main_color w-[151px] m-auto" onClick={()=>setFormShown(true)} text="Add tags" />
       </div>
       {showForm&&
-      <UniversalForm header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>
-        <UniversalInput text="Fill in the name of the tag" value={name} onChange={handleName} />
+      <UniversalForm className="pt-[150px]" header="Add new tag" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>
+        <UniversalInput max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
         <UniversalInput text="Fill in the description of the tag" value={description} onChange={(event:any)=>{setDescription(event.target.value)}} />
         <SelectColor text="Fill in the color of the tag" value={color} onChange={(event:any)=>{setColor(event.target.value)}} />
         <div className="flex mt-8">

@@ -108,20 +108,20 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
                       checked={picked.includes(tag)}
                       onChange={() => handleTags(tag)}
                     />
-                    {tag.name}
+                    <span className="ml-4">{tag.name}</span>
                   </div>
                 ))}
               </div>
               <Description text="Your comment" />
               <textarea required className={inputSameProperties} value={description} onChange={(event) => setDescription(event.target.value)} />
-              <div className="flex mt-8">
+              <div className="flex mt-2">
                 <FormButton type="submit" text="Edit form" className="mr-2 bg-button_green" />
                 <FormButton onClick={handleDeletingEntry} className="bg-button_red" text="Delete entry"/>
               </div>
             </div>
           </UniversalForm>
       }
-      <img src="upravit_zaznam.png" className="h-[30px] m-auto cursor-pointer mt-1 w-min h-min" onClick={handleOpeningForm}/>
+      <img src="upravit_zaznam.png" className="h-[30px] m-auto" onClick={handleOpeningForm}/>
     </div>
   )
 }
