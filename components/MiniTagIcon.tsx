@@ -16,7 +16,7 @@ export const MiniTagIcon = ({id}:{id:number}) =>{
 
   const tags = useSelector((state:any) => state.tags)
   const foundTag = tags.find((tag:ITag) => tag.id===id)
-  const className = `text-whites rounded-sm sborder-black h-[30px] w-[40px] p-2 ${returnTagColor(foundTag.color)}`
+  const className = `text-whites rounded-sm sborder-black h-[30px] w-[40px] p-2 ${foundTag&&returnTagColor(foundTag.color)}`
 
   return(
     <div className={className} />

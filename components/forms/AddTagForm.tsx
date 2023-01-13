@@ -35,7 +35,7 @@ export const AddTagForm = ()=>{
       <UniversalForm className="pt-[150px]" header="Add new tag" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>
         <UniversalInput max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
         <UniversalInput text="Fill in the description of the tag" value={description} onChange={(event:any)=>{setDescription(event.target.value)}} />
-        <SelectColor text="Fill in the color of the tag" value={color} onChange={(event:any)=>{setColor(event.target.value)}} />
+        <SelectColor text="Choose from eight different colors" value={color} onChange={(event:any)=>{setColor(event.target.value)}} />
         <div className="flex mt-8">
           <FormButton className="bg-button_green" type="submit" text="Add the tag"/>
         </div>
