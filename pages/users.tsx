@@ -1,10 +1,17 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { User } from "../components/User"
 import { Header } from "../components/Header"
 import { AddUserForm } from "../components/forms/AddUserForm"
+import { useEffect } from "react"
+import { setPage } from "../src/store/actions"
 
 export default function UsersPage() {
   const users = useSelector((state:any) => state.users)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setPage("users"))
+  }, [dispatch])
 
   return (
     <div className="px-4 max-w-page_max m-auto mb-5">

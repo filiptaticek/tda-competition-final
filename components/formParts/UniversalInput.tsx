@@ -9,10 +9,11 @@ interface IUniversalInput {
     value:any,
     onChange:any,
     extrastyle?:string,
-    type?:any
+    type?:any,
+    required?:boolean
 }
 
-export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max}:IUniversalInput)=>{
+export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max, required}:IUniversalInput)=>{
   return(
     <>
       <Description text={text} />
@@ -23,6 +24,7 @@ export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max}:IU
         maxLength={max?12:undefined}
         value={value} 
         onChange={onChange} 
+        required={required?true:false}
       />
     </>
   )

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { UniversalInput,FormButton } from "../formParts"
 import { UniversalForm } from "./UniversalForm"
 import { addSingleUser } from "../../src/store/actions"
-import { capitalize, isOnlyLetters,postRequest } from "../../src/functions"
+import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 
 export const AddUserForm = ()=>{
 
@@ -23,13 +23,13 @@ export const AddUserForm = ()=>{
   const handleFirstName = (event:any) => {
     const word = event.target.value
     if (isOnlyLetters(word)){
-      setFirstName(capitalize(word))
+      setFirstName(sntz(capitalize(word)))
     }
   }
   const handleSurname = (event:any) => {
     const word = event.target.value
     if (isOnlyLetters(word)){
-      setSurname(capitalize(word))
+      setSurname(sntz(capitalize(word)))
     }
   }
 
@@ -40,8 +40,8 @@ export const AddUserForm = ()=>{
       </div>
       {showForm&&
       <UniversalForm className="pt-[150px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
-        <UniversalInput text="Fill in the first name with only one word" value={name} onChange={handleFirstName} />
-        <UniversalInput text="Fill in the surname with only one word" value={surname} onChange={handleSurname} />
+        <UniversalInput required={true} text="Fill in the first name with only one word" value={name} onChange={handleFirstName} />
+        <UniversalInput required={true} text="Fill in the surname with only one word" value={surname} onChange={handleSurname} />
         <div className="flex mt-8">
           <FormButton className="bg-button_green" type="submit" text="Add the user"/>
         </div>

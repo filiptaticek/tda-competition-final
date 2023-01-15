@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
-import { setRecords } from "../src/store/actions"
+import { setRecords, setPage } from "../src/store/actions"
 import { getRequest } from "../src/functions/api/get"
 import { useEffect } from "react"
-import { Entries } from "../components/Entries"
+import { Entries } from "../components/entries/Entries"
 import { Header } from "../components/Header"
 
 export default function AllEntriesPage() {
@@ -14,6 +14,7 @@ export default function AllEntriesPage() {
       dispatch(setRecords(serverData))
     }
     updateState()
+    dispatch(setPage("all_entries"))
   }, [dispatch])
 
   return (

@@ -2,9 +2,9 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { UniversalForm } from "./UniversalForm"
 import { addSingleTag } from "../../src/store/actions"
-import { capitalize, postRequest } from "../../src/functions"
-import { Color } from "../../src/types"
+import { capitalize, postRequest,sntz } from "../../src/functions"
 import { SelectColor, FormButton, UniversalInput } from "../formParts"
+import { Color } from "../../src/types"
 
 export const AddTagForm = ()=>{
 
@@ -23,7 +23,7 @@ export const AddTagForm = ()=>{
   }
 
   const handleName = (event:any) => {
-    setName(capitalize(event.target.value))
+    setName(sntz(capitalize(event.target.value)))
   }
 
   return(
@@ -33,9 +33,9 @@ export const AddTagForm = ()=>{
       </div>
       {showForm&&
       <UniversalForm className="pt-[150px]" header="Add new tag" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>
-        <UniversalInput max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
-        <UniversalInput text="Fill in the description of the tag" value={description} onChange={(event:any)=>{setDescription(event.target.value)}} />
-        <SelectColor text="Choose from eight different colors" value={color} onChange={(event:any)=>{setColor(event.target.value)}} />
+        <UniversalInput required={true} max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
+        <UniversalInput required={true} text="Fill in the description of the tag" value={description} onChange={(event:any)=>{setDescription(sntz(event.target.value))}} />
+        <SelectColor text="Choose from eight different colors" value={color} onChange={(event:any)=>{setColor(sntz(event.target.value))}} />
         <div className="flex mt-8">
           <FormButton className="bg-button_green" type="submit" text="Add the tag"/>
         </div>

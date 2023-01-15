@@ -2,13 +2,12 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Language, MinutesSpent, Rating, IUser, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
-import { getEstheticDate,postRequest } from "../../src/functions/index.js"
+import { sntz, getEstheticDate,postRequest } from "../../src/functions/index.js"
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton,SelectUser } from "../formParts/index.js"
 import clsx from "clsx"
-//This form handles sending new post to the database and updating the state
 
 export const AddEntryForm = ({datetime}:{datetime:string})=>{
 
@@ -26,7 +25,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
 
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
-      setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))} 
+      setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))}
     else {
       setPicked([...picked, tag])
     }
@@ -45,13 +44,18 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
 
   return (
     <div>
+      {new Date() > new Date(datetime)?
+        <button className={clsx(addPostButtonProps,"hover:opacity-80")} onClick={()=>setShowForm(!showForm)}>+</button>
+        :
+        <div className={addPostButtonProps}>+</div>
+      }
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>Create a new entry on day <br/><strong>{getEstheticDate(datetime)}</strong></>} onSubmit={handleSubmit}>
         <div className="w-full">
-          <SelectProgrammingLanguage text="programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(event.target.value as Language)} />
-          <SelectUser text="Choose the user" value={user} onChange={(event:any)=>setUser(event.target.value)} />
-          <UniversalInput type="number" text="Time spent in minutes" extrastyle="h-10" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(Number(event.target.value) as MinutesSpent)}/>
-          <SelectRating text="Rating" value={rating} onChange={(event:any) => setRating(parseInt(event.target.value) as Rating)}/>
+          <SelectProgrammingLanguage text="programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value as Language))} />
+          <SelectUser text="Choose the user" value={user} onChange={(event:any)=>setUser(sntz(event.target.value))} />
+          <UniversalInput type="number" text="Time spent in minutes" extrastyle="h-10" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))}/>
+          <SelectRating text="Rating" value={rating} onChange={(event:any) => setRating(sntz(parseInt(event.target.value) as Rating))}/>
           <Description text="Pick the tags for your entry" />
           <div className={inputSameProperties}>
             {tags.map((tag: ITag) => (
@@ -71,17 +75,12 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
             required
             className={inputSameProperties} 
             value={description} 
-            onChange={(event) => setDescription(event.target.value)} />
+            onChange={(event) => setDescription(sntz(event.target.value))} />
           <div className="flex mt-8">
             <FormButton className="bg-button_green" type="submit" text="Send"/>
           </div>
         </div>
       </UniversalForm>
-      }
-      {new Date() > new Date(datetime)?
-        <button className={clsx(addPostButtonProps,"hover:opacity-80")} onClick={()=>setShowForm(!showForm)}>+</button>
-        :
-        <div className={addPostButtonProps}>+</div>
       }
     </div>
   )

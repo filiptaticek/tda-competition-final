@@ -2,8 +2,8 @@ import { Header } from "../components/Header"
 import { useEffect } from "react"
 import { getRequest } from "../src/functions"
 import { useDispatch } from "react-redux"
-import { Tag } from "../components/Tag"
-import { setTags } from "../src/store/actions"
+import { Tag } from "../components/tags/Tag"
+import { setTags, setPage} from "../src/store/actions"
 import { useSelector } from "react-redux"
 import { ITag } from "../src/types"
 import { AddTagForm } from "../components/forms/AddTagForm"
@@ -19,13 +19,14 @@ export default function TagsPage() {
       dispatch(setTags(serverData))
     }
     updateState()
+    dispatch(setPage("tags"))
   }, [dispatch])
 
   return (
     <div>
       <Header />
       <AddTagForm />
-      <div className="flex w-[1110px] flex-wrap m-auto mb-10">
+      <div className="sm:flex max-w-[1110px] flex-wrap m-auto mb-10">
         {tags.map((tag:ITag)=>{
           return(
             <Tag name={tag.name} color={tag.color} id={tag.id} key={tag.id} description={tag.description} />

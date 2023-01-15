@@ -17,7 +17,7 @@ export const ProgrammingLanguageLogo = ({programming_language}:{programming_lang
 
   return(
     <img
-      className="w-[50px] mt-2 mb-[-10px] m-auto"
+      className="w-[50px] h-[50px] mt-2 mb-[-10px] m-auto"
       src={returnPictureSource()}
     />
   )

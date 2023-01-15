@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
-import { getEstheticDate } from "../src/functions/index.js"
-import { IDiaryEntry, IUser } from "../src/types"
-import { UniversalForm, EditEntryForm } from "./forms/index.js"
-import { ProgrammingLanguageLogo } from "./ProgrammingLanguageLogo"
-import { RatingLogo } from "./RatingLogo"
+import { getEstheticDate } from "../../src/functions/index.js"
+import { IDiaryEntry, IUser } from "../../src/types"
+import { UniversalForm, EditEntryForm } from "../forms/index.js"
+import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
+import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
-import { MiniTag } from "./MiniTag"
+import { MiniTag } from "../tags/MiniTag"
 import { useState } from "react"
-import { MiniTagIcon } from "./MiniTagIcon"
+import { MiniTagIcon } from "../tags/MiniTagIcon"
 
 export const Entry = ({programming_language,minutes_spent,rating,description, datetime, id, programmer_id, tag_ids}:IDiaryEntry)=>{
 
@@ -37,7 +37,7 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
           {tag_ids?
             <div className="h-fit px-3 w-fit my-5 m-auto w-fit flex flex-wrap">{tag_ids.map(tag_id => {return(<MiniTagIcon key={tag_id} id={tag_id} />)})}</div>
             :
-            <div className="h-[32px] mb-5"/>}
+            <div className="h-[32px] my-5"/>}
           <RatingLogo rating={rating} />
           <p className="w-[200px] m-auto h-[50px] overflow-scroll mt-5 italic">{description}</p>
           <EditEntryForm 

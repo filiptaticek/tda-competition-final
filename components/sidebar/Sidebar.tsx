@@ -17,7 +17,7 @@ export const Sidebar = ()=>{
     >
       <div className={` ${isOpen?"block":"hidden"} text-white text-2xl`}>
         <img className="fixed top-10 cursor-pointer left-[300px] w-[20px]" src="zavrit_stranku.png" onClick={()=>dispatch(toggleSidebarVisbility())}/>
-        <SideBarLink text="Home" href="/" />
+        <SideBarLink text="Calendar" href="/" />
         <br/>
         <br/>
         <SideBarLink text="All Entries" href="/all_entries" />

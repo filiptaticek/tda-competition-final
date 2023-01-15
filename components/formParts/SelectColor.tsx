@@ -1,7 +1,5 @@
 import { Description } from "../Description"
 import { inputSameProperties, colorsNames } from "../../src/constants"
-import { useSelector } from "react-redux"
-import { ITag } from "../../src/types"
 
 interface ISelectColor {
     text:string
@@ -12,8 +10,6 @@ interface ISelectColor {
 }
 
 export const SelectColor = ({text,value,onChange,color}:ISelectColor)=>{
-  const tags = useSelector((state:any) => state.tags)
-  const filteredColors = colorsNames.filter(color => !tags.some((tag:ITag) => tag.color === color))
   
   return(
     <>
@@ -23,7 +19,7 @@ export const SelectColor = ({text,value,onChange,color}:ISelectColor)=>{
         value={value} 
         onChange={onChange}>
         {color&&<option key={0} value={color}>{color}</option>}
-        {filteredColors.map(color =>{
+        {colorsNames.map(color =>{
           return(
             <option key={color} value={color}>{color}</option>
           )

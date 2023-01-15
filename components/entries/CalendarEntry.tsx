@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import { IDiaryEntry } from "../src/types"
-import { EditEntryForm } from "./forms/EditEntryForm"
-import { ProgrammingLanguageLogo } from "./ProgrammingLanguageLogo"
-import { RatingLogo } from "./RatingLogo"
+import { IDiaryEntry } from "../../src/types"
+import { EditEntryForm } from "../forms/EditEntryForm"
+import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
+import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
-import { IUser } from "../src/types"
+import { IUser } from "../../src/types"
 import { useState } from "react"
-import { UniversalForm } from "./forms/UniversalForm"
-import { getEstheticDate } from "../src/functions"
-import { MiniTag } from "./MiniTag"
+import { UniversalForm } from "../forms/UniversalForm"
+import { getEstheticDate } from "../../src/functions"
+import { MiniTag } from "../tags/MiniTag"
 
 export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id, tag_ids}:IDiaryEntry)=>{
   
@@ -46,7 +46,7 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
         />
       </div>
       {showDetail&&
-      <UniversalForm top="pt-[150px]" className="text-center" closeForm={()=>setDetailShown(!showDetail)} header={<Header/>}>
+      <UniversalForm className="pt-[150px] text-center" closeForm={()=>setDetailShown(!showDetail)} header={<Header/>}>
         <div className="mb-5">
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>

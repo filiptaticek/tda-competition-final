@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { ITag } from "../src/types"
+import { ITag } from "../../src/types"
 import { returnTagColor } from "./MiniTagIcon"
 
 export const MiniTag = ({id}:{id:number}) =>{

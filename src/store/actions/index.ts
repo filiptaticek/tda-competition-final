@@ -1,5 +1,6 @@
 import { IDiaryEntry, ITag, IUser } from "../../types"
 import { AnyAction } from "redux"
+import { Page } from "../reducers/page_reducer"
 
 //RECORDS ACTIONS
 
@@ -135,5 +136,13 @@ export const updateSingleTag = (updated_tag_id:number,new_tag:ITag): AnyAction =
     type: "UPDATE_TAG",
     updated_tag_id:updated_tag_id,
     new_tag:new_tag
+  }
+}
+
+//PAGE ACTIONS
+export const setPage = (page:Page): AnyAction => {
+  return {
+    type: "SET_PAGE",
+    page:page
   }
 }

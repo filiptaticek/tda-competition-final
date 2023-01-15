@@ -5,4 +5,4 @@ export { postRequest } from "./api/post.ts"
 
 export { getEstheticDate } from "./date/esthetic_date.ts"
 export { getPastDate } from "./date/right_date.ts"
-export { sanitize,capitalize,isOnlyLetters } from "./other.ts"
+export { sntz,capitalize,isOnlyLetters } from "./others/index.ts"

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import { ITag } from "../src/types"
-import { Color } from "../src/types"
+import { ITag } from "../../src/types"
+import { Color } from "../../src/types"
 
 
 const colorsCodes = ["bg-[#ffe100]", "bg-[#FFA500]", "bg-[#DC143C]", "bg-[#FF69B4]", "bg-[#9400D3]", "bg-[#0000FF]", "bg-[#32CD32]", "bg-[#8B4513]"]

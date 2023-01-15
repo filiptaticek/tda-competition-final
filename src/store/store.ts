@@ -8,7 +8,8 @@ const initalState = {
   records:[],
   sidebar:false,
   users:[],
-  tags:[]
+  tags:[],
+  page:"home"
 }
 
 const middleware = [thunk]

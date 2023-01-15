@@ -6,6 +6,6 @@ export const getRequest = async (path:string) => {
     const response = await axios.get(`${baseUrl}/${path}`)
     return(response.data)
   } catch (error) {
-    //console.error(error)
+    console.error(error)
   }
 }

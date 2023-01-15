@@ -8,6 +8,5 @@ export const postRequest = async (data: IDiaryEntry|IUser|ITag,path:string) => {
     return(response.data)
   } catch (error) {
     console.error(error)
-    return("whatever")
   }
 }
