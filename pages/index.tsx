@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { useDispatch } from "react-redux"
+import { useState, useEffect } from "react"
 import { setRecords, setPage } from "../src/store/actions"
-import { useState } from "react"
 import { getRequest } from "../src/functions/api/get"
-import { useEffect } from "react"
 import { CallendarEntries } from "../components/entries/CalendarEntries"
 import { Header } from "../components/Header"
 
 export default function Home() {
   const dispatch = useDispatch()
-  const [daysBack,setDaysBack] = useState<number>(-7)
+  const [daysBack,setDaysBack] = useState<number>(0)
 
   useEffect(() => {
     const updateState = async () =>{

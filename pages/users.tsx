@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from "react"
 import { User } from "../components/User"
 import { Header } from "../components/Header"
 import { AddUserForm } from "../components/forms/AddUserForm"
-import { useEffect } from "react"
 import { setPage } from "../src/store/actions"
 
 export default function UsersPage() {

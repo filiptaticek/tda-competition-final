@@ -1,8 +1,8 @@
 import { CalendarEntry } from "./CalendarEntry"
 import { useSelector } from "react-redux"
-import { getPastDate, getEstheticDate } from "../../src/functions/index.js"
+import { getPastDate, getEstheticDate } from "../../src/functions"
 import { Language, MinutesSpent, Rating } from "../../src/types"
-import { AddEntryForm } from "../forms/AddEntryForm"
+import { AddEntryForm } from "../forms"
 
 export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
 

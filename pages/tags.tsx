@@ -1,12 +1,11 @@
-import { Header } from "../components/Header"
 import { useEffect } from "react"
-import { getRequest } from "../src/functions"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { Header } from "../components/Header"
 import { Tag } from "../components/tags/Tag"
+import { AddTagForm } from "../components/forms"
+import { getRequest } from "../src/functions"
 import { setTags, setPage} from "../src/store/actions"
-import { useSelector } from "react-redux"
 import { ITag } from "../src/types"
-import { AddTagForm } from "../components/forms/AddTagForm"
 
 export default function TagsPage() {
 
@@ -26,7 +25,7 @@ export default function TagsPage() {
     <div>
       <Header />
       <AddTagForm />
-      <div className="sm:flex max-w-[1110px] flex-wrap m-auto mb-10">
+      <div className="sm:flex max-w-[1110px] w-fit flex-wrap m-auto mb-10">
         {tags.map((tag:ITag)=>{
           return(
             <Tag name={tag.name} color={tag.color} id={tag.id} key={tag.id} description={tag.description} />

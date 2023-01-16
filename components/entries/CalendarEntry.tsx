@@ -1,14 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
-import { IDiaryEntry } from "../../src/types"
-import { EditEntryForm } from "../forms/EditEntryForm"
+import { IDiaryEntry, IUser } from "../../src/types"
+import { EditEntryForm, UniversalForm } from "../forms"
 import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
 import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
-import { IUser } from "../../src/types"
 import { useState } from "react"
-import { UniversalForm } from "../forms/UniversalForm"
 import { getEstheticDate } from "../../src/functions"
-import { MiniTag } from "../tags/MiniTag"
+import { MiniTag } from "../tags"
 
 export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id, tag_ids}:IDiaryEntry)=>{
   

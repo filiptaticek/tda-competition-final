@@ -1,13 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
-import { getEstheticDate } from "../../src/functions/index.js"
+import { getEstheticDate } from "../../src/functions"
 import { IDiaryEntry, IUser } from "../../src/types"
-import { UniversalForm, EditEntryForm } from "../forms/index.js"
+import { UniversalForm, EditEntryForm } from "../forms"
 import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
 import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
-import { MiniTag } from "../tags/MiniTag"
+import { MiniTag, MiniTagIcon } from "../tags"
 import { useState } from "react"
-import { MiniTagIcon } from "../tags/MiniTagIcon"
 
 export const Entry = ({programming_language,minutes_spent,rating,description, datetime, id, programmer_id, tag_ids}:IDiaryEntry)=>{
 

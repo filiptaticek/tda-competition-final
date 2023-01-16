@@ -1,10 +1,10 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { UniversalForm } from "./UniversalForm"
 import { Description } from "../Description"
 import { Sorting } from "../../src/types"
 import { sorting,inputSameProperties } from "../../src/constants"
 import { FormButton } from "../formParts/FormButton"
-import { useDispatch } from "react-redux"
 import { sortEntriesFromHighestRating, sortEntriesFromLongest, sortEntriesFromLowestRating, sortEntriesFromNewest, sortEntriesFromOldest, sortEntriesFromShortest } from "../../src/store/actions"
 
 export const SortEntriesForm = ({onClick}:{onClick:any})=>{

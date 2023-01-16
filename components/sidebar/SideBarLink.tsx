@@ -1,7 +1,6 @@
 import Link from "next/link"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toggleSidebarVisbility } from "../../src/store/actions"
-import { useSelector } from "react-redux"
 
 
 interface ISideBarLink {

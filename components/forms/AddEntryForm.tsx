@@ -2,11 +2,11 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Language, MinutesSpent, Rating, IUser, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
-import { sntz, getEstheticDate,postRequest } from "../../src/functions/index.js"
+import { sntz, getEstheticDate,postRequest } from "../../src/functions"
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton,SelectUser } from "../formParts/index.js"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton,SelectUser } from "../formParts"
 import clsx from "clsx"
 
 export const AddEntryForm = ({datetime}:{datetime:string})=>{

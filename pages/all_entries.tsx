@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
+import { useEffect } from "react"
 import { setRecords, setPage } from "../src/store/actions"
 import { getRequest } from "../src/functions/api/get"
-import { useEffect } from "react"
 import { Entries } from "../components/entries/Entries"
 import { Header } from "../components/Header"
 

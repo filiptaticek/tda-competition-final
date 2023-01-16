@@ -8,7 +8,7 @@ import { getEstheticDate, deleteRequest, putRequest,sntz } from "../../src/funct
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage, SelectUser,FormButton } from "../formParts/index.js"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage, SelectUser,FormButton } from "../formParts"
 
 interface IEditEntryForm {
     datetime:string,

@@ -1,6 +1,6 @@
-import { Language } from "../src/types"
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import { Language } from "../src/types"
 
 export const ProgrammingLanguageLogo = ({programming_language}:{programming_language:Language})=>{
 
