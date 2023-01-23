@@ -4,6 +4,7 @@ import { User } from "../components/User"
 import { Header } from "../components/Header"
 import { AddUserForm } from "../components/forms/AddUserForm"
 import { setPage } from "../src/store/actions"
+import { Page } from "../components/Page"
 
 export default function UsersPage() {
   const users = useSelector((state:any) => state.users)
@@ -13,8 +14,9 @@ export default function UsersPage() {
     dispatch(setPage("users"))
   }, [dispatch])
 
+  //<div className="px-4 max-w-page_max m-auto mb-5">
   return (
-    <div className="px-4 max-w-page_max m-auto mb-5">
+    <Page>
       <Header />
       <AddUserForm />
       {users.map((user: { name: string; surname: string; id: number })=>{
@@ -26,6 +28,6 @@ export default function UsersPage() {
             key={user.id} />
         )
       })}
-    </div>
+    </Page>
   )
 }

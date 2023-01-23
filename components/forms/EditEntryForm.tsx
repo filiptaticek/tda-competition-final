@@ -23,6 +23,7 @@ interface IEditEntryForm {
 
 export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinutesSpent,postRating, postComment, postProgrammerId, postTagIds}:IEditEntryForm)=>{
 
+  const mode = useSelector((state:any) => state.mode)
   const tags = useSelector((state:any) => state.tags)
   const users = useSelector((state:any) => state.users)
   const dispatch = useDispatch()
@@ -121,7 +122,11 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
             </div>
           </UniversalForm>
       }
-      <img src="upravit_zaznam.png" className="h-[30px] m-auto" onClick={handleOpeningForm}/>
+      {mode?
+        <img src="upravit_zaznam_bily.png" className="h-[30px] m-auto" onClick={handleOpeningForm}/>
+        :
+        <img src="upravit_zaznam.png" className="h-[30px] m-auto" onClick={handleOpeningForm}/>
+      }
     </div>
   )
 }

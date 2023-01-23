@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { UniversalForm } from "./UniversalForm"
 import { addSingleTag } from "../../src/store/actions"
 import { capitalize, postRequest,sntz } from "../../src/functions"
@@ -13,6 +13,7 @@ export const AddTagForm = ()=>{
   const [description,setDescription] = useState<string>("")
   const [color,setColor] = useState<Color>("red" as Color)
   const dispatch = useDispatch()
+  const mode = useSelector((state:any) => state.mode)
 
   const handleAddingTags = async (event:any)  =>{
     event?.preventDefault()
@@ -29,7 +30,7 @@ export const AddTagForm = ()=>{
   return(
     <>
       <div className="flex mb-10">
-        <FormButton className="bg-main_color w-[151px] m-auto" onClick={()=>setFormShown(true)} text="Add tags" />
+        <FormButton className={` w-[151px] m-auto ${mode?"text-main_color bg-white":"text-white bg-main_color"}`} onClick={()=>setFormShown(true)} text="Add tags" />
       </div>
       {showForm&&
       <UniversalForm className="pt-[150px]" header="Add new tag" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>

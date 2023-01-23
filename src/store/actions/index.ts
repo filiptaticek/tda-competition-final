@@ -146,3 +146,10 @@ export const setPage = (page:Page): AnyAction => {
     page:page
   }
 }
+
+//MODE ACTIONS
+export const toggleMode = (): AnyAction => {
+  return {
+    type: "TOGGLE_DARK_MODE"
+  }
+}

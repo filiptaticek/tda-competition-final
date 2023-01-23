@@ -6,7 +6,6 @@ import { useEffect } from "react"
 import { getRequest } from "../src/functions"
 import { setUsers, setTags } from "../src/store/actions"
 
-
 function App({ Component, pageProps }: AppProps) {
   const dispatch = useDispatch()
 

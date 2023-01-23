@@ -12,6 +12,7 @@ export const Entries = ()=>{
   //STATE
   const users = useSelector((state:any) => state.users) //all the users
   const tags = useSelector((state:any) => state.tags)
+  const mode = useSelector((state:any) => state.mode)
   const globalposts = useSelector((state:any) => state.records) //all the entries
   const [filters,setFiltersShown] = useState<boolean>(false) //should the filters form be shown? 
   const [sorting,setSortingShown] = useState<boolean>(false) //should the filters form be shown? 
@@ -62,11 +63,11 @@ export const Entries = ()=>{
 
   //BODY
   return(
-    <>
+    <div>
       {/*BUTTONS SETTING ON FILTERS AND RANKINGS*/}
       <div className="font-bold w-fit flex mb-2 m-auto w-[300px]">
-        <FormButton className="bg-main_color mr-2" onClick={()=>setFiltersShown(true)} text="Filter entries" />
-        <FormButton className="bg-main_color" onClick={()=>setSortingShown(true)} text="Sort entries"  />
+        <FormButton className={`mr-2 ${mode?"bg-white text-main_color":"bg-main_color text-white"}`} onClick={()=>setFiltersShown(true)} text="Filter entries" />
+        <FormButton className={mode?"bg-white text-main_color":"bg-main_color text-white"} onClick={()=>setSortingShown(true)} text="Sort entries"  />
       </div>      
 
       {//FORM HANDLING SORTING ENTRIES
@@ -132,6 +133,6 @@ export const Entries = ()=>{
           )
         })}
       </div>
-    </>
+    </div>
   )
 }

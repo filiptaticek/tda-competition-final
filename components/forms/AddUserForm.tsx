@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 import { UniversalInput,FormButton } from "../formParts"
 import { UniversalForm } from "./UniversalForm"
 import { addSingleUser } from "../../src/store/actions"
@@ -7,6 +7,7 @@ import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 
 export const AddUserForm = ()=>{
 
+  const mode = useSelector((state:any) => state.mode)
   const [showForm,setFormShown] = useState<boolean>(false)
   const [name,setFirstName] = useState<string>("")
   const [surname,setSurname] = useState<string>("")
@@ -36,7 +37,7 @@ export const AddUserForm = ()=>{
   return(
     <>
       <div className="flex m-auto w-[300px] mb-2">
-        <FormButton className="bg-main_color w-min m-auto" onClick={()=>setFormShown(true)} text="Add users" />
+        <FormButton className={`${mode?"text-main_color bg-white":"text-white bg-main_color"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
       </div>
       {showForm&&
       <UniversalForm className="pt-[150px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>

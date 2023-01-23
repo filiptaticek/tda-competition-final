@@ -11,6 +11,7 @@ import clsx from "clsx"
 
 export const AddEntryForm = ({datetime}:{datetime:string})=>{
 
+  const mode = useSelector((state:any) => state.mode)
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>("Python")
   const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(1 as MinutesSpent)
@@ -21,7 +22,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   const dispatch = useDispatch()
   const users = useSelector((state:any) => state.users)
   const tags = useSelector((state:any) => state.tags)
-  const addPostButtonProps = "w-full text-center border-x-2 border-b-2 border-black bg-main_color text-white font-bold"
+  const addPostButtonProps = "w-full text-center border-x-2 border-b-2 text-white font-bold bg-main_color"
 
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
@@ -45,9 +46,9 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   return (
     <div>
       {new Date() > new Date(datetime)?
-        <button className={clsx(addPostButtonProps,"hover:opacity-80")} onClick={()=>setShowForm(!showForm)}>+</button>
+        <button className={clsx(addPostButtonProps,"hover:opacity-80",mode?"bg-white text-main_color border-white":"border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</button>
         :
-        <div className={addPostButtonProps}>+</div>
+        <div className={clsx(addPostButtonProps,mode?"bg-white text-main_color border-white":"border-black")}>+</div>
       }
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>Create a new entry on day <br/><strong>{getEstheticDate(datetime)}</strong></>} onSubmit={handleSubmit}>

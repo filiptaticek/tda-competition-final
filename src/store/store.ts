@@ -9,7 +9,8 @@ const initalState = {
   sidebar:false,
   users:[],
   tags:[],
-  page:"home"
+  page:"home",
+  mode:false,
 }
 
 const middleware = [thunk]

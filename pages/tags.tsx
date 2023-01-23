@@ -6,6 +6,7 @@ import { AddTagForm } from "../components/forms"
 import { getRequest } from "../src/functions"
 import { setTags, setPage} from "../src/store/actions"
 import { ITag } from "../src/types"
+import { Page } from "../components/Page"
 
 export default function TagsPage() {
 
@@ -22,7 +23,7 @@ export default function TagsPage() {
   }, [dispatch])
 
   return (
-    <div>
+    <Page>
       <Header />
       <AddTagForm />
       <div className="sm:flex max-w-[1110px] w-fit flex-wrap m-auto mb-10">
@@ -32,6 +33,6 @@ export default function TagsPage() {
           )
         })}
       </div>
-    </div>
+    </Page>
   )
 }

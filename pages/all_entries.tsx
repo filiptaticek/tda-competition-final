@@ -4,6 +4,7 @@ import { setRecords, setPage } from "../src/store/actions"
 import { getRequest } from "../src/functions/api/get"
 import { Entries } from "../components/entries/Entries"
 import { Header } from "../components/Header"
+import { Page } from "../components/Page"
 
 export default function AllEntriesPage() {
   const dispatch = useDispatch()
@@ -18,11 +19,9 @@ export default function AllEntriesPage() {
   }, [dispatch])
 
   return (
-    <div className="px-4 max-w-page_max m-auto">
+    <Page>
       <Header />
       <Entries />
-      <div className="w-full flex">
-      </div>
-    </div>
+    </Page>
   )
 }
