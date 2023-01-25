@@ -3,7 +3,7 @@ import { ITag } from "../../types"
 export const tagsReducer = (state:ITag[]=[], action:any) => {
   switch (action.type) {
   case "SET_TAGS":{
-    return (action.tags)
+    return (action.tags?action.tags:[])
   }
   case "ADD_TAG":{
     return ([action.newtag,...state])

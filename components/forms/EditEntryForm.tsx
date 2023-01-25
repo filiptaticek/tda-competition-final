@@ -97,7 +97,7 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
             <div className="w-full text-left">
               <SelectProgrammingLanguage text="Programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value as Language))}/>
               <SelectUser actualUserValue={user} actualUser={true} text="Choose the user" value={user} onChange={(event:any)=>setUser(event.target.value)} />
-              <UniversalInput type="number" text="Time spent in minutes" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))} extrastyle="h-10" /> 
+              <UniversalInput required type="number" text="Time spent in minutes" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))} extrastyle="h-10" /> 
               <SelectRating value={rating} onChange={(event:any) => setRating(sntz(parseInt(event.target.value) as Rating))} text="Rating"/>
               <Description text="Pick the tags for your entry" />
               <div className={inputSameProperties}>

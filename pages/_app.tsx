@@ -22,7 +22,6 @@ function App({ Component, pageProps }: AppProps) {
     updateTags()
   }, [dispatch])
 
-
   return(
     <Provider store={store}>
       <Component {...pageProps} />
