@@ -10,7 +10,7 @@ interface ISelectColor {
 }
 
 export const SelectColor = ({text,value,onChange,color}:ISelectColor)=>{
-  
+
   return(
     <>
       <Description text={text} />

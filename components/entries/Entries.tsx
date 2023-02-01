@@ -65,7 +65,7 @@ export const Entries = ()=>{
   return(
     <div>
       {/*BUTTONS SETTING ON FILTERS AND RANKINGS*/}
-      <div className="font-bold w-fit flex mb-2 m-auto w-[300px]">
+      <div className="font-bold w-fit flex mb-8 lg:mb-2 m-auto w-[300px]">
         <FormButton className={`mr-2 ${mode?"bg-white text-main_color":"bg-main_color text-white"}`} onClick={()=>setFiltersShown(true)} text="Filter entries" />
         <FormButton className={mode?"bg-white text-main_color":"bg-main_color text-white"} onClick={()=>setSortingShown(true)} text="Sort entries"  />
       </div>      

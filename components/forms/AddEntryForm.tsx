@@ -4,9 +4,9 @@ import { Language, MinutesSpent, Rating, IUser, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
 import { sntz, getEstheticDate,postRequest } from "../../src/functions"
 import { Description } from "../Description"
-import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton,SelectUser } from "../formParts"
+import { inputSameProperties } from "../../src/constants"
 import clsx from "clsx"
 
 export const AddEntryForm = ({datetime}:{datetime:string})=>{
@@ -23,7 +23,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   const users = useSelector((state:any) => state.users)
   const tags = useSelector((state:any) => state.tags)
   const addPostButtonProps = "w-full text-center border-x-2 border-b-2 text-white font-bold bg-main_color"
-
+  
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
       setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))}
@@ -48,7 +48,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
       {new Date() > new Date(datetime)?
         <button className={clsx(addPostButtonProps,"hover:opacity-80",mode?"bg-white text-main_color border-white":"border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</button>
         :
-        <div className={clsx(addPostButtonProps,mode?"bg-white text-main_color border-white":"border-black")}>+</div>
+        <div className={clsx(addPostButtonProps,mode?"bg-white text-white border-white":"text-main_color border-black")}>+</div>
       }
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>Create a new entry on day <br/><strong>{getEstheticDate(datetime)}</strong></>} onSubmit={handleSubmit}>
@@ -67,7 +67,7 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
                   checked={picked.includes(tag)}
                   onChange={() => handleTags(tag)}
                 />
-                {tag.name}
+                <span className="ml-4">{tag.name}</span>
               </div>
             ))}
           </div>

@@ -26,11 +26,7 @@ export default function Home() {
     <Page>
       <Header />
       <div className="w-full flex">
-        {mode?
-          <img src="sipka_doleva_bila.png" className="w-[40px] cursor-pointer mt-1 mr-2 h-min" onClick={()=>setDaysBack(daysBack-7)}/>
-          :
-          <img src="sipka_doleva.png" className="w-[40px] cursor-pointer mt-1 mr-2 h-min" onClick={()=>setDaysBack(daysBack-7)}/>
-        }
+        <img src={mode?"sipka_doleva_bila.png":"sipka_doleva.png"} className="w-[40px] cursor-pointer mt-1 mr-2 h-min" onClick={()=>setDaysBack(daysBack-7)}/>
         <CallendarEntries daysBack={daysBack} />
         <img src={mode?"sipka_doprava_bila.png":"sipka_doprava.png"} className="w-[40px] cursor-pointer mt-1 mr-2 h-min" onClick={()=>setDaysBack(daysBack+7)}/>
       </div>

@@ -13,7 +13,7 @@ export const Tag = ({name,color,description,id}:ITag)=>{
   const mode = useSelector((state:any) => state.mode)
 
   return(
-    <div className={clsx(`m-auto sm:m-0 my-1 sm:my-0 rounded-sm w-min lg:ms-1 px-2 py-5 w-[150px] h-[300px] ${mode?"border border-white":""}`,returnTagColor(color))}>
+    <div className={clsx(`hover:border-2 m-auto sm:m-0 my-1 sm:my-0 rounded-sm w-min lg:ms-1 px-2 py-5 w-[150px] h-[300px] border ${mode?"border-white":"border-black"}`,returnTagColor(color))}>
       <p className="text-xl text-center font-bold text-white w-full">{name}</p>
       <p className="text-xl text-center h-[200px] text-white">{description}</p>
       <div className="h-fit w-full">

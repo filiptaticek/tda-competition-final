@@ -29,7 +29,7 @@ export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
           <div className="mx-1 mb-10 w-full" key={den.number}>
             <p className={clsx("border-2 font-bold text-center text-md",mode?"text-white border-white":"border-black")}>{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
             <AddEntryForm datetime={getPastDate(den.number)} />
-            <div className={clsx("h-[570px] overflow-scroll",numberOfPosts)}>
+            <div className={clsx("lg:h-[570px] overflow-scroll",numberOfPosts)}>
               {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:null|number,tag_ids:number[]}):any=>{
                 if (entry.datetime.substring(0,10)===getPastDate(den.number).substring(0,10)){
                   return(

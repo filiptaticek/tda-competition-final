@@ -14,7 +14,6 @@ export default function UsersPage() {
     dispatch(setPage("users"))
   }, [dispatch])
 
-  //<div className="px-4 max-w-page_max m-auto mb-5">
   return (
     <Page>
       <Header />

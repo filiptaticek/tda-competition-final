@@ -6,9 +6,9 @@ import { Language, MinutesSpent, Rating, ITag, IUser } from "../../src/types"
 import { removeSingleRecord, updateSingleRecord } from "../../src/store/actions"
 import { getEstheticDate, deleteRequest, putRequest,sntz } from "../../src/functions/index.js"
 import { Description } from "../Description"
-import { inputSameProperties } from "../../src/constants"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, SelectUser,FormButton } from "../formParts"
+import clsx from "clsx"
 
 interface IEditEntryForm {
     datetime:string,
@@ -59,6 +59,7 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
     setInitialUser()
   }, [postProgrammerId, postTagIds, tags, users])
 
+  const inputSameProperties = `w-full my-[4px] rounded-md border ${mode?"border-black":"border-white"} p-2 m-auto`
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
       setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))}
@@ -100,7 +101,7 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
               <UniversalInput required type="number" text="Time spent in minutes" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))} extrastyle="h-10" /> 
               <SelectRating value={rating} onChange={(event:any) => setRating(sntz(parseInt(event.target.value) as Rating))} text="Rating"/>
               <Description text="Pick the tags for your entry" />
-              <div className={inputSameProperties}>
+              <div className={clsx(inputSameProperties,"border border-black")}>
                 {tags.map((tag: ITag) => (
                   <div key={tag.id}>
                     <input
@@ -114,10 +115,10 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
                 ))}
               </div>
               <Description text="Your comment" />
-              <textarea required className={inputSameProperties} value={description} onChange={(event) => setDescription(sntz(event.target.value))} />
+              <textarea required className={clsx(inputSameProperties,"border border-black")} value={description} onChange={(event) => setDescription(sntz(event.target.value))} />
               <div className="flex mt-2">
                 <FormButton type="submit" text="Edit form" className="mr-2 bg-button_green" />
-                <FormButton onClick={handleDeletingEntry} className="bg-button_red" text="Delete entry"/>
+                <FormButton onClick={handleDeletingEntry} className="bg-button_red" text="Delete"/>
               </div>
             </div>
           </UniversalForm>

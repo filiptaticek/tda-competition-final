@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux"
 import { UniversalForm } from "./UniversalForm"
 import { Description } from "../Description"
 import { Sorting } from "../../src/types"
-import { sorting,inputSameProperties } from "../../src/constants"
+import { sorting } from "../../src/constants"
 import { FormButton } from "../formParts/FormButton"
 import { sortEntriesFromHighestRating, sortEntriesFromLongest, sortEntriesFromLowestRating, sortEntriesFromNewest, sortEntriesFromOldest, sortEntriesFromShortest } from "../../src/store/actions"
+import { inputSameProperties } from "../../src/constants"
 
 export const SortEntriesForm = ({onClick}:{onClick:any})=>{
 

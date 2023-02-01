@@ -14,6 +14,7 @@ interface IUniversalInput {
 }
 
 export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max, required}:IUniversalInput)=>{
+  
   return(
     <>
       <Description text={text} />

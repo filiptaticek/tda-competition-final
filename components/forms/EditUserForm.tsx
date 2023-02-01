@@ -52,7 +52,7 @@ export const EditUserForm = ({closeForm,id,name,surname}:{closeForm:any,id:numbe
       <UniversalInput text="Edit the surname of the user" value={surnameState} onChange={handleSurname}/> 
       <div className="flex mt-8">
         <FormButton type="submit" text="Edit form" className="mr-2 bg-button_green" />
-        <FormButton onClick={handleDeletingUser} className="bg-button_red" text="Delete entry"/>
+        <FormButton onClick={handleDeletingUser} className="bg-button_red" text="Delete"/>
       </div>
     </UniversalForm>
   )

@@ -36,7 +36,7 @@ export const AddUserForm = ()=>{
 
   return(
     <>
-      <div className="flex m-auto w-[300px] mb-2">
+      <div className="flex m-auto w-[300px] mb-8 lg:mb-2">
         <FormButton className={`${mode?"text-main_color bg-white":"text-white bg-main_color"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
       </div>
       {showForm&&

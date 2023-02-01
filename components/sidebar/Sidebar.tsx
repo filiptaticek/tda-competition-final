@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import clsx from "clsx"
 import { useSelector, useDispatch } from "react-redux"
 import { toggleSidebarVisbility } from "../../src/store/actions"
 import { SideBarLink } from "./SideBarLink"
@@ -14,13 +13,18 @@ export const Sidebar = ()=>{
   return(
     <div
       className={`
-      ${isOpen ? "w-[350px] p-20" : "w-0"}
-      ${mode ? "bg-white text-main_color" : clsx("text-white","bg-main_color")}
+      ${isOpen ? "w-[350px] p-20" : "w-0"} ${mode?isOpen&&"border border-white":""} bg-main_color h-full fixed top-0 left-0 z-10 duration-300 text-white`
+      }
+      /*
+      className={`
+      ${isOpen ? "w-[350px] p-20 border-2" : "w-0"}
+      ${mode ? clsx("text-white bg-main_color",isOpen&&"border-white") : clsx("bg-white text-main_color",isOpen&&"border-main_color")}
       h-full fixed top-0 left-0 z-10 duration-300 text-white`
       }
+        * */
     >
       <div className={` ${isOpen?"block":"hidden"} text-2xl`}>
-        <img className="fixed top-[20px] cursor-pointer left-[280px] w-[50px]" src={mode?"zavrit_stranku_fialove.png":"zavrit_stranku.png"} onClick={()=>dispatch(toggleSidebarVisbility())}/>
+        <img className="fixed top-[20px] cursor-pointer left-[280px] w-[50px]" src={"zavrit_stranku.png"} onClick={()=>dispatch(toggleSidebarVisbility())}/>
         <SideBarLink text="Calendar" href="/" />
         <br/>
         <br/>
