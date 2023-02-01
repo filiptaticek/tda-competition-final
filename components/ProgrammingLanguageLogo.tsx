@@ -11,7 +11,7 @@ export const ProgrammingLanguageLogo = ({programming_language}:{programming_lang
     case "Javascript":
       return("javascript_logo.png")
     default:
-      return("C++_logo.png")
+      return("c++_logo.png")
     }
   }
 
