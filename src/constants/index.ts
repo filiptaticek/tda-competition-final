@@ -1,4 +1,4 @@
-export const baseUrl = "http://147.182.204.155:8888"
+export const baseUrl = "http://student.cmgp.cz/api/"
 export const programmingLanguages = ["Python","Javascript","C++"]
 export const inputSameProperties ="w-full my-[4px] rounded-md border border-black p-2 m-auto"
 export const colorsNames = ["yellow","orange","red","pink","purple","blue","green","brown"]
