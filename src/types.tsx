@@ -18,8 +18,11 @@ export interface IDiaryEntry {
 export interface IUser {
     name:string,
     surname:string,
+    username?:string,
+    email?:string
     id:number
 }
+
 export interface ITag {
     name:string,
     color:Color,

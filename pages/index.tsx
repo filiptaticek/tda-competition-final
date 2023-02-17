@@ -14,6 +14,7 @@ export default function Home() {
   const mode = useSelector((state:any) => state.mode)
 
   useEffect(() => {
+
     const updateState = async () =>{
       const serverData = await getRequest("record")
       dispatch(setRecords(serverData))

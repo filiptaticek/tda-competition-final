@@ -6,8 +6,8 @@ import combineReducer from "./reducers"
 
 const initalState = {
   records:[],
-  sidebar:false,
   users:[],
+  user:false,
   tags:[],
   page:"home",
   mode:false,

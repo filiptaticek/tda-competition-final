@@ -1,4 +1,4 @@
-export type Page = "home"|"all_entries"|"users"|"tags"
+export type Page = "home"|"all_entries"|"manage_users"|"tags"
 
 export const pageReducer = (state:Page="home", action:any) => {
   switch (action.type) {

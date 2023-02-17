@@ -5,11 +5,21 @@ import { Provider,useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { getRequest } from "../src/functions"
 import { setUsers, setTags } from "../src/store/actions"
+import { LoginPage } from "../components/LoginPage"
+import { useSelector } from "react-redux"
 
 function App({ Component, pageProps }: AppProps) {
   const dispatch = useDispatch()
+  const user = useSelector((state:any) => state.user)
 
   useEffect(() => {
+
+    const karel = window.localStorage.getItem("karel")
+    if (karel) {
+      console.log("Karel je přihlášen")
+      //dispatch(toggleUser())
+    }
+
     const updateUsers = async () =>{
       const serverData = await getRequest("programmer")
       dispatch(setUsers(serverData))
@@ -24,7 +34,10 @@ function App({ Component, pageProps }: AppProps) {
 
   return(
     <Provider store={store}>
-      <Component {...pageProps} />
+      {user?
+        <Component {...pageProps} />:
+        <LoginPage />
+      }
     </Provider>
   )
 }

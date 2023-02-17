@@ -69,16 +69,6 @@ export const sortEntriesFromLongest = (): AnyAction => {
   }
 }
 
-//SIDEBAR ACTIONS
-
-export const toggleSidebarVisbility = (): AnyAction => {
-  return {
-    type: "TOGGLE_VISIBILITY"
-  }
-}
-
-//USERS ACTIONS
-
 export const setUsers = (users:Array<IUser>): AnyAction => {
   return {
     type: "SET_USERS",
@@ -151,5 +141,13 @@ export const setPage = (page:Page): AnyAction => {
 export const toggleMode = (): AnyAction => {
   return {
     type: "TOGGLE_DARK_MODE"
+  }
+}
+
+//USER ACTION
+export const setUser = (newuser:IUser|null): AnyAction => {
+  return {
+    type: "SET_USER",
+    newuser:newuser
   }
 }
