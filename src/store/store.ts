@@ -11,6 +11,7 @@ const initalState = {
   tags:[],
   page:"home",
   mode:false,
+  token:null
 }
 
 const middleware = [thunk]

@@ -28,7 +28,6 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
     <>
       <div onClick={()=>setDetailShown(true)} className="cursor-pointer h-[400px] lg:w-[20%] text-center rounded-md p-1">
         <div className={`border ${mode?"hover:bg-[#8C3FB8] border-white text-white":"border-black hover:bg-gray-100"} rounded-md pt-5 h-full`}>
-          <p className="font-bold">{programmer?programmer:"No user"}</p>
           <div className="mb-5">
             <ProgrammingLanguageLogo programming_language={programming_language}/>
           </div>

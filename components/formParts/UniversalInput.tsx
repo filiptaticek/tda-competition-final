@@ -4,7 +4,7 @@ import clsx from "clsx"
 
 interface IUniversalInput {
     text:string,
-    min?:boolean,
+    min?:number,
     max?:boolean
     value:any,
     onChange:any,
@@ -21,7 +21,7 @@ export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max, re
       <input 
         className={clsx(inputSameProperties,extrastyle)} 
         type={type?type:"string"}
-        min={min?"1":""}
+        min={min?min:""}
         maxLength={max?12:undefined}
         value={value} 
         onChange={onChange} 

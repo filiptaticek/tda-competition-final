@@ -5,16 +5,25 @@ import { Header } from "../components/Header"
 import { AddUserForm } from "../components/forms/AddUserForm"
 import { setPage } from "../src/store/actions"
 import { Page } from "../components/Page"
+import { IUser } from "../src/types"
+import { getRequest } from "../src/functions"
+import { setUsers } from "../src/store/actions"
 
 
 export default function UsersPage() {
   const users = useSelector((state:any) => state.users)
   const user = useSelector((state:any) => state.user)
+  const token = useSelector((state:any) => state.token)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const updateUsers = async () =>{
+      const serverData = await getRequest("programmer",token)
+      dispatch(setUsers(serverData))
+    }
+    updateUsers()
     dispatch(setPage("manage_users"))
-  }, [dispatch])
+  }, [dispatch,token ])
 
   return (
     <Page>
@@ -22,13 +31,18 @@ export default function UsersPage() {
         <>
           <Header />
           <AddUserForm />
-          {users.map((user: { name: string; surname: string; id: number })=>{
+          {users.map((user: IUser)=>{
             return(
               <User 
                 id={user.id} 
+                email={user.email}
                 name={user.name} 
                 surname={user.surname} 
-                key={user.id} />
+                username={user.username}
+                admin={user.admin}
+                password={user.password}
+                key={user.id} 
+              />
             )
           })}
         </>:

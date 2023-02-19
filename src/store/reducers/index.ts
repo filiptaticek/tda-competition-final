@@ -5,6 +5,7 @@ import { tagsReducer } from "./tags_reducer"
 import { pageReducer } from "./page_reducer"
 import { darkModeReducer } from "./dark_mode_reducer"
 import { userReducer } from "./user_reducer"
+import { tokenReducer } from "./token_reducer"
 
 export default combineReducers({
   records: recordsReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   tags: tagsReducer,
   page: pageReducer,
   mode: darkModeReducer,
-  user: userReducer
+  user: userReducer,
+  token: tokenReducer
 })

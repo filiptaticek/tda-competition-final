@@ -15,7 +15,6 @@ interface ISelectUser {
 export const SelectUser = ({text,value,onChange,actualUser,actualUserValue}:ISelectUser)=>{
 
   const users = useSelector((state:any) => state.users)
-  const mode = useSelector((state:any) => state.mode)
 
   return(
     <>

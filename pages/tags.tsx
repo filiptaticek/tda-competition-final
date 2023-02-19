@@ -12,15 +12,16 @@ export default function TagsPage() {
 
   const dispatch = useDispatch()
   const tags = useSelector((state:any) => state.tags)
+  const token = useSelector((state:any) => state.token)
 
   useEffect(() => {
     const updateState = async () =>{
-      const serverData = await getRequest("tag")
+      const serverData = await getRequest("tag",token)
       dispatch(setTags(serverData))
     }
     updateState()
     dispatch(setPage("tags"))
-  }, [dispatch])
+  }, [dispatch,token])
 
   return (
     <Page>

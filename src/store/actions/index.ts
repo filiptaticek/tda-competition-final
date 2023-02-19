@@ -151,3 +151,11 @@ export const setUser = (newuser:IUser|null): AnyAction => {
     newuser:newuser
   }
 }
+
+//USER ACTION
+export const setToken = (newtoken:string): AnyAction => {
+  return {
+    type: "SET_TOKEN",
+    newtoken:newtoken
+  }
+}

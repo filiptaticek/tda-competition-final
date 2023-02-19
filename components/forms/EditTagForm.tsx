@@ -5,6 +5,7 @@ import { useState } from "react"
 import { deleteRequest, putRequest, sntz  } from "../../src/functions"
 import { SelectColor, UniversalInput, FormButton } from "../formParts"
 import { Color } from "../../src/types"
+import { useSelector } from "react-redux"
 
 export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
 
@@ -12,6 +13,7 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
   const [tagName, setName] = useState<string>(name)
   const [tagDescription, setDescription] = useState<string>(description)
   const [tagColor, setColor] = useState<Color>(color)
+  const token = useSelector((state:any) => state.token)
   
   const handleEditingTag = (event:any)=>{
     event?.preventDefault()
@@ -22,7 +24,7 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
       id:id
     }
     console.log("Upraveno",updatedTag)
-    putRequest("tag",id,updatedTag)
+    putRequest("tag",id,updatedTag, token)
     console.log(updatedTag, id)
     dispatch(updateSingleTag(id,updatedTag))
     closeForm()
@@ -30,7 +32,7 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
 
   const handleDeletingTag = (event:any)=>{
     event?.preventDefault()
-    deleteRequest("tag",id)
+    deleteRequest("tag",id, token)
     console.log("Tag smazán")
     dispatch(removeSingleTag(id))
     closeForm()

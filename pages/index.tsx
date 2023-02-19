@@ -12,16 +12,19 @@ export default function Home() {
   const dispatch = useDispatch()
   const [daysBack,setDaysBack] = useState<number>(0)
   const mode = useSelector((state:any) => state.mode)
+  const token = useSelector((state:any) => state.token)
 
   useEffect(() => {
 
     const updateState = async () =>{
-      const serverData = await getRequest("record")
+      const serverData = await getRequest("record",token)
+      console.log(token)
+      console.log(serverData)
       dispatch(setRecords(serverData))
     }
     updateState()
     dispatch(setPage("home"))
-  }, [dispatch])
+  }, [dispatch, token])
 
   return (
     <Page>

@@ -31,7 +31,7 @@ export const Sidebar = ()=>{
           <br/>
           {user.admin&&
           <>
-            <SideBarLink text="Manage" href="/manage_users" />
+            <SideBarLink text="Manage users" href="/manage_users" />
             <br/>
             <br/>
           </>

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { IDiaryEntry, IUser } from "../../src/types"
+import { IDiaryEntry } from "../../src/types"
 import { EditEntryForm, UniversalForm } from "../forms"
 import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
 import { RatingLogo } from "../RatingLogo"
@@ -11,15 +11,14 @@ import clsx from "clsx"
 
 export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id, tag_ids}:IDiaryEntry)=>{
   
-  const users = useSelector((state:any) => state.users)
+  const user = useSelector((state:any) => state.user)
   const [showDetail, setDetailShown] = useState<boolean>(false)
-  const programmerObject = users.find((programmer:IUser) => programmer.id === programmer_id)
-  const programmer = programmerObject?programmerObject.name + " " + programmerObject.surname:""
+  const programmer = user.name + " " + user.surname
   const mode = useSelector((state:any) => state.mode)
   const Header = ()=> {
     return(
       <>
-        {programmerObject?<>{programmer}'s </>:<>No user </>}
+        {<>{programmer}'s </>}
         post from <br/><strong>{getEstheticDate(datetime)}</strong>
       </>
     )
@@ -28,7 +27,6 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
   return(
     <div className={clsx("duration-300 py-5 overflow-hidden text-center border-x-2 p-2 m-auto border-b",mode?"hover:bg-[#8C3FB8] border-white":"border-black hover:bg-gray-100")}>
       <div className={clsx("cursor-pointer",mode?"text-white":"")} onClick={()=>setDetailShown(true)}>
-        <p className="font-bold h-10">{programmer?programmer:"No user"}</p>
         <div className="mb-10">
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>

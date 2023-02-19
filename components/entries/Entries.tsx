@@ -35,8 +35,14 @@ export const Entries = ()=>{
   //FUNCTIONS HANDLING ALL THE INPUTS
   const handleMinimalDate = (event:any) => {setMinimalDate(event.target.value)}
   const handleMaximalDate = (event:any) => {setMaximalDate(event.target.value)}
-  const handleMinimalTime = (event:any) => {setMinimalTime(event.target.value)}
-  const handleMaximalTime = (event:any) => {setMaximalTime(parseInt(event.target.value))}
+  const handleMinimalTime = (event:any) => {
+    const value = event.target.value
+    value>=0?setMinimalTime(value):setMinimalTime(0)
+  }
+  const handleMaximalTime = (event:any) => {
+    const value = event.target.value
+    value>=0?setMaximalTime(value):setMinimalTime(0)
+  }
   const handleMinimalRating = (event:any) => {setMinimalRating(parseInt(event.target.value)as Rating)}
   const handleMaximalRating = (event:any) => {setMaximalRating(parseInt(event.target.value) as Rating)}
   const handleUser = (event:any) => {setUser(event.target.value)}

@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Language, MinutesSpent, Rating, IUser, ITag } from "../../src/types"
+import { Language, MinutesSpent, Rating, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
 import { sntz, getEstheticDate,postRequest } from "../../src/functions"
 import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton,SelectUser } from "../formParts"
+import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton } from "../formParts"
 import { inputSameProperties } from "../../src/constants"
 import clsx from "clsx"
 
@@ -17,11 +17,11 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(1 as MinutesSpent)
   const [rating, setRating] = useState<Rating>(1)
   const [description, setDescription] = useState<string>("")
-  const [user, setUser] = useState<string>("")
   const [picked, setPicked] = useState<ITag[]>([])
   const dispatch = useDispatch()
-  const users = useSelector((state:any) => state.users)
+  const user = useSelector((state:any) => state.user)
   const tags = useSelector((state:any) => state.tags)
+  const token = useSelector((state:any) => state.token)
   const addPostButtonProps = "w-full text-center border-x-2 border-b-2 text-white font-bold bg-main_color"
   
   const handleTags = (tag:ITag) => {
@@ -34,12 +34,13 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
 
   const handleSubmit = async (event:any) => {
     event.preventDefault()
-    const tag_ids = picked.length!==0?picked.map(obj => obj.id):null
-    const programmer_id = user===""||user==="No user"||user===null?null:(users.find((person:IUser) => person.name === user.substr(0, user.indexOf(" "))).id)
-    const data = { datetime, description, programming_language, programmer_id, minutes_spent,rating, id:100, tag_ids }
-    console.log("Toto jsem kamarádovi poslal:", data)
+    const tag_ids = picked.length!==0?picked.map(obj => obj.id):[]
+    const data = { datetime, description, programming_language, programmer_id:user.id, minutes_spent,rating, id:100, tag_ids }
+    console.log(user)
     setShowForm(false)
-    const toCoPrislo = await postRequest(data,"record")
+    console.log("Toto posílám na server: ", data)
+    const toCoPrislo = await postRequest(data,"record",token)
+    console.log("Balíček ze serveru: ",toCoPrislo)
     dispatch(addSingleRecord(toCoPrislo))
     setProgrammingLanguage("Python"),setMinutesSpent(1 as MinutesSpent),setRating(1),setDescription("")
   }
@@ -47,16 +48,15 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   return (
     <div>
       {new Date() > new Date(datetime)?
-        <button className={clsx(addPostButtonProps,"hover:opacity-80",mode?"bg-white text-main_color border-white":"border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</button>
+        <div className={clsx(addPostButtonProps,"hover:opacity-80",mode?"bg-white text-white border-white":"border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</div>
         :
-        <div className={clsx(addPostButtonProps,mode?"bg-white text-white border-white":"text-main_color border-black")}>+</div>
+        <div className={clsx(addPostButtonProps,mode?"bg-white text-main_color border-white":"text-main_color border-black")}>+</div>
       }
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>Create a new entry on day <br/><strong>{getEstheticDate(datetime)}</strong></>} onSubmit={handleSubmit}>
         <div className="w-full">
           <SelectProgrammingLanguage text="programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value as Language))} />
-          <SelectUser text="Choose the user" value={user} onChange={(event:any)=>setUser(sntz(event.target.value))} />
-          <UniversalInput required type="number" text="Time spent in minutes" extrastyle="h-10" min={true} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))}/>
+          <UniversalInput required type="number" text="Time spent in minutes" extrastyle="h-10" min={1} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))}/>
           <SelectRating text="Rating" value={rating} onChange={(event:any) => setRating(sntz(parseInt(event.target.value) as Rating))}/>
           <Description text="Pick the tags for your entry" />
           <div className={inputSameProperties}>

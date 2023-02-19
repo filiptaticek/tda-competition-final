@@ -5,18 +5,22 @@ import { getRequest } from "../src/functions/api/get"
 import { Entries } from "../components/entries/Entries"
 import { Header } from "../components/Header"
 import { Page } from "../components/Page"
+import { useSelector } from "react-redux"
 
 export default function AllEntriesPage() {
   const dispatch = useDispatch()
+  const token = useSelector((state:any) => state.token)
 
   useEffect(() => {
     const updateState = async () =>{
-      const serverData = await getRequest("record")
-      dispatch(setRecords(serverData))
+      if (token){  
+        const serverData = await getRequest("record",token)
+        dispatch(setRecords(serverData))
+      }
     }
     updateState()
     dispatch(setPage("all_entries"))
-  }, [dispatch])
+  }, [dispatch,token])
 
   return (
     <Page>

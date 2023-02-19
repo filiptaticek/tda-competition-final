@@ -9,14 +9,12 @@ import { MyAccount } from "./MyAccount"
 export const Header = ()=>{
   const dispatch = useDispatch()
   const mode = useSelector((state:any) => state.mode)
-  const user = useSelector((state:any) => state.user)
 
   return(
     <div>
       <div className="flex w-[92%] mb-10 m-auto">
         <Sidebar />
-        <p>{user.name}</p>
-        <p className={clsx("w-[60%] text-5xl text-center font-bold",!mode?"":"text-white")}>Programming. <span className={!mode?"text-main_color":"text-white"}>Logout.</span></p>
+        <p className={clsx("w-[60%] text-5xl text-center font-bold",!mode?"":"text-white")}>Programming. <span className={!mode?"text-main_color":"text-white"}>Diary.</span></p>
         <div className="pt-2 flex justify-end w-[20%]">
           <MyAccount />
           <img className="w-[40px] h-[40px] float hidden sm:block cursor-pointer" src={mode?"zmena_modu_bila.png":"zmena_modu.png"} onClick={()=>dispatch(toggleMode())}/>

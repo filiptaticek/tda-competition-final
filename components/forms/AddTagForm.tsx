@@ -14,11 +14,16 @@ export const AddTagForm = ()=>{
   const [color,setColor] = useState<Color>("red" as Color)
   const dispatch = useDispatch()
   const mode = useSelector((state:any) => state.mode)
+  const token = useSelector((state:any) => state.token)
+  const user = useSelector((state:any) => state.user)
 
   const handleAddingTags = async (event:any)  =>{
     event?.preventDefault()
     setFormShown(false)
-    const toCoPrislo = await postRequest({name,description,color,id:1},"tag")
+    const toCoPosilam = {name,description,color,id:1,programmer_id:user.id}
+    console.log(toCoPosilam)
+    console.log(user)
+    const toCoPrislo = await postRequest(toCoPosilam,"tag",token)
     dispatch(addSingleTag(toCoPrislo))
     setName(""),setDescription("")
   }

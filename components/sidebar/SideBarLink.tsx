@@ -14,10 +14,10 @@ export const SideBarLink = ({text,href}:ISideBarLink)=>{
   return (
     <Link 
       className={`hover:font-bold 
-      ${page==="home"&&text==="Calendar" ? "font-bold" : ""}
-      ${page==="all_entries"&&text==="All Entries" ? "font-bold" : ""}
+      ${page==="home"&&text==="Calendar"?"font-bold" : ""}
+      ${page==="all_entries"&&text==="All Entries"?"font-bold":""}
       ${page==="tags"&&text==="Tags" ? "font-bold" : ""}
-      ${page==="manage_users"&&text==="Manage" ? "font-bold" : ""}
+      ${page==="manage_users"&&text==="Manage users" ? "font-bold" : ""}
 
       `} 
       href={href}>{text} </Link>
