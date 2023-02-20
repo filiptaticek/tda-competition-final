@@ -10,7 +10,6 @@ export const postRequest = async (data: IDiaryEntry|IUser|ITag,path:string,token
 
   try {
     const response = await axios.post(`${baseUrl}/${path}`, data, {headers} )
-    console.log(response.data)
     return(response.data)
   } catch (error) {
     console.error("Ajaj: ",error)

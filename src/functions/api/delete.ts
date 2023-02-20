@@ -9,7 +9,7 @@ export const deleteRequest = async (path:string,id: number, token:string)=> {
 
   try {
     const response = await axios.delete(`${baseUrl}/${path}/${id}`,{headers})
-    console.log(response.data)
+    return(response.data)
   } catch (error) {
     console.error(error)
   }

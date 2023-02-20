@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { useSelector } from "react-redux"
 
-
 interface ISideBarLink {
     text:string,
     href:string

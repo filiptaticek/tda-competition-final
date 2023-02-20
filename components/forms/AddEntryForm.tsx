@@ -8,10 +8,9 @@ import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton } from "../formParts"
 import { inputSameProperties } from "../../src/constants"
 import clsx from "clsx"
+import { addPostButtonProps } from "../../src/constants"
 
 export const AddEntryForm = ({datetime}:{datetime:string})=>{
-
-  const mode = useSelector((state:any) => state.mode)
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>("Python")
   const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(1 as MinutesSpent)
@@ -19,10 +18,10 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
   const [description, setDescription] = useState<string>("")
   const [picked, setPicked] = useState<ITag[]>([])
   const dispatch = useDispatch()
+  const mode = useSelector((state:any) => state.mode)
   const user = useSelector((state:any) => state.user)
   const tags = useSelector((state:any) => state.tags)
   const token = useSelector((state:any) => state.token)
-  const addPostButtonProps = "w-full text-center border-x-2 border-b-2 text-white font-bold bg-main_color"
   
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
@@ -36,11 +35,8 @@ export const AddEntryForm = ({datetime}:{datetime:string})=>{
     event.preventDefault()
     const tag_ids = picked.length!==0?picked.map(obj => obj.id):[]
     const data = { datetime, description, programming_language, programmer_id:user.id, minutes_spent,rating, id:100, tag_ids }
-    console.log(user)
     setShowForm(false)
-    console.log("Toto posílám na server: ", data)
     const toCoPrislo = await postRequest(data,"record",token)
-    console.log("Balíček ze serveru: ",toCoPrislo)
     dispatch(addSingleRecord(toCoPrislo))
     setProgrammingLanguage("Python"),setMinutesSpent(1 as MinutesSpent),setRating(1),setDescription("")
   }

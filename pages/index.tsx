@@ -18,8 +18,6 @@ export default function Home() {
 
     const updateState = async () =>{
       const serverData = await getRequest("record",token)
-      console.log(token)
-      console.log(serverData)
       dispatch(setRecords(serverData))
     }
     updateState()

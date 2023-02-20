@@ -5,29 +5,38 @@ import { UniversalForm } from "./UniversalForm"
 import { addSingleUser } from "../../src/store/actions"
 import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 import { SelectYesNo } from "../formParts/SelectYesNo"
+import clsx from "clsx"
 
 export const AddUserForm = ()=>{
 
   const mode = useSelector((state:any) => state.mode)
   const token = useSelector((state:any) => state.token)
+  const [buttonText, setButtonText] = useState<string>("Log in")
+  const [buttonColor, setButtonColor] = useState<string>("bg-button_green")
   const [showForm,setFormShown] = useState<boolean>(false)
   const [name,setFirstName] = useState<string>("")
   const [surname,setSurname] = useState<string>("")
   const [username,setUsername] = useState<string>("")
   const [email,setEmail] = useState<string>("")
   const [password,setPassword] = useState<string>("")
-  const [admin, setAdmin] = useState<string>("no")
+  const [admin, setAdmin] = useState<string>("No")
   const dispatch = useDispatch()
 
   const handleAddingUsers = async (event:any)  =>{
     event?.preventDefault()
-    setFormShown(false)
-    const nasObjekt = {name,surname,id:1,username,email,password,admin:admin=="yes"?false:true}
-    console.log("Toto posíláme na server: ", nasObjekt)
+    const nasObjekt = {name,surname,id:1,username,email,password,admin:admin=="Yes"?true:false}
+    console.log(nasObjekt)
     const toCoPrislo = await postRequest(nasObjekt,"programmer", token)
-    console.log(toCoPrislo)
-    dispatch(addSingleUser(toCoPrislo))
-    setFirstName(""),setSurname("")
+    if (toCoPrislo){
+      dispatch(addSingleUser(toCoPrislo)) 
+      setFormShown(false)
+      setFirstName(""),setSurname(""),setUsername(""),setEmail(""),setPassword(""),setAdmin("No")
+    }
+    else {
+      setButtonText("This email or username are already in use")
+      setButtonColor("bg-button_red")
+      setTimeout(() => {setButtonText("Log in "),setButtonColor("bg-button_green")}, 3000)
+    }
   }
 
   const handleFirstName = (event:any) => {
@@ -57,11 +66,9 @@ export const AddUserForm = ()=>{
     setPassword(sntz(word))
   }
 
-  const handleAdmin = (event:any) => {
-    const word = event.target.value
-    setAdmin(sntz(word))
+  const handleAdmin = () => {
+    setAdmin(admin==="Yes"?"No":"Yes")
   }
-
 
   return(
     <>
@@ -77,7 +84,7 @@ export const AddUserForm = ()=>{
         <UniversalInput type="password" required={true} text="Fill in the password" value={password} onChange={handlePassword} />
         <SelectYesNo text="Is the user admin?" value={admin} onChange={handleAdmin} />
         <div className="flex mt-8">
-          <FormButton className="bg-button_green" type="submit" text="Add the user"/>
+          <FormButton className={clsx(buttonColor,"duration-500")} type="submit" text={buttonText}/>
         </div>
       </UniversalForm>
       }

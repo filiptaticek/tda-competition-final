@@ -17,7 +17,6 @@ function App({ Component, pageProps }: AppProps) {
     const loggedUserJSON = window.localStorage.getItem("loggedNoteappUser")
     if (loggedUserJSON && !user) {
       const user = JSON.parse(loggedUserJSON)
-      console.log(user)
       dispatch(setUser(user.user))
       dispatch(setToken(user.token))
     }

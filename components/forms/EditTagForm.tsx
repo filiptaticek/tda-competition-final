@@ -1,11 +1,10 @@
-import { UniversalForm } from "./UniversalForm"
-import { useDispatch } from "react-redux"
-import { removeSingleTag, updateSingleTag } from "../../src/store/actions"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
+import { removeSingleTag, updateSingleTag } from "../../src/store/actions"
 import { deleteRequest, putRequest, sntz  } from "../../src/functions"
+import { UniversalForm } from "./UniversalForm"
 import { SelectColor, UniversalInput, FormButton } from "../formParts"
 import { Color } from "../../src/types"
-import { useSelector } from "react-redux"
 
 export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
 
@@ -23,9 +22,7 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
       color:tagColor,
       id:id
     }
-    console.log("Upraveno",updatedTag)
     putRequest("tag",id,updatedTag, token)
-    console.log(updatedTag, id)
     dispatch(updateSingleTag(id,updatedTag))
     closeForm()
   }
@@ -33,7 +30,6 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
   const handleDeletingTag = (event:any)=>{
     event?.preventDefault()
     deleteRequest("tag",id, token)
-    console.log("Tag smazán")
     dispatch(removeSingleTag(id))
     closeForm()
   }

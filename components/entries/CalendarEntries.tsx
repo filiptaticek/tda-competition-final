@@ -5,7 +5,6 @@ import { Language, MinutesSpent, Rating } from "../../src/types"
 import { AddEntryForm } from "../forms"
 import clsx from "clsx"
 
-
 export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
   
   const mode = useSelector((state:any) => state.mode)

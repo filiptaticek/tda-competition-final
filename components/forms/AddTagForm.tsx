@@ -21,8 +21,6 @@ export const AddTagForm = ()=>{
     event?.preventDefault()
     setFormShown(false)
     const toCoPosilam = {name,description,color,id:1,programmer_id:user.id}
-    console.log(toCoPosilam)
-    console.log(user)
     const toCoPrislo = await postRequest(toCoPosilam,"tag",token)
     dispatch(addSingleTag(toCoPrislo))
     setName(""),setDescription("")

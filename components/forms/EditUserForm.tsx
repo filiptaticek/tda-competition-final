@@ -1,14 +1,12 @@
 import { UniversalForm } from "./UniversalForm"
-import { useDispatch } from "react-redux"
-import { removeSingleUser, updateSingleUser } from "../../src/store/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { removeSingleUser, updateSingleUser, setUser } from "../../src/store/actions"
 import { useState } from "react"
 import { putRequest,capitalize, deleteRequest, isOnlyLetters } from "../../src/functions"
 import { UniversalInput, FormButton } from "../formParts"
 import { sntz } from "../../src/functions/others"
 import { SelectYesNo } from "../formParts/SelectYesNo"
 import { IUser } from "../../src/types"
-import { useSelector } from "react-redux"
-import { setUser } from "../../src/store/actions"
 
 export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}:IUser&{closeForm:any})=>{
 
@@ -47,8 +45,8 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
     setPassword(sntz(event.target.value))
   }
 
-  const handleAdmin = (event:any) => {
-    setAdmin(sntz(event.target.value))
+  const handleAdmin = () => {
+    setAdmin("Yes")
   }
   
   const handleEditingUser = (event:any)=>{

@@ -21,7 +21,7 @@ export const Header = ()=>{
         </div>
       </div>
       <div className="block flex mb-8 w-fit m-auto sm:hidden">
-        <img className="cursor-pointer w-[40px] mr-5" src={mode?"otevrit_stranku_bila.png":"otevrit_stranku.png"} onClick={()=>/*dispatch(toggleSidebarVisbility())*/console.log("")}/>
+        <img className="cursor-pointer w-[40px] mr-5" src={mode?"otevrit_stranku_bila.png":"otevrit_stranku.png"}/>
         <img className="cursor-pointer w-[40px]" src={mode?"zmena_modu_bila.png":"zmena_modu.png"} onClick={()=>dispatch(toggleMode())}/>
       </div>
     </div>

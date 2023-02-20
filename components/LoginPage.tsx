@@ -12,7 +12,7 @@ import { SelectYesNo } from "./formParts/SelectYesNo"
 export const LoginPage = ()=>{
   const [username,setFirstName] = useState<string>("")
   const [password,setPassword] = useState<string>("")
-  const [remember,setRemember] = useState<string>("Yes")
+  const [remember,setRemember] = useState<string>("No")
   const [buttonText, setButtonText] = useState<string>("Log in")
   const [buttonColor, setButtonColor] = useState<string>("bg-button_green")
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ export const LoginPage = ()=>{
     {
       setButtonText("Wrong credentials")
       setButtonColor("bg-button_red")
-      setTimeout(() => {setButtonText("Log in "),setButtonColor("bg-button_green")}, 1000)
+      setTimeout(() => {setButtonText("Log in "),setButtonColor("bg-button_green")}, 3000)
     }
   }
   
@@ -46,14 +46,14 @@ export const LoginPage = ()=>{
     setPassword(sntz(word))
   }
   
-  const handleRemember = (event:any) => {
-    const word = event.target.value
-    setRemember(sntz(word))
+  const handleRemember = () => {
+    setRemember(remember=="Yes"?"No":"Yes")
   }
 
   return(
     <div className={`px-10 lg:px-0 overflow-hidden h-screen overflow-y-scroll w-screen py-[10px] left-0 fixed top-0 h-screen ${""}`}>
-      <p className={clsx("m-auto my-10 w-[60%] text-5xl text-center font-bold")}>Welcome to programming <span className={"text-main_color"}>Diary.</span></p>
+      <p className={clsx("m-auto mt-10 w-[60%] text-5xl text-center font-bold")}>Welcome to programming <span className={"text-main_color"}>Diary.</span></p>
+      <p className={clsx("m-auto mt-2 mb-10 text-2xl text-center font-bold")}>Place for programmers to track their progress. </p>
       <form className={"text-black bg-white p-10 m-auto rounded-xl relative sm:w-[500px] border border-black"} onSubmit={handleAddingUsers}>
         <p className="text-2xl text-center mb-5">Start with loggin in</p>
         <div className="overflow-hidden">
