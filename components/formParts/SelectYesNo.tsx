@@ -12,17 +12,6 @@ export const SelectYesNo = ({value,onChange, text}:{value:any,onChange:any, text
         onChange={onChange}
       />
       Yes
-      {
-      /*
-        <select 
-        className={clsx(inputSameProperties,"w-fit")}
-        value={value} 
-        onChange={onChange}>
-        <option key={1} value={"Yes"}>Yes</option>
-        <option key={2} value={"No"}>No</option>
-        </select>
-      */
-      }
     </>
   )
 }
