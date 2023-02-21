@@ -19,7 +19,7 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
     return(
       <>
         {<>{programmer}'s </>}
-        post from <br/><strong>{getEstheticDate(datetime)}</strong>
+        post from <br/><strong>{/*getEstheticDate(datetime)*/}Datum aktuálně nezobrazeno</strong>
       </>
     )
   }

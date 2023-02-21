@@ -1,10 +1,9 @@
 import { useState } from "react"
 import { useDispatch, useSelector} from "react-redux"
-import { UniversalInput,FormButton } from "../formParts"
+import { UniversalInput,FormButton, SelectYesNo } from "../formParts"
 import { UniversalForm } from "./UniversalForm"
 import { addSingleUser } from "../../src/store/actions"
 import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
-import { SelectYesNo } from "../formParts/SelectYesNo"
 import clsx from "clsx"
 
 export const AddUserForm = ()=>{

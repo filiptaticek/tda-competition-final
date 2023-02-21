@@ -12,7 +12,7 @@ import { SelectYesNo } from "./formParts/SelectYesNo"
 export const LoginPage = ()=>{
   const [username,setFirstName] = useState<string>("")
   const [password,setPassword] = useState<string>("")
-  const [remember,setRemember] = useState<string>("No")
+  const [remember,setRemember] = useState<string>("Yes")
   const [buttonText, setButtonText] = useState<string>("Log in")
   const [buttonColor, setButtonColor] = useState<string>("bg-button_green")
   const dispatch = useDispatch()

@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { ITag } from "../../src/types"
 import { useSelector } from "react-redux"
+import { ITag } from "../../src/types"
 import { Description } from "../Description"
 import { inputSameProperties } from "../../src/constants"
 

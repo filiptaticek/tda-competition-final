@@ -9,6 +9,7 @@ export const SelectYesNo = ({value,onChange, text}:{value:any,onChange:any, text
         className="mr-2"
         type="checkbox"
         value={value}
+        checked={value==="Yes"}
         onChange={onChange}
       />
       Yes

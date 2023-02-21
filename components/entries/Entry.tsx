@@ -5,8 +5,8 @@ import { UniversalForm, EditEntryForm } from "../forms"
 import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
 import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
-import { MiniTag, MiniTagIcon } from "../tags"
 import { useState } from "react"
+import { MiniTag, MiniTagIcon } from "../tags"
 
 export const Entry = ({programming_language,minutes_spent,rating,description, datetime, id, programmer_id, tag_ids}:IDiaryEntry)=>{
 
@@ -31,7 +31,7 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
           <div className="mb-5">
             <ProgrammingLanguageLogo programming_language={programming_language}/>
           </div>
-          <p className="font-bold italic">{getEstheticDate(datetime)}</p>
+          <p className="font-bold italic">{/*getEstheticDate(datetime)*/}Datum aktuálně nezobrazeno</p>
           <p><span className="font-bold">{minutes_spent}</span> minutes</p>
           {tag_ids?
             <div className="h-fit px-3 w-fit my-5 m-auto w-fit flex flex-wrap">{tag_ids.map(tag_id => {return(<MiniTagIcon key={tag_id} id={tag_id} />)})}</div>

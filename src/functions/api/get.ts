@@ -9,6 +9,7 @@ export const getRequest = async (path:string, token:string) => {
 
   try {
     const response = await axios.get(`${baseUrl}/${path}`,{headers})
+    console.log(response.data)
     return(response.data)
   } catch (error) {
     console.error(error)
