@@ -5,21 +5,21 @@ import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
 import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
 import { useState } from "react"
-import { getEstheticDate } from "../../src/functions"
 import { MiniTag } from "../tags"
+import { State } from "../../src/types"
 import clsx from "clsx"
+import { lastDate } from "../../src/functions"
 
-export const CalendarEntry = ({programming_language,minutes_spent,rating,description, datetime, id,programmer_id, tag_ids}:IDiaryEntry)=>{
+export const CalendarEntry = ({programming_language,time_spent,rating,description, date, id,programmer_id, tag_ids}:IDiaryEntry)=>{
   
-  const user = useSelector((state:any) => state.user)
+  const { mode, user } = useSelector((state: State) => state)
   const [showDetail, setDetailShown] = useState<boolean>(false)
   const programmer = user.name + " " + user.surname
-  const mode = useSelector((state:any) => state.mode)
   const Header = ()=> {
     return(
       <>
         {<>{programmer}'s </>}
-        post from <br/><strong>{/*getEstheticDate(datetime)*/}Datum aktuálně nezobrazeno</strong>
+        post from <br/><strong>{lastDate(date)}</strong>
       </>
     )
   }
@@ -33,8 +33,8 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
         <RatingLogo rating={rating} />
         {description&&<p className="h-[50px] overflow-scroll mt-5 italic">{description.substring(0,15)}{description.length>10&&<>...</>}</p>}
         <EditEntryForm 
-          datetime={datetime} 
-          postMinutesSpent={minutes_spent} 
+          date={date} 
+          postMinutesSpent={time_spent} 
           postProgrammingLanguage={programming_language}
           postRating={rating}
           postComment={description}
@@ -49,7 +49,7 @@ export const CalendarEntry = ({programming_language,minutes_spent,rating,descrip
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>
         {tag_ids&&<div className="w-fit m-auto my-10 flex flex-wrap">{tag_ids.map(tag_id => {return(<MiniTag key={tag_id} id={tag_id} />)})}</div>}
-        <p><span className="font-bold">{minutes_spent}</span> minutes</p>
+        <p><span className="font-bold">{time_spent}</span> minutes</p>
         <RatingLogo rating={rating} />
         <p className="mt-5 italic">{description}</p>
       </UniversalForm>}

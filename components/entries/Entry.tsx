@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { getEstheticDate } from "../../src/functions"
+import { lastDate } from "../../src/functions"
 import { IDiaryEntry, IUser } from "../../src/types"
 import { UniversalForm, EditEntryForm } from "../forms"
 import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
@@ -7,19 +7,19 @@ import { RatingLogo } from "../RatingLogo"
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import { MiniTag, MiniTagIcon } from "../tags"
+import { State } from "../../src/types"
 
-export const Entry = ({programming_language,minutes_spent,rating,description, datetime, id, programmer_id, tag_ids}:IDiaryEntry)=>{
+export const Entry = ({programming_language,time_spent,rating,description, date, id, programmer_id, tag_ids}:IDiaryEntry)=>{
 
   const [showDetail, setDetailShown] = useState<boolean>(false)
-  const users = useSelector((state:any) => state.users)
-  const mode = useSelector((state:any) => state.mode)
+  const { mode, users } = useSelector((state: State) => state)
   const programmerObject = users.find((programmer:IUser) => programmer.id === programmer_id)
   const programmer= programmerObject?programmerObject.name + " " + programmerObject.surname:""
   const Header = ()=> {
     return(
       <>
         {programmerObject?<>{programmer}'s </>:<>No user </>}
-        post from <br/><strong>{getEstheticDate(datetime)}</strong>
+        post from <br/><strong>{lastDate(date)}</strong>
       </>
     )
   }
@@ -31,8 +31,8 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
           <div className="mb-5">
             <ProgrammingLanguageLogo programming_language={programming_language}/>
           </div>
-          <p className="font-bold italic">{/*getEstheticDate(datetime)*/}Datum aktuálně nezobrazeno</p>
-          <p><span className="font-bold">{minutes_spent}</span> minutes</p>
+          <p className="font-bold italic">{lastDate(date)}</p>
+          <p><span className="font-bold">{time_spent}</span> minutes</p>
           {tag_ids?
             <div className="h-fit px-3 w-fit my-5 m-auto w-fit flex flex-wrap">{tag_ids.map(tag_id => {return(<MiniTagIcon key={tag_id} id={tag_id} />)})}</div>
             :
@@ -41,8 +41,8 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
           <p className="w-[200px] m-auto h-[50px] overflow-scroll mt-5 italic">{description}</p>
           <EditEntryForm 
             postProgrammerId={programmer_id}
-            datetime={datetime} 
-            postMinutesSpent={minutes_spent} 
+            date={date} 
+            postMinutesSpent={time_spent} 
             postProgrammingLanguage={programming_language}
             postRating={rating}
             postComment={description}
@@ -57,7 +57,7 @@ export const Entry = ({programming_language,minutes_spent,rating,description, da
           <ProgrammingLanguageLogo programming_language={programming_language}/>
         </div>
         {tag_ids&&<div className="w-fit m-auto my-10 flex flex-wrap">{tag_ids.map(tag_id => {return(<MiniTag key={tag_id} id={tag_id} />)})}</div>}
-        <p><span className="font-bold">{minutes_spent}</span> minutes</p>
+        <p><span className="font-bold">{time_spent}</span> minutes</p>
         <RatingLogo rating={rating} />
         <p className="mt-5 italic">{description}</p>
       </UniversalForm>}

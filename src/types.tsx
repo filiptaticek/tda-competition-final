@@ -5,9 +5,9 @@ export type Button = "button" | "submit" | "reset"
 export type Sorting = "from newest" | "from oldest" | "from best rating" | "from worst rating" | "from shortest"| "from longest"| "no sorting"
 export type Color = "red" | "orange" | "blue" | "yellow" | "green" | "purple" | "pink" | "brown"
 export interface IDiaryEntry {
-    datetime:string
+    date:string
     programming_language:Language
-    minutes_spent:MinutesSpent
+    time_spent:MinutesSpent
     rating:Rating
     description:string
     programmer_id:number|null
@@ -30,4 +30,13 @@ export interface ITag {
     color:Color,
     description:string
     id:number
+}
+
+export interface State {
+    token?: string,
+    mode: boolean,
+    user: IUser,
+    tags: any,
+    users: any,
+    records: any
 }

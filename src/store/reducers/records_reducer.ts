@@ -15,10 +15,10 @@ export const recordsReducer = (state:IDiaryEntry[] = [], action:any) => {
     return(state.map((record:IDiaryEntry) => record.id !== action.updatedrecord_id ? record : action.newrecord))
   }
   case "SORT_RECORDS_FROM_OLDEST":{
-    return(state.sort((a, b) => new Date(a.datetime).toISOString().localeCompare(new Date(b.datetime).toISOString())))
+    return(state.sort((a, b) => new Date(a.date).toISOString().localeCompare(new Date(b.date).toISOString())))
   }
   case "SORT_RECORDS_FROM_NEWEST":{
-    return(state.sort((a, b) => new Date(b.datetime).toISOString().localeCompare(new Date(a.datetime).toISOString())))
+    return(state.sort((a, b) => new Date(b.date).toISOString().localeCompare(new Date(a.date).toISOString())))
   }
   case "SORT_RECORDS_FROM_LOWEST_RATING":{
     return(state.sort((a, b) => a.rating - b.rating))
@@ -27,10 +27,10 @@ export const recordsReducer = (state:IDiaryEntry[] = [], action:any) => {
     return(state.sort((a, b) => b.rating - a.rating))
   }
   case "SORT_RECORDS_FROM_SHORTEST":{
-    return(state.sort((a, b) => a.minutes_spent - b.minutes_spent))
+    return(state.sort((a, b) => a.time_spent - b.time_spent))
   }
   case "SORT_RECORDS_FROM_LONGEST":{
-    return(state.sort((a, b) => b.minutes_spent - a.minutes_spent))
+    return(state.sort((a, b) => b.time_spent - a.time_spent))
   }
   default:
     return state

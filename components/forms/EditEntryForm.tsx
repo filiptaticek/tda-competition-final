@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch,useSelector } from "react-redux"
-import { Language, MinutesSpent, Rating, ITag } from "../../src/types"
+import { Language, MinutesSpent, Rating, ITag, State } from "../../src/types"
 import { removeSingleRecord, updateSingleRecord } from "../../src/store/actions"
-import { getEstheticDate, deleteRequest, putRequest,sntz } from "../../src/functions/index.js"
+import { deleteRequest, putRequest,sntz } from "../../src/functions/index.js"
 import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage,FormButton } from "../formParts"
 import { inputSameProperties } from "../../src/constants"
 
 interface IEditEntryForm {
-    datetime:string,
+    date:string,
     postProgrammingLanguage:Language
     postMinutesSpent:MinutesSpent
     postRating:Rating
@@ -21,19 +21,26 @@ interface IEditEntryForm {
     postTagIds:number[]
 }
 
-export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinutesSpent,postRating, postComment}:IEditEntryForm)=>{
+export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSpent,postRating, postComment, postTagIds}:IEditEntryForm)=>{
 
-  const mode = useSelector((state:any) => state.mode)
-  const tags = useSelector((state:any) => state.tags)
-  const user = useSelector((state:any) => state.user)
-  const token = useSelector((state:any) => state.token)
   const dispatch = useDispatch()
+  const { mode, tags, user, token } = useSelector((state: State) => state)
   const [showForm, setShowForm] = useState<boolean>(false)
   const [programming_language, setProgrammingLanguage] = useState<Language>(postProgrammingLanguage)
-  const [minutes_spent, setMinutesSpent] = useState<MinutesSpent>(postMinutesSpent)
+  const [time_spent, setMinutesSpent] = useState<MinutesSpent>(postMinutesSpent)
   const [rating, setRating] = useState<Rating>(postRating)
   const [description, setDescription] = useState<string>(postComment)
   const [picked, setPicked] = useState<any>([])
+
+  useEffect(() => {
+    const setInitialPicked = ()=>setTimeout(() => {
+      if(tags) {
+        const filteredTags = postTagIds?tags.filter((tag:ITag) => postTagIds.includes(tag.id)):[]
+        setPicked(filteredTags)
+      }
+    }, 5)
+    setInitialPicked()
+  }, [postTagIds, tags])
 
   const handleTags = (tag:ITag) => {
     if (picked.includes(tag)) {
@@ -47,8 +54,8 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
     event.preventDefault()
     const id = postId
     const tag_ids = picked.map((obj:any) => obj.id)
-    const data = { datetime, description, programming_language, minutes_spent, rating, id, programmer_id:user.id, tag_ids }
-    putRequest("record",postId,data, token)
+    const data = { date, description, programming_language, time_spent, rating, id, programmer_id:user.id, tag_ids }
+    console.log(putRequest("record",postId,data, token))
     dispatch(updateSingleRecord(postId,data))
     setShowForm(false)
   }
@@ -68,10 +75,10 @@ export const EditEntryForm = ({postId,datetime,postProgrammingLanguage,postMinut
   return (
     <div onClick={(event)=>{event.stopPropagation()}}>
       {showForm&&
-          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<>Edit your entry from <br/><strong>{getEstheticDate(datetime)}</strong></>} onSubmit={handleEditingEntry}>
+          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<>Edit your entry from <br/><strong>{date}</strong></>} onSubmit={handleEditingEntry}>
             <div className="w-full text-left">
               <SelectProgrammingLanguage text="Programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value as Language))}/>
-              <UniversalInput required type="number" text="Time spent in minutes" min={1} value={minutes_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))} extrastyle="h-10" /> 
+              <UniversalInput required type="number" text="Time spent in minutes" min={1} value={time_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))} extrastyle="h-10" /> 
               <SelectRating value={rating} onChange={(event:any) => setRating(sntz(parseInt(event.target.value) as Rating))} text="Rating"/>
               <Description text="Pick the tags for your entry" />
               <div className={inputSameProperties}>

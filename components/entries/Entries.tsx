@@ -6,14 +6,12 @@ import { UniversalForm, SortEntriesForm } from "../forms"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, SelectUser, FormButton } from "../formParts"
 import { inputSameProperties } from "../../src/constants"
 import { Description } from "../Description"
+import { State } from "../../src/types"
 
 export const Entries = ()=>{
 
   //STATE
-  const users = useSelector((state:any) => state.users) //all the users
-  const tags = useSelector((state:any) => state.tags)
-  const mode = useSelector((state:any) => state.mode)
-  const globalposts = useSelector((state:any) => state.records) //all the entries
+  const { mode, tags, users, records } = useSelector((state: State) => state)
   const [filters,setFiltersShown] = useState<boolean>(false) //should the filters form be shown? 
   const [sorting,setSortingShown] = useState<boolean>(false) //should the filters form be shown? 
   const [minimalDate, setMinimalDate] = useState<string|undefined>(undefined) //DATE filter inputs
@@ -115,22 +113,22 @@ export const Entries = ()=>{
 
       {/*ALL THE ENTRIES FILTERE*/}
       <div className="w-full lg:flex flex-wrap">
-        {globalposts.map((entry: { datetime: string; programming_language: Language; rating: Rating; description: string; minutes_spent: MinutesSpent; id: number,programmer_id:number|null,tag_ids:number[]}):any=>{
+        {records.map((entry: { date: string; programming_language: Language; rating: Rating; description: string; time_spent: MinutesSpent; id: number,programmer_id:number|null,tag_ids:number[]}):any=>{
           if (programmingLanguageFilter&&entry.programming_language!==programmingLanguageFilter){return false}
           if (userFilter&&!(entry.programmer_id===(users.find((programmer:IUser) => programmer.name === user.split(" ")[0]).id))) {return false}
-          if (dateFilter&&!(entry.datetime>=dateFilter[0]&&entry.datetime<=dateFilter[1])){return false}
-          if  (timeFilter&&!(entry.minutes_spent>timeFilter[0]&&entry.minutes_spent<timeFilter[1])) {return false}
+          if (dateFilter&&!(entry.date>=dateFilter[0]&&entry.date<=dateFilter[1])){return false}
+          if  (timeFilter&&!(entry.time_spent>timeFilter[0]&&entry.time_spent<timeFilter[1])) {return false}
           if (!(entry.rating>=ratingFilter[0]&&entry.rating<=ratingFilter[1])){return false}
           if (tagsFilter&&!entry.tag_ids){return false}
           if (tagsFilter&&tagsFilter.some(tag => entry.tag_ids.includes(tag.id)===false)){return false}
 
           else return(
             <Entry 
-              datetime={entry.datetime}
+              date={entry.date}
               programming_language={entry.programming_language}
               rating={entry.rating}
               description={entry.description}
-              minutes_spent={entry.minutes_spent}
+              time_spent={entry.time_spent}
               key={entry.id}
               id={entry.id}
               programmer_id={entry.programmer_id}

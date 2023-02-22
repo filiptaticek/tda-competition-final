@@ -45,7 +45,7 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
   }
 
   const handleAdmin = () => {
-    setAdmin("Yes")
+    setAdmin(adminState=="Yes"?"No":"Yes")
   }
   
   const handleEditingUser = (event:any)=>{
