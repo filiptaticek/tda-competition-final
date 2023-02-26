@@ -6,7 +6,7 @@ export type Sorting = "from newest" | "from oldest" | "from best rating" | "from
 export type Color = "red" | "orange" | "blue" | "yellow" | "green" | "purple" | "pink" | "brown"
 export interface IDiaryEntry {
     date:string
-    programming_language:Language
+    programming_language:string
     time_spent:MinutesSpent
     rating:Rating
     description:string
@@ -36,7 +36,7 @@ export interface State {
     token?: string,
     mode: boolean,
     user: IUser,
-    tags: any,
-    users: any,
-    records: any
+    tags: ITag[],
+    users: IUser[],
+    records: IDiaryEntry[]
 }

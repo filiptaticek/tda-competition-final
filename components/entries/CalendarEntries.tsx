@@ -1,53 +1,66 @@
-import { CalendarEntry } from "./CalendarEntry"
-import { useSelector } from "react-redux"
-import { getPastDate, getEstheticDate, formatDate } from "../../src/functions"
-import { Language, MinutesSpent, Rating } from "../../src/types"
-import { AddEntryForm } from "../forms"
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import clsx from "clsx"
+import { useSelector } from "react-redux"
+import { useState } from "react"
 
-export const CallendarEntries = ({daysBack}:{daysBack:number})=>{
-  
-  const mode = useSelector((state:any) => state.mode)
-  const globalposts = useSelector((state:any) => state.records)
-  const poradiDneVTydnu = new Date().getDay()
-  const dny_v_tydnu = [
-    {number:1-poradiDneVTydnu+daysBack,name:"Monday"},
-    {number:2-poradiDneVTydnu+daysBack,name:"Tuesday"},
-    {number:3-poradiDneVTydnu+daysBack,name:"Wednesday"},
-    {number:4-poradiDneVTydnu+daysBack,name:"Thursday"},
-    {number:5-poradiDneVTydnu+daysBack,name:"Friday"},
-    {number:6-poradiDneVTydnu+daysBack,name:"Saturday"},
-    {number:7-poradiDneVTydnu+daysBack,name:"Sunday"}
+import { formatDate, getEstheticDate, getPastDate } from "../../src/functions"
+import { IDiaryEntry, State } from "../../src/types"
+import { AddEntryForm } from "../forms"
+import { CalendarEntry } from "./CalendarEntry"
+
+export const CallendarEntries = () => {
+  const { mode, records } = useSelector((state: State) => state)
+  const orderInTheWeek = new Date().getDay()
+  const [daysBack, setDaysBack] = useState<number>(0)
+
+  const daysOfTheWeek = [
+    { number: 1 - orderInTheWeek + daysBack, name: "Monday" },
+    { number: 2 - orderInTheWeek + daysBack, name: "Tuesday" },
+    { number: 3 - orderInTheWeek + daysBack, name: "Wednesday" },
+    { number: 4 - orderInTheWeek + daysBack, name: "Thursday" },
+    { number: 5 - orderInTheWeek + daysBack, name: "Friday" },
+    { number: 6 - orderInTheWeek + daysBack, name: "Saturday" },
+    { number: 7 - orderInTheWeek + daysBack, name: "Sunday" }
   ]
 
-  return(
-    <div className="w-full lg:flex">
-      {dny_v_tydnu.map((den: { number: number, name:string})=>{
-        const numberOfPosts = globalposts.filter((post: { date: string }) => post.date.substring(0,10) === getPastDate(den.number).substring(0,10)).length>2&&"border-b border-black"
-        return(
-          <div className="mx-1 mb-10 w-full" key={den.number}>
-            <p className={clsx("border-2 font-bold text-center text-md",mode?"text-white border-white":"border-black")}>{den.name}<br/>{getEstheticDate(getPastDate(den.number))}</p>
-            <AddEntryForm date={getPastDate(den.number)} />
-            <div className={clsx("lg:h-[570px] overflow-scroll",numberOfPosts)}>
-              {globalposts.map((entry: { date: string; programming_language: Language; rating: Rating; description: string; time_spent: MinutesSpent; id: number,programmer_id:null|number,tag_ids:number[]}):any=>{
-                if (entry.date.substring(0,10)===formatDate(getPastDate(den.number)).substring(0,10)){
-                  return(
-                    <CalendarEntry 
-                      date={entry.date}
-                      programming_language={entry.programming_language}
-                      rating={entry.rating}
-                      description={entry.description}
-                      time_spent={entry.time_spent}
-                      key={entry.id}
-                      id={entry.id}
-                      programmer_id={entry.programmer_id}
-                      tag_ids={entry.tag_ids}
-                    />
-                  )}})}
+  return (
+    <div className="flex w-full">
+      <img src={mode?"sipka_doleva_bila.png":"sipka_doleva.png"} className="mt-1 mr-2 h-min w-[40px] cursor-pointer" onClick={()=>setDaysBack(daysBack-7)}/>
+      <div className="w-full">
+        {daysOfTheWeek.map((den: { number: number; name: string }) => {
+          const numberOfPosts = records.filter((post: { date: string }) => post.date.substring(0, 10) === getPastDate(den.number).substring(0, 10)).length > 2 &&"border-b border-black"
+          return (
+            <div className="mx-1 mb-10 w-full" key={den.number}>
+              <p className={clsx("rounded-t-3xl border-x-2 border-t-2 text-center text-xl font-bold", mode ? "border-white text-white" : "border-black")}>
+                {den.name}
+                <br />
+                {getEstheticDate(getPastDate(den.number))}
+              </p>
+              <AddEntryForm date={getPastDate(den.number)} />
+              <div className={clsx("overflow-scroll lg:max-h-[555px]", numberOfPosts)}>
+                {records.map(
+                  (entry:IDiaryEntry): any => {
+                    if (entry.date.substring(0, 10) === formatDate(getPastDate(den.number)).substring(0, 10)) {
+                      return (
+                        <CalendarEntry
+                          date={entry.date}
+                          programming_language={entry.programming_language}
+                          rating={entry.rating}
+                          description={entry.description}
+                          time_spent={entry.time_spent}
+                          key={entry.id}
+                          id={entry.id}
+                          programmer_id={entry.programmer_id}
+                          tag_ids={entry.tag_ids}
+                        />
+                      )}})}
+              </div>
+              <div className={`h-[25px] ${mode ? "border-white" : "border-black"} rounded-b-3xl border-x-2 border-b-2`} />
             </div>
-          </div>
-        )
-      })}
+          )})}
+      </div>
+      <img src={mode?"sipka_doprava_bila.png":"sipka_doprava.png"} className="mt-1 ml-3 h-min w-[40px] cursor-pointer" onClick={()=>setDaysBack(daysBack+7)}/>
     </div>
   )
 }

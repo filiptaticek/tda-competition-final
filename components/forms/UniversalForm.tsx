@@ -1,24 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 
+import clsx from "clsx"
+import { useSelector } from "react-redux"
+import { State } from "../../src/types"
+
 interface IUniversalForm {
-    header:any
-    onSubmit?:any
-    closeForm:any
-    children:any
-    className?:string
+    header: any;
+    onSubmit?: any;
+    closeForm: any;
+    children: any;
+    className?: string;
 }
 
-export const UniversalForm = ({header,onSubmit,children,closeForm,className}:IUniversalForm)=>{
+export const UniversalForm = ({ header, onSubmit, children, closeForm, className }: IUniversalForm) => {
 
-  return(
-    <div className={`px-10 lg:px-0 overflow-hidden h-screen overflow-y-scroll w-screen py-[10px] left-0 fixed top-0 h-screen bg-black/80 ${className}`}>
-      <form className={"text-black bg-white p-10 m-auto rounded-xl relative sm:w-[500px] border border-black"} onSubmit={onSubmit}>
-        <img className="relative cursor-pointer mb-[-20px] top-[10px] left-[390px]" src="zavrit_formular.png" onClick={closeForm} ></img>
-        <p className="text-2xl text-center mb-5">{header}</p>
-        <div className="overflow-hidden">
-          {children}
-        </div>
+  const { mode } = useSelector((state: State) => state)
+
+  return (
+    <div
+      className={clsx(
+        "fixed left-0 top-0 h-screen w-screen overflow-hidden overflow-y-scroll px-10 py-[10px] lg:px-0",
+        className,
+        mode?"bg-black/70":"bg-black/80")}
+    >
+      <form className={"relative m-auto w-[300px] rounded-xl border border-black bg-white p-10 text-black sm:w-[500px]"} onSubmit={onSubmit}>
+        <img className="relative top-[25px] left-[220px] cursor-pointer sm:left-[390px]" src="zavrit_formular.png" onClick={closeForm}></img>
+        <p className="mb-5 text-center text-2xl">{header}</p>
+        <div className="overflow-hidden">{children}</div>
       </form>
     </div>
   )

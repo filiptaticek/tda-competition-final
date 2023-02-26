@@ -1,7 +1,3 @@
-export const Description = ({text}:{text:string})=>{
-  return(
-    <span className="font-bold text-sm">
-      {text}
-    </span>
-  )
+export const Description = ({ text }: { text: string }) => {
+  return <span className="text-sm font-bold">{text}</span>
 }

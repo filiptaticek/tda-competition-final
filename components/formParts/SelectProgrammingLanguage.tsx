@@ -5,10 +5,11 @@ interface ISelectProgrammingLanguage {
     text:string
     value:any,
     onChange:any,
-    bonusOption?:boolean
+    bonusOption?:boolean,
+    ownLanguage?:boolean
 }
 
-export const SelectProgrammingLanguage = ({text,value,onChange,bonusOption}:ISelectProgrammingLanguage)=>{
+export const SelectProgrammingLanguage = ({text,value,onChange,bonusOption,ownLanguage}:ISelectProgrammingLanguage)=>{
 
   return(
     <>
@@ -23,6 +24,7 @@ export const SelectProgrammingLanguage = ({text,value,onChange,bonusOption}:ISel
             <option key={pLanguage} value={pLanguage}>{pLanguage}</option>
           )
         })}
+        {ownLanguage&&<option key={1} value={""}>My own programming language</option>}
       </select>
     </>
   )

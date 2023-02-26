@@ -46,7 +46,7 @@ export default function UsersPage() {
             )
           })}
         </>:
-        <p className="m-auto my-10 w-[60%] text-5xl text-center font-bold">You have to be admin in order to reach this page</p>
+        <p className="m-auto my-10 w-[60%] text-center text-5xl font-bold">You have to be admin in order to reach this page</p>
       }
     </Page>
   )

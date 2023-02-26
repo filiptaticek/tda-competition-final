@@ -5,7 +5,7 @@ import { useState } from "react"
 import { putRequest,capitalize, deleteRequest, isOnlyLetters, sntz } from "../../src/functions"
 import { UniversalInput, FormButton } from "../formParts"
 import { SelectYesNo } from "../formParts/SelectYesNo"
-import { IUser } from "../../src/types"
+import { IUser, State } from "../../src/types"
 
 export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}:IUser&{closeForm:any})=>{
 
@@ -16,8 +16,7 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
   const [emailState,setEmail] = useState<string>(email)
   const [passwordState,setPassword] = useState<string>("")
   const [adminState, setAdmin] = useState<string>(admin?"Yes":"No")
-  const token = useSelector((state:any) => state.token)
-  const user = useSelector((state:any) => state.user)
+  const { token, user } = useSelector((state: State) => state)
 
   const handleFirstName = (event:any) => {
     const word = event.target.value

@@ -3,26 +3,27 @@
 import { useSelector } from "react-redux"
 import { SideBarLink } from "./SideBarLink"
 import { useState } from "react"
+import { State } from "../../src/types"
+import clsx from "clsx"
 
-export const Sidebar = ()=>{
+export const Sidebar = ({hidden}:{hidden?:boolean})=>{
 
-  const mode = useSelector((state:any) => state.mode)
-  const user = useSelector((state:any) => state.user)
+  const { mode, user } = useSelector((state: State) => state)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return(
-    <div className="w-[20%]">
+    <div className={clsx("w-[20%]",hidden&&"hidden md:block")}>
       <img 
-        className="w-[40px] h-[40px] hidden sm:block cursor-pointer" 
+        className="h-[40px] w-[40px] cursor-pointer" 
         src={mode?"otevrit_stranku_bila.png":"otevrit_stranku.png"} 
         onClick={()=>setIsOpen(true)}/>
       <div
         className={`
-      ${isOpen ? "w-[350px] p-20" : "w-0"} ${mode?isOpen&&"border border-white":""} bg-main_color h-full fixed top-0 left-0 z-10 duration-300 text-white`
+      ${isOpen ? "w-[350px] p-20" : "w-0"} ${mode?isOpen&&"border border-white":""} fixed top-0 left-0 z-10 h-full bg-main_color text-white duration-300`
         }
       >
         <div className={` ${isOpen?"block":"hidden"} text-2xl`}>
-          <img className="fixed top-[20px] cursor-pointer left-[280px] w-[50px]" src={"zavrit_stranku.png"} onClick={()=>setIsOpen(false)}/>
+          <img className="fixed top-[20px] left-[280px] w-[50px] cursor-pointer" src={"zavrit_stranku.png"} onClick={()=>setIsOpen(false)}/>
           <SideBarLink text="Calendar" href="/" />
           <br/>
           <br/>

@@ -27,7 +27,7 @@ export default function TagsPage() {
     <Page>
       <Header />
       <AddTagForm />
-      <div className="sm:flex max-w-[1110px] w-fit flex-wrap m-auto mb-10">
+      <div className="border border-white w-fit place-items-center sm:flex max-w-[1110px] flex-wrap m-auto mb-10">
         {tags.map((tag:ITag)=>{
           return(
             <Tag name={tag.name} color={tag.color} id={tag.id} key={tag.id} description={tag.description} />

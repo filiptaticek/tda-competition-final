@@ -1,24 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { Language } from "../src/types"
 
-export const ProgrammingLanguageLogo = ({programming_language}:{programming_language:Language})=>{
-
-  const returnPictureSource = ()=>{
+export const ProgrammingLanguageLogo = ({ programming_language }: { programming_language: string }) => {
+  const returnPictureSource = () => {
     switch (programming_language) {
-    case "Python":
-      return("python_logo.png")
-    case "Javascript":
-      return("javascript_logo.png")
-    default:
-      return("c++_logo.png")
+      case "Python":
+        return "python_logo.png"
+      case "Javascript":
+        return "javascript_logo.png"
+      case "C++":
+        return "C++_logo.png"
+      default:
+        return "other_languages.png"
     }
   }
 
-  return(
-    <img
-      className="w-[50px] h-[50px] mt-2 mb-[-10px] m-auto"
-      src={returnPictureSource()}
-    />
-  )
+  return <img className="m-auto my-4 h-[50px] w-[50px]" src={returnPictureSource()} />
 }

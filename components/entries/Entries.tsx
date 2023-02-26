@@ -1,141 +1,244 @@
-import { useSelector } from "react-redux"
-import { useState } from "react"
-import { Entry } from "./Entry"
-import { Language, MinutesSpent, Rating, IUser, ITag } from "../../src/types"
-import { UniversalForm, SortEntriesForm } from "../forms"
-import { UniversalInput, SelectRating, SelectProgrammingLanguage, SelectUser, FormButton } from "../formParts"
 import { inputSameProperties } from "../../src/constants"
+import { IDiaryEntry, ITag, Rating, State } from "../../src/types"
 import { Description } from "../Description"
-import { State } from "../../src/types"
+import {
+  FormButton,
+  SelectProgrammingLanguage,
+  SelectRating,
+  UniversalInput,
+} from "../formParts"
+import { SortEntriesForm, UniversalForm } from "../forms"
+import { Entry } from "./Entry"
+import { useState } from "react"
+import { useSelector } from "react-redux"
 
-export const Entries = ()=>{
-
+export const Entries = () => {
   //STATE
-  const { mode, tags, users, records } = useSelector((state: State) => state)
-  const [filters,setFiltersShown] = useState<boolean>(false) //should the filters form be shown? 
-  const [sorting,setSortingShown] = useState<boolean>(false) //should the filters form be shown? 
-  const [minimalDate, setMinimalDate] = useState<string|undefined>(undefined) //DATE filter inputs
-  const [maximalDate, setMaximalDate] = useState<string|undefined>(undefined)
+  const { mode, tags, records } = useSelector((state: State) => state)
+  const [filters, setFiltersShown] = useState<boolean>(false) //should the filters form be shown?
+  const [sorting, setSortingShown] = useState<boolean>(false) //should the filters form be shown?
+  const [minimalDate, setMinimalDate] = useState<string | undefined>(undefined) //DATE filter inputs
+  const [maximalDate, setMaximalDate] = useState<string | undefined>(undefined)
   const [minimalTime, setMinimalTime] = useState<number>(0) //TIME filter inputs
   const [maximalTime, setMaximalTime] = useState<number>(0)
   const [picked, setPicked] = useState<Array<ITag>>([])
   const [minimalRating, setMinimalRating] = useState<Rating>(1) //RATING filter inputs
   const [maximalRating, setMaximalRating] = useState<Rating>(5)
-  const [user, setUser] = useState<string>("No user filter") //USER filter input
-  const [programmingLanguage, setProgrammingLanguage] = useState<string>("No language filter")//PROGRAMMING LANGUAGE filter inputs
-  const [ratingFilter, setRatingFilter] = useState<[Rating,Rating]>([1,5]) //RATING FILTER
-  const [timeFilter, setTimeFilter] = useState<[number,number]|undefined>(undefined) //TIME FILTER
-  const [programmingLanguageFilter,setProgrammingLanguageFilter] =useState<string|undefined>(undefined) //PROGRAMMING LANGUAGE FILTER
-  const [userFilter, setUserFilter] = useState<string|undefined>(undefined) //USER FILTER
-  const [dateFilter, setDateFilter] = useState<[string,string]|undefined>(undefined) //DATE FILTER
-  const [tagsFilter, setTagsFilter] = useState<Array<ITag>|undefined>(undefined)
+  const [programmingLanguage, setProgrammingLanguage] = useState<string>("No language filter") //PROGRAMMING LANGUAGE filter inputs
+  const [ratingFilter, setRatingFilter] = useState<[Rating, Rating]>([1, 5]) //RATING FILTER
+  const [timeFilter, setTimeFilter] = useState<[number, number] | undefined>(undefined) //TIME FILTER
+  const [programmingLanguageFilter, setProgrammingLanguageFilter] = useState<string | undefined>(undefined) //PROGRAMMING LANGUAGE FILTER
+  const [dateFilter, setDateFilter] = useState<[string, string] | undefined>(undefined) //DATE FILTER
+  const [tagsFilter, setTagsFilter] = useState<Array<ITag> | undefined>(undefined)
 
   //FUNCTIONS HANDLING ALL THE INPUTS
-  const handleMinimalDate = (event:any) => {setMinimalDate(event.target.value)}
-  const handleMaximalDate = (event:any) => {setMaximalDate(event.target.value)}
-  const handleMinimalTime = (event:any) => {
-    const value = event.target.value
-    value>=0?setMinimalTime(value):setMinimalTime(0)
+  const handleMinimalDate = (event: any) => {setMinimalDate(event.target.value)}
+  const handleMaximalDate = (event: any) => {setMaximalDate(event.target.value)}
+  const handleMinimalTime = (event: any) => {const value = event.target.value; value >= 0 ? setMinimalTime(value) : setMinimalTime(0)}
+  const handleMaximalTime = (event: any) => {const value = event.target.value
+    value >= 0 ? setMaximalTime(value) : setMinimalTime(0)
   }
-  const handleMaximalTime = (event:any) => {
-    const value = event.target.value
-    value>=0?setMaximalTime(value):setMinimalTime(0)
+  const handleMinimalRating = (event: any) => {setMinimalRating(parseInt(event.target.value) as Rating)}
+  const handleMaximalRating = (event: any) => {setMaximalRating(parseInt(event.target.value) as Rating)}
+  const handleProgrammingLanguage = (event: any) => {setProgrammingLanguage(event.target.value)}
+  const handleTags = (tag: ITag) => {
+    if (picked.includes(tag)) {
+      setPicked(picked.filter((thing: ITag) => thing.name !== tag.name))
+    } else {
+      setPicked([...picked, tag])
+    }
   }
-  const handleMinimalRating = (event:any) => {setMinimalRating(parseInt(event.target.value)as Rating)}
-  const handleMaximalRating = (event:any) => {setMaximalRating(parseInt(event.target.value) as Rating)}
-  const handleUser = (event:any) => {setUser(event.target.value)}
-  const handleProgrammingLanguage = (event:any) => {setProgrammingLanguage(event.target.value)}
-  const handleTags = (tag:ITag) => {if (picked.includes(tag)) {setPicked(picked.filter((thing:ITag) => thing.name !== tag.name))} else {setPicked([...picked, tag])}}
 
-  const submitFilters = (event:any) => {
+  const submitFilters = (event: any) => {
     event.preventDefault()
     setFiltersShown(false)
-    if(minimalTime!==0||maximalTime!==0){setTimeFilter([minimalTime, maximalTime])}
-    if(minimalDate&&maximalDate){setDateFilter([minimalDate,maximalDate])}
-    if(minimalRating&&maximalRating){setRatingFilter([minimalRating, maximalRating])}
-    picked.length>0&&setTagsFilter(picked)
-    picked.length===0&&setTagsFilter(undefined)
-    user==="No user filter"?setUserFilter(undefined):setUserFilter(user)
-    programmingLanguage==="No language filter"?setProgrammingLanguageFilter(undefined):setProgrammingLanguageFilter(programmingLanguage)
+    if (minimalTime !== 0 || maximalTime !== 0) {setTimeFilter([minimalTime, maximalTime])}
+    if (minimalDate && maximalDate) {setDateFilter([minimalDate, maximalDate])}
+    if (minimalRating && maximalRating) {setRatingFilter([minimalRating, maximalRating])}
+    picked.length > 0 && setTagsFilter(picked)
+    picked.length === 0 && setTagsFilter(undefined)
+    programmingLanguage === "No language filter"
+      ? setProgrammingLanguageFilter(undefined)
+      : setProgrammingLanguageFilter(programmingLanguage)
   }
 
-  const resetFilters = (event:any) =>{
+  const resetFilters = (event: any) => {
     event.preventDefault()
-    setMinimalTime(0),setMaximalTime(0),setMinimalRating(1),setMaximalRating(5),setProgrammingLanguage("No language filter"),setMinimalDate(undefined),setMaximalDate(undefined),setUser("No user filter"),setPicked([])
-    setTimeFilter(undefined),setRatingFilter([1,5]),setProgrammingLanguageFilter(undefined),setDateFilter(undefined),setUserFilter(undefined),setTagsFilter(undefined)
+    setMinimalTime(0),setMaximalTime(0),setMinimalRating(1),setMaximalRating(5),setProgrammingLanguage("No language filter"),setMinimalDate(undefined),setMaximalDate(undefined),setPicked([]),setTimeFilter(undefined),setRatingFilter([1, 5]),setProgrammingLanguageFilter(undefined),setDateFilter(undefined),setTagsFilter(undefined)
   }
 
   //BODY
-  return(
+  return (
     <div>
       {/*BUTTONS SETTING ON FILTERS AND RANKINGS*/}
-      <div className="font-bold w-fit flex mb-8 lg:mb-2 m-auto w-[300px]">
-        <FormButton className={`mr-2 ${mode?"bg-white text-main_color":"bg-main_color text-white"}`} onClick={()=>setFiltersShown(true)} text="Filter entries" />
-        <FormButton className={mode?"bg-white text-main_color":"bg-main_color text-white"} onClick={()=>setSortingShown(true)} text="Sort entries"  />
-      </div>      
+      <div className="m-auto mb-8 flex w-[300px] font-bold lg:mb-2">
+        <FormButton
+          className={`mr-2 ${
+            mode ? "bg-white text-main_color" : "bg-main_color text-white"
+          }`}
+          onClick={() => setFiltersShown(true)}
+          text="Filter entries"
+        />
+        <FormButton
+          className={
+            mode ? "bg-white text-main_color" : "bg-main_color text-white"
+          }
+          onClick={() => setSortingShown(true)}
+          text="Sort entries"
+        />
+      </div>
 
-      {//FORM HANDLING SORTING ENTRIES
-        sorting&&
-        <SortEntriesForm onClick={()=>setSortingShown(false)}/>
+      {
+        sorting && <SortEntriesForm onClick={() => setSortingShown(false)} />
       }
 
-      {//FORM HANDLING FILTERING ENTRIES
-        filters&&
-        <UniversalForm header={<strong>Set some filters</strong>} closeForm={()=>{setFiltersShown(false)}} onSubmit={submitFilters}>
-          <UniversalInput text="From" type="date" value={minimalDate} onChange={handleMinimalDate} />
-          <UniversalInput text="To" type="date" value={maximalDate} onChange={handleMaximalDate} />
-          <SelectUser text="Choose the user" value={user} onChange={handleUser} />
-          <UniversalInput text="Minimal time" type="number" value={minimalTime} onChange={handleMinimalTime} />
-          <UniversalInput text="Maximal time" type="number" value={maximalTime} onChange={handleMaximalTime} />
-          <SelectProgrammingLanguage text="Programming language" value={programmingLanguage} onChange={handleProgrammingLanguage} bonusOption={true} />
-          <SelectRating text="Minimal rating" value={minimalRating} onChange={handleMinimalRating} />
-          <SelectRating text="Maximal rating" value={maximalRating} onChange={handleMaximalRating} />
-          <Description text="Pick the tags for your entry" />
-          <div className={inputSameProperties}>
-            {tags.map((tag: ITag) => (
-              <div key={tag.id}>
-                <input
-                  type="checkbox"
-                  value={tag.name}
-                  checked={picked.includes(tag)}
-                  onChange={() => handleTags(tag)}
-                />
-                {tag.name}
-              </div>
-            ))}
-          </div>
-          <div className="flex mt-8">
-            <FormButton type="submit" text="Submit" className="bg-button_green mr-1" />
-            <FormButton onClick={resetFilters} text="Reset all filters" className="bg-button_red" />
-          </div>
-        </UniversalForm>
+      {
+        filters && (
+          <UniversalForm
+            header={<strong>Set some filters</strong>}
+            closeForm={() => {
+              setFiltersShown(false)
+            }}
+            onSubmit={submitFilters}
+          >
+            <UniversalInput
+              text="From"
+              type="date"
+              value={minimalDate}
+              onChange={handleMinimalDate}
+            />
+            <UniversalInput
+              text="To"
+              type="date"
+              value={maximalDate}
+              onChange={handleMaximalDate}
+            />
+            <UniversalInput
+              text="Minimal time"
+              type="number"
+              value={minimalTime}
+              onChange={handleMinimalTime}
+            />
+            <UniversalInput
+              text="Maximal time"
+              type="number"
+              value={maximalTime}
+              onChange={handleMaximalTime}
+            />
+            <SelectProgrammingLanguage
+              text="Programming language"
+              value={programmingLanguage}
+              onChange={handleProgrammingLanguage}
+              bonusOption={true}
+            />
+            <SelectRating
+              text="Minimal rating"
+              value={minimalRating}
+              onChange={handleMinimalRating}
+            />
+            <SelectRating
+              text="Maximal rating"
+              value={maximalRating}
+              onChange={handleMaximalRating}
+            />
+            <Description text="Pick the tags for your entry" />
+            <div className={inputSameProperties}>
+              {tags.map((tag: ITag) => (
+                <div key={tag.id}>
+                  <input
+                    type="checkbox"
+                    value={tag.name}
+                    checked={picked.includes(tag)}
+                    onChange={() => handleTags(tag)}
+                  />
+                  {tag.name}
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 flex">
+              <FormButton
+                type="submit"
+                text="Submit"
+                className="mr-1 bg-button_green"
+              />
+              <FormButton
+                onClick={resetFilters}
+                text="Reset all filters"
+                className="bg-button_red"
+              />
+            </div>
+          </UniversalForm>
+        )
       }
 
       {/*ALL THE ENTRIES FILTERE*/}
-      <div className="w-full lg:flex flex-wrap">
-        {records.map((entry: { date: string; programming_language: Language; rating: Rating; description: string; time_spent: MinutesSpent; id: number,programmer_id:number|null,tag_ids:number[]}):any=>{
-          if (programmingLanguageFilter&&entry.programming_language!==programmingLanguageFilter){return false}
-          if (userFilter&&!(entry.programmer_id===(users.find((programmer:IUser) => programmer.name === user.split(" ")[0]).id))) {return false}
-          if (dateFilter&&!(entry.date>=dateFilter[0]&&entry.date<=dateFilter[1])){return false}
-          if  (timeFilter&&!(entry.time_spent>timeFilter[0]&&entry.time_spent<timeFilter[1])) {return false}
-          if (!(entry.rating>=ratingFilter[0]&&entry.rating<=ratingFilter[1])){return false}
-          if (tagsFilter&&!entry.tag_ids){return false}
-          if (tagsFilter&&tagsFilter.some(tag => entry.tag_ids.includes(tag.id)===false)){return false}
-
-          else return(
-            <Entry 
-              date={entry.date}
-              programming_language={entry.programming_language}
-              rating={entry.rating}
-              description={entry.description}
-              time_spent={entry.time_spent}
-              key={entry.id}
-              id={entry.id}
-              programmer_id={entry.programmer_id}
-              tag_ids={entry.tag_ids}
-            />
-          )
-        })}
+      <div className="w-full flex-wrap lg:flex">
+        {records.map(
+          (entry: IDiaryEntry
+            /*{
+            date: string;
+            programming_language: string;
+            rating: Rating;
+            description: string;
+            time_spent: MinutesSpent;
+            id: number;
+            programmer_id: number | null;
+            tag_ids: number[];
+          }*/
+          ) => {
+            if (
+              programmingLanguageFilter &&
+              entry.programming_language !== programmingLanguageFilter
+            ) {
+              return false
+            }
+            if (
+              dateFilter &&
+              !(entry.date >= dateFilter[0] && entry.date <= dateFilter[1])
+            ) {
+              return false
+            }
+            if (
+              timeFilter &&
+              !(
+                entry.time_spent > timeFilter[0] &&
+                entry.time_spent < timeFilter[1]
+              )
+            ) {
+              return false
+            }
+            if (
+              !(
+                entry.rating >= ratingFilter[0] &&
+                entry.rating <= ratingFilter[1]
+              )
+            ) {
+              return false
+            }
+            if (tagsFilter && !entry.tag_ids) {
+              return false
+            }
+            if (
+              tagsFilter &&
+              tagsFilter.some((tag) => entry.tag_ids.includes(tag.id) === false)
+            ) {
+              return false
+            } else
+              return (
+                <Entry
+                  date={entry.date}
+                  programming_language={entry.programming_language}
+                  rating={entry.rating}
+                  description={entry.description}
+                  time_spent={entry.time_spent}
+                  key={entry.id}
+                  id={entry.id}
+                  programmer_id={entry.programmer_id}
+                  tag_ids={entry.tag_ids}
+                />
+              )
+          }
+        )}
       </div>
     </div>
   )

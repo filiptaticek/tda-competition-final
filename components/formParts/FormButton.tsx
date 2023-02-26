@@ -10,13 +10,11 @@ interface IFormButton {
 
 export const FormButton = ({className,text,onClick,type}:IFormButton)=>{
 
-  const tip = type?type:undefined
-
   return(
     <button 
-      className={clsx("hover:opacity-80 m-auto w-[50%] px-5 py-2 rounded-md text-white font-bold",className)}
+      className={clsx("m-auto w-[50%] rounded-2xl px-5 py-2 font-bold text-white hover:opacity-80",className)}
       onClick={onClick}
-      type={tip}
+      type={type?type:undefined}
     >
       {text}
     </button>

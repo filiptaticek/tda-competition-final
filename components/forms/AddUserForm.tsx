@@ -5,12 +5,12 @@ import { UniversalForm } from "./UniversalForm"
 import { addSingleUser } from "../../src/store/actions"
 import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 import clsx from "clsx"
+import { State } from "../../src/types"
 
 export const AddUserForm = ()=>{
 
-  const mode = useSelector((state:any) => state.mode)
-  const token = useSelector((state:any) => state.token)
-  const [buttonText, setButtonText] = useState<string>("Log in")
+  const { mode, token } = useSelector((state: State) => state)
+  const [buttonText, setButtonText] = useState<string>("Add user")
   const [buttonColor, setButtonColor] = useState<string>("bg-button_green")
   const [showForm,setFormShown] = useState<boolean>(false)
   const [name,setFirstName] = useState<string>("")
@@ -24,7 +24,6 @@ export const AddUserForm = ()=>{
   const handleAddingUsers = async (event:any)  =>{
     event?.preventDefault()
     const nasObjekt = {name,surname,id:1,username,email,password,admin:admin=="Yes"?true:false}
-    console.log(nasObjekt)
     const toCoPrislo = await postRequest(nasObjekt,"programmer", token)
     if (toCoPrislo){
       dispatch(addSingleUser(toCoPrislo)) 
@@ -71,8 +70,8 @@ export const AddUserForm = ()=>{
 
   return(
     <>
-      <div className="flex m-auto w-[300px] mb-8 lg:mb-2">
-        <FormButton className={`${mode?"text-main_color bg-white":"text-white bg-main_color"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
+      <div className="m-auto mb-8 flex w-[300px] lg:mb-2">
+        <FormButton className={`${mode?"bg-white text-main_color":"bg-main_color text-white"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
       </div>
       {showForm&&
       <UniversalForm className="pt-[60px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
@@ -82,7 +81,7 @@ export const AddUserForm = ()=>{
         <UniversalInput required={true} text="Fill in the email" value={email} onChange={handleEmail} />
         <UniversalInput type="password" required={true} text="Fill in the password" value={password} onChange={handlePassword} />
         <SelectYesNo text="Is the user admin?" value={admin} onChange={handleAdmin} />
-        <div className="flex mt-8">
+        <div className="mt-8 flex">
           <FormButton className={clsx(buttonColor,"duration-500")} type="submit" text={buttonText}/>
         </div>
       </UniversalForm>

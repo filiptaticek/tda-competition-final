@@ -51,8 +51,8 @@ export const SortEntriesForm = ({onClick}:{onClick:any})=>{
           )
         })}
       </select>
-      <div className="flex mt-10">
-        <FormButton className="bg-button_green m-auto" type="submit" text="Sort the entries"/>
+      <div className="mt-10 flex">
+        <FormButton className="m-auto bg-button_green" type="submit" text="Sort the entries"/>
       </div>
     </UniversalForm>
   )
