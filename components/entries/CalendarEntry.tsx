@@ -5,7 +5,7 @@ import { useState } from "react"
 import clsx from "clsx"
 import { useSelector } from "react-redux"
 
-import { lastDate } from "../../src/functions"
+import { getEstheticDate } from "../../src/functions"
 import { IDiaryEntry, State } from "../../src/types"
 import { EditEntryForm, UniversalForm } from "../forms"
 import { ProgrammingLanguageLogo } from "../ProgrammingLanguageLogo"
@@ -21,7 +21,7 @@ export const CalendarEntry = ({ programming_language, time_spent, rating, descri
       <>
         {<>{programmer}'s </>}
         post from <br />
-        <strong>{lastDate(date)}</strong>
+        <strong>{getEstheticDate(date)}</strong>
       </>
     )
   }
@@ -30,7 +30,7 @@ export const CalendarEntry = ({ programming_language, time_spent, rating, descri
     <div
       className={clsx(
         "m-auto overflow-hidden border-x-2 border-t p-2 py-5 text-center duration-300",
-        mode ? "border-white hover:bg-[#8C3FB8]" : "border-black hover:bg-gray-100"
+        mode ? "border-white hover:bg-[#3FA5FF] " : "border-black hover:bg-gray-100"
       )}
     >
       <div className={clsx("cursor-pointer", mode ? "text-white" : "")} onClick={() => setDetailShown(true)}>
@@ -56,7 +56,10 @@ export const CalendarEntry = ({ programming_language, time_spent, rating, descri
       </div>
       {showDetail && (
         <UniversalForm className="pt-[150px] text-center" closeForm={() => setDetailShown(!showDetail)} header={<Header />}>
-          <div className="mb-5"><ProgrammingLanguageLogo programming_language={programming_language} /></div>
+          <div className="mb-5">
+            <ProgrammingLanguageLogo form programming_language={programming_language} />
+            <p className="mb-2 font-bold">{programming_language}</p>
+          </div>
           {tag_ids && (
             <div className="m-auto my-10 flex w-fit flex-wrap">
               {tag_ids.map((tag_id) => {

@@ -51,10 +51,9 @@ export const LoginPage = () => {
 
   return (
     <div className={`fixed left-0 top-0 h-screen w-screen overflow-hidden overflow-y-scroll px-10 py-[10px] lg:px-0 ${""}`}>
-      <p className={clsx("m-auto mt-10 w-[60%] text-center text-5xl font-bold")}>
+      <p className={clsx("m-auto my-10 text-center text-5xl font-bold sm:w-[60%]")}>
         Welcome to programming <span className={"text-main_color"}>Diary.</span>
       </p>
-      <p className={clsx("m-auto mt-2 mb-10 text-center text-2xl font-bold")}>Place for programmers to track their progress. </p>
       <form className={"relative m-auto rounded-xl border border-black bg-white p-10 text-black sm:w-[500px]"} onSubmit={handleAddingUsers}>
         <p className="mb-5 text-center text-2xl">Start with loggin in</p>
         <div className="overflow-hidden">

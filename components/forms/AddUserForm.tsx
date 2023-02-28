@@ -6,6 +6,7 @@ import { addSingleUser } from "../../src/store/actions"
 import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 import clsx from "clsx"
 import { State } from "../../src/types"
+import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
 
 export const AddUserForm = ()=>{
 
@@ -71,7 +72,7 @@ export const AddUserForm = ()=>{
   return(
     <>
       <div className="m-auto mb-8 flex w-[300px] lg:mb-2">
-        <FormButton className={`${mode?"bg-white text-main_color":"bg-main_color text-white"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
+        <BlueWhiteButton className={`${mode?"bg-white text-main_color":"bg-main_color text-white"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
       </div>
       {showForm&&
       <UniversalForm className="pt-[60px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>

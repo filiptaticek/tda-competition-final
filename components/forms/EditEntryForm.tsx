@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useDispatch,useSelector } from "react-redux"
 import { MinutesSpent, Rating, ITag, State } from "../../src/types"
 import { removeSingleRecord, updateSingleRecord } from "../../src/store/actions"
-import { deleteRequest, lastDate, putRequest,sntz } from "../../src/functions/index.js"
+import { deleteRequest, getEstheticDate,sntz, putRequest } from "../../src/functions/index.js"
 import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage,FormButton } from "../formParts"
@@ -57,9 +57,8 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
     const id = postId
     const tag_ids = picked.map((obj:any) => obj.id)
     const data = { date, description, programming_language:programming_language!=="Python"&&programming_language!=="Javascript"&&programming_language!=="C++"?own_language:programming_language, time_spent, rating, id, programmer_id:user.id, tag_ids }
-    console.log(putRequest("record",postId,data, token))
+    putRequest("record",postId,data, token)
     dispatch(updateSingleRecord(postId,data))
-    console.log(data)
     setShowForm(false)
   }
 
@@ -78,7 +77,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
   return (
     <div onClick={(event)=>{event.stopPropagation()}}>
       {showForm&&
-          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<>Edit your entry from <br/><strong>{lastDate(date)}</strong></>} onSubmit={handleEditingEntry}>
+          <UniversalForm closeForm={()=>setShowForm(!showForm)} header={<>Edit your entry from <br/><strong>{getEstheticDate(date)}</strong></>} onSubmit={handleEditingEntry}>
             <div className="w-full text-left">
               <SelectProgrammingLanguage ownLanguage text="Programming language" value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value))}/>
               {
@@ -111,7 +110,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
               <Description text="Your comment" />
               <textarea required className={inputSameProperties} value={description} onChange={(event) => setDescription(sntz(event.target.value))} />
               <div className="mt-2 flex">
-                <FormButton type="submit" text="Edit form" className="mr-2 bg-button_green" />
+                <FormButton type="submit" text="Edit" className="mr-2 bg-button_green" />
                 <FormButton onClick={handleDeletingEntry} className="bg-button_red" text="Delete"/>
               </div>
             </div>

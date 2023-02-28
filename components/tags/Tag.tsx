@@ -16,7 +16,7 @@ export const Tag = ({ name, color, description, id }: ITag) => {
 
   return (
     <div
-      className={clsx("m-1 h-[300px] w-[150px] rounded-2xl border-2 px-2 py-5 lg:m-1", returnTagColor(color), mode ? "border-white" : "border-black")}
+      className={clsx("m-1 h-[300px] w-[150px] rounded-2xl border-2 px-2 py-5 lg:m-1 hover:bg-[#3FA5FF]", returnTagColor(color), mode ? "border-white" : "border-black")}
     >
       <p className="w-full text-center text-xl font-bold text-white">{name}</p>
       <p className="h-[200px] text-center text-xl text-white">{description}</p>

@@ -5,7 +5,8 @@ interface IFormButton {
     className:string
     text:string
     onClick?:any
-    type?:Button
+    type?:Button,
+    main_color?:boolean
 }
 
 export const FormButton = ({className,text,onClick,type}:IFormButton)=>{

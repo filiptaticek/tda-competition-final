@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Language, MinutesSpent, Rating, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
-import { sntz, getEstheticDate,postRequest, formatDate } from "../../src/functions"
+import { sntz, getEstheticDate,postRequest } from "../../src/functions"
 import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton } from "../formParts"
@@ -32,7 +32,6 @@ export const AddEntryForm = ({date}:{date:string})=>{
   const handleSubmit = async (event:any) => {
     event.preventDefault()
     const tag_ids = picked.length!=0?picked.map(obj => obj.id):[]
-    console.log(date.substring(0,10))
     const data = { date:date.substring(0,10), description, programming_language:programming_language!=="Python"&&programming_language!=="Javascript"&&programming_language!=="C++"?own_language:programming_language,  programmer_id:user.id, time_spent,rating, id:100, tag_ids }
     setShowForm(false)
     const toCoPrislo = await postRequest(data,"record",token)
@@ -43,9 +42,9 @@ export const AddEntryForm = ({date}:{date:string})=>{
   return (
     <div>
       {new Date() > new Date(date)?
-        <div className={clsx(addPostButtonProps,"border-t-2 hover:opacity-80",mode?"bg-[#FFFFFF] text-main_color":"border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</div>
+        <div className={clsx(addPostButtonProps,"cursor-pointer border-t-2 hover:bg-[#3FA5FF]",mode?"border-white bg-[#FFFFFF] text-main_color":"border-b-[1px] border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</div>
         :
-        <div className={clsx(addPostButtonProps,"border-t-2",mode?"bg-white text-white":"border-black text-main_color")}>+</div>
+        <div className={clsx(addPostButtonProps,"border-t-2",mode?"bg-[#FFFFFF]":"border-black text-main_color")}>+</div>
       }
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>New entry on day <br/><strong>{getEstheticDate(date)}</strong></>} onSubmit={handleSubmit}>

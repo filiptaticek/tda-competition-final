@@ -4,8 +4,8 @@ import { UniversalForm } from "./UniversalForm"
 import { addSingleTag } from "../../src/store/actions"
 import { capitalize, postRequest,sntz } from "../../src/functions"
 import { SelectColor, FormButton, UniversalInput } from "../formParts"
-import { Color } from "../../src/types"
-import { State } from "../../src/types"
+import { Color, State } from "../../src/types"
+import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
 
 export const AddTagForm = ()=>{
 
@@ -14,7 +14,7 @@ export const AddTagForm = ()=>{
   const [description,setDescription] = useState<string>("")
   const [color,setColor] = useState<Color>("red" as Color)
   const dispatch = useDispatch()
-  const { mode, token, user } = useSelector((state: State) => state)
+  const { token, user } = useSelector((state: State) => state)
 
   const handleAddingTags = async (event:any)  =>{
     event?.preventDefault()
@@ -32,7 +32,7 @@ export const AddTagForm = ()=>{
   return(
     <>
       <div className="mb-10 flex">
-        <FormButton className={` m-auto w-[151px] ${mode?"bg-white text-main_color":"bg-main_color text-white"}`} onClick={()=>setFormShown(true)} text="Add tags" />
+        <BlueWhiteButton className="m-auto w-[151px]" onClick={()=>setFormShown(true)} text="Add tags"/>
       </div>
       {showForm&&
       <UniversalForm className="pt-[150px]" header="Add new tag" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>

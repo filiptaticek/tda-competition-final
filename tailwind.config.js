@@ -9,7 +9,8 @@ module.exports = {
       colors:{
         button_green:"rgb(16 185 129)",
         button_red: "rgb(225 29 72)",
-        main_color: "rgb(107 33 168)",
+        //main_color: "#2D43FF",
+        main_color: "#1c2054",
         black: "#000000",
       },
       maxWidth: {

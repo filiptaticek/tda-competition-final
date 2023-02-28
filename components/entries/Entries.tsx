@@ -1,16 +1,12 @@
 import { inputSameProperties } from "../../src/constants"
 import { IDiaryEntry, ITag, Rating, State } from "../../src/types"
 import { Description } from "../Description"
-import {
-  FormButton,
-  SelectProgrammingLanguage,
-  SelectRating,
-  UniversalInput,
-} from "../formParts"
+import { FormButton, SelectProgrammingLanguage, SelectRating, UniversalInput} from "../formParts"
 import { SortEntriesForm, UniversalForm } from "../forms"
 import { Entry } from "./Entry"
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
 
 export const Entries = () => {
   //STATE
@@ -67,19 +63,17 @@ export const Entries = () => {
     setMinimalTime(0),setMaximalTime(0),setMinimalRating(1),setMaximalRating(5),setProgrammingLanguage("No language filter"),setMinimalDate(undefined),setMaximalDate(undefined),setPicked([]),setTimeFilter(undefined),setRatingFilter([1, 5]),setProgrammingLanguageFilter(undefined),setDateFilter(undefined),setTagsFilter(undefined)
   }
 
-  //BODY
   return (
     <div>
-      {/*BUTTONS SETTING ON FILTERS AND RANKINGS*/}
       <div className="m-auto mb-8 flex w-[300px] font-bold lg:mb-2">
-        <FormButton
+        <BlueWhiteButton
           className={`mr-2 ${
             mode ? "bg-white text-main_color" : "bg-main_color text-white"
           }`}
           onClick={() => setFiltersShown(true)}
           text="Filter entries"
         />
-        <FormButton
+        <BlueWhiteButton
           className={
             mode ? "bg-white text-main_color" : "bg-main_color text-white"
           }
@@ -158,7 +152,7 @@ export const Entries = () => {
             <div className="mt-8 flex">
               <FormButton
                 type="submit"
-                text="Submit"
+                text="Submit filters"
                 className="mr-1 bg-button_green"
               />
               <FormButton
@@ -171,20 +165,9 @@ export const Entries = () => {
         )
       }
 
-      {/*ALL THE ENTRIES FILTERE*/}
       <div className="w-full flex-wrap lg:flex">
         {records.map(
           (entry: IDiaryEntry
-            /*{
-            date: string;
-            programming_language: string;
-            rating: Rating;
-            description: string;
-            time_spent: MinutesSpent;
-            id: number;
-            programmer_id: number | null;
-            tag_ids: number[];
-          }*/
           ) => {
             if (
               programmingLanguageFilter &&

@@ -1,4 +1,5 @@
 export const baseUrl = "http://student.cmgp.cz/api/"
+export const wordToChange = "hover:bg-[#3FA5FF]"
 export const programmingLanguages = ["Python","Javascript","C++"]
 export const inputSameProperties ="w-full rounded-md border border-black p-2 m-auto"
 export const addPostButtonProps = "w-full text-center border-x-2 border-b-2 text-white font-bold bg-main_color"

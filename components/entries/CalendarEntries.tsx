@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { useSelector } from "react-redux"
 import { useState } from "react"
 
-import { formatDate, getEstheticDate, getPastDate } from "../../src/functions"
+import { getEstheticDate, getPastDate } from "../../src/functions"
 import { IDiaryEntry, State } from "../../src/types"
 import { AddEntryForm } from "../forms"
 import { CalendarEntry } from "./CalendarEntry"
@@ -27,9 +27,8 @@ export const CallendarEntries = () => {
   return (
     <div className="flex w-full">
       <img src={mode?"sipka_doleva_bila.png":"sipka_doleva.png"} className="mt-1 mr-2 h-min w-[40px] cursor-pointer" onClick={()=>setDaysBack(daysBack-7)}/>
-      <div className="w-full">
+      <div className="w-full lg:flex">
         {daysOfTheWeek.map((den: { number: number; name: string }) => {
-          const numberOfPosts = records.filter((post: { date: string }) => post.date.substring(0, 10) === getPastDate(den.number).substring(0, 10)).length > 2 &&"border-b border-black"
           return (
             <div className="mx-1 mb-10 w-full" key={den.number}>
               <p className={clsx("rounded-t-3xl border-x-2 border-t-2 text-center text-xl font-bold", mode ? "border-white text-white" : "border-black")}>
@@ -38,10 +37,10 @@ export const CallendarEntries = () => {
                 {getEstheticDate(getPastDate(den.number))}
               </p>
               <AddEntryForm date={getPastDate(den.number)} />
-              <div className={clsx("overflow-scroll lg:max-h-[555px]", numberOfPosts)}>
+              <div className="overflow-scroll lg:max-h-[555px]">
                 {records.map(
                   (entry:IDiaryEntry): any => {
-                    if (entry.date.substring(0, 10) === formatDate(getPastDate(den.number)).substring(0, 10)) {
+                    if (getEstheticDate(entry.date) === getEstheticDate(getPastDate(den.number))) {
                       return (
                         <CalendarEntry
                           date={entry.date}
