@@ -14,7 +14,7 @@ export const Sidebar = ({hidden}:{hidden?:boolean})=>{
   return(
     <div className={clsx("w-[20%]",hidden&&"hidden md:block")}>
       <img 
-        className="h-[40px] w-[40px] cursor-pointer" 
+        className="h-[40px] min-w-[40px] cursor-pointer border border-black" 
         src={mode?"otevrit_stranku_bila.png":"otevrit_stranku.png"} 
         onClick={()=>setIsOpen(true)}/>
       <div
