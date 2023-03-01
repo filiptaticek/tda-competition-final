@@ -16,6 +16,7 @@ import { getTodayDate } from "../src/functions/date/today_date"
 export const MyAccount = () => {
   const dispatch = useDispatch()
   const [detailShown, setDetailShown] = useState<boolean>(false)
+  const [infoText, setInfoText] = useState<string|undefined>(undefined)
   const { mode, user, token } = useSelector((state: State) => state)
   const [selectedFile, setSelectedFile] = useState<string>("null")
 
@@ -34,13 +35,29 @@ export const MyAccount = () => {
     event.preventDefault()
     if (token){
       const formData = {"file":selectedFile}
-      console.log(postRequest(formData,"import",token, true))
-      const serverDataUsers = await getRequest("programmer",token)
-      const serverDataTags = await getRequest("tag",token)
-      const serverData = await getRequest("record",token)
-      dispatch(setRecords(serverData))
-      dispatch(setUsers(serverDataUsers))
-      dispatch(setTags(serverDataTags))
+      const poslano = await postRequest(formData,"import",token, true, true)
+      if (poslano){
+        setInfoText(
+          poslano==="Success"?
+            ""
+            :
+            poslano.length==1?
+              poslano.length+" line was skipped"
+              :
+              poslano.length+" lines were skipped"
+        )
+        setTimeout(() => {setInfoText(undefined)}, 3000)
+        const serverDataUsers = await getRequest("programmer",token)
+        const serverDataTags = await getRequest("tag",token)
+        const serverData = await getRequest("record",token)
+        dispatch(setRecords(serverData))
+        dispatch(setUsers(serverDataUsers))
+        dispatch(setTags(serverDataTags))
+      }
+      else {
+        setInfoText("Invalid file!")
+        setTimeout(() => {setInfoText(undefined)}, 3000)
+      }
     }
   }
 
@@ -82,6 +99,7 @@ export const MyAccount = () => {
           <Line />
           <div>
             <input className={clsx(inputSameProperties,"m-auto mb-4 w-[85%]")} type="file" onChange={handleFileInput} />
+            {infoText&&<p className="mb-3 text-xl font-bold text-button_red ">{infoText}</p>}
             <FormButton className={mode?"bg-entry_color":"bg-light_blue"} text="Import data" onClick={handleImport} />
           </div>
           <Line />
