@@ -30,7 +30,7 @@ export const CalendarEntry = ({ programming_language, time_spent, rating, descri
     <div
       className={clsx(
         "m-auto overflow-hidden border-x-2 border-t p-2 py-5 text-center duration-300",
-        mode ? "border-white hover:bg-[#3FA5FF] " : "border-black hover:bg-gray-100"
+        mode ? "border-white bg-entry_color hover:bg-[#284260] " : "border-black hover:bg-gray-100"
       )}
     >
       <div className={clsx("cursor-pointer", mode ? "text-white" : "")} onClick={() => setDetailShown(true)}>

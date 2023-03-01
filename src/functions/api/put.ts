@@ -10,7 +10,6 @@ export const putRequest = async (path:string,id: number, data: IDiaryEntry|IUser
 
   try {
     const response = await axios.put(`${baseUrl}/${path}/${id}`, data, {headers})
-    console.log(response.data)
     return(response.data)
   } catch (error) {
     console.error(error)

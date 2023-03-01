@@ -19,7 +19,7 @@ export const Sidebar = ({hidden}:{hidden?:boolean})=>{
         onClick={()=>setIsOpen(true)}/>
       <div
         className={`
-      ${isOpen ? "w-[350px] p-20" : "w-0"} ${mode?isOpen&&"border border-white":""} fixed top-0 left-0 z-10 h-full bg-main_color text-white duration-300`
+      ${isOpen ? "w-[350px] p-20" : "w-0"} ${mode?isOpen&&"border border-white bg-main_color":"bg-light_blue"} fixed top-0 left-0 z-10 h-full text-white duration-300`
         }
       >
         <div className={` ${isOpen?"block":"hidden"} text-2xl`}>

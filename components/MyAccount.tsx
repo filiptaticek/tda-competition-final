@@ -11,6 +11,7 @@ import { UniversalForm } from "./forms"
 import { inputSameProperties } from "../src/constants"
 import clsx from "clsx"
 import { postRequest } from "../src/functions/api/post"
+import { getTodayDate } from "../src/functions/date/today_date"
 
 export const MyAccount = () => {
   const dispatch = useDispatch()
@@ -26,7 +27,7 @@ export const MyAccount = () => {
     event.preventDefault()
     const karel = await getRequest("export", token)
     const data = new Blob([karel], { type: "text/csv" })
-    saveAs(data, "upravuju_to_ja.csv")
+    saveAs(data, user.username+"-"+getTodayDate())
   }
   
   const handleImport = async (event: any) => {
@@ -68,7 +69,6 @@ export const MyAccount = () => {
       {detailShown && (
         <UniversalForm
           className="pt-[30px] text-center"
-          // eslint-disable-next-line react/jsx-no-comment-textnodes
           header={<span className="font-bold">My account</span>}
           closeForm={() => setDetailShown(false)}
         >
@@ -78,11 +78,11 @@ export const MyAccount = () => {
           <Category category="Email" value={user.email} />
           <Category category="Permission" value={user.admin ? "Admin" : "User"} />
           <Line />
-          <FormButton className="m-auto bg-main_color" type="submit" onClick={handleExport} text="Export data" />
+          <FormButton className={clsx("m-auto ",mode?"bg-entry_color":"bg-light_blue")} type="submit" onClick={handleExport} text="Export data" />
           <Line />
           <div>
-            <input className={clsx(inputSameProperties,"m-auto mb-4")} type="file" onChange={handleFileInput} />
-            <FormButton className="bg-main_color" text="Import data" onClick={handleImport} />
+            <input className={clsx(inputSameProperties,"m-auto mb-4 w-[85%]")} type="file" onChange={handleFileInput} />
+            <FormButton className={mode?"bg-entry_color":"bg-light_blue"} text="Import data" onClick={handleImport} />
           </div>
           <Line />
           <FormButton className="bg-button_red" text="Log out" onClick={() => {dispatch(setUser(null)), window.localStorage.clear()}}/>

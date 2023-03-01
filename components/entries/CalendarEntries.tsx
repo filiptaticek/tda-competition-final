@@ -31,7 +31,7 @@ export const CallendarEntries = () => {
         {daysOfTheWeek.map((den: { number: number; name: string }) => {
           return (
             <div className="mx-1 mb-10 w-full" key={den.number}>
-              <p className={clsx("rounded-t-3xl border-x-2 border-t-2 text-center text-xl font-bold", mode ? "border-white text-white" : "border-black")}>
+              <p className={clsx("rounded-t-xl border-x-2 border-t-2 text-center text-xl font-bold", mode ? "border-white bg-entry_color text-white" : "border-black")}>
                 {den.name}
                 <br />
                 {getEstheticDate(getPastDate(den.number))}
@@ -55,7 +55,7 @@ export const CallendarEntries = () => {
                         />
                       )}})}
               </div>
-              <div className={`h-[25px] ${mode ? "border-white" : "border-black"} rounded-b-3xl border-x-2 border-b-2`} />
+              <div className={`h-[25px] ${mode ? "border-white bg-entry_color" : "border-black"} rounded-b-xl border-x-2 border-b-2`} />
             </div>
           )})}
       </div>

@@ -13,8 +13,8 @@ export const User = ({ name, surname, id, email, password, username, admin }: IU
 
   return (
     <div
-      className={`my-1 w-[90%] rounded-2xl ${
-        mode ? "border-white hover:bg-[#3FA5FF]" : "border-black hover:bg-gray-100"
+      className={`my-1 w-[80%] rounded-2xl md:w-[55%] ${
+        mode ? "border-white bg-entry_color hover:bg-[#284260]" : "border-black hover:bg-gray-100"
       } m-auto flex border-2 p-5 text-xl`}
     >
       <p className={`${mode ? "text-white" : ""} w-full`}>

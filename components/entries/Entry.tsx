@@ -29,7 +29,7 @@ export const Entry = ({ programming_language, time_spent, rating, description, d
   return (
     <>
       <div onClick={() => setDetailShown(true)} className="h-[420px] cursor-pointer rounded-md p-1 text-center lg:w-[20%]">
-        <div className={`border-2 ${mode ? "border-white text-white hover:bg-[#3FA5FF]" : "border-black hover:bg-gray-100"} h-full rounded-2xl pt-5`}>
+        <div className={`border-2 ${mode ? "border-white bg-entry_color text-white hover:bg-[#284260]" : "border-black hover:bg-gray-100"} h-full rounded-2xl pt-5`}>
           <div className="mb-5">
             <ProgrammingLanguageLogo programming_language={programming_language} />
             <p className="mb-2 font-bold">{programming_language}</p>

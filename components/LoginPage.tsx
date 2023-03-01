@@ -22,6 +22,7 @@ export const LoginPage = () => {
     event.preventDefault()
     const prihlaseni = await postRequest({ login: username, password }, "login")
     if (prihlaseni) {
+      console.log("Toto ukládám, ",prihlaseni)
       remember == "Yes" && window.localStorage.setItem("loggedNoteappUser", JSON.stringify(prihlaseni))
       dispatch(setUser(prihlaseni.user))
       dispatch(setToken(prihlaseni.token))
@@ -35,24 +36,14 @@ export const LoginPage = () => {
     }
   }
 
-  const handleUserName = (event: any) => {
-    const word = event.target.value
-    setFirstName(sntz(word))
-  }
-
-  const handlePassword = (event: any) => {
-    const word = event.target.value
-    setPassword(sntz(word))
-  }
-
-  const handleRemember = () => {
-    setRemember(remember == "Yes" ? "No" : "Yes")
-  }
+  const handleUserName = (event: any) => {const word = event.target.value;setFirstName(sntz(word))}
+  const handlePassword = (event: any) => {const word = event.target.value;setPassword(sntz(word))}
+  const handleRemember = () => {setRemember(remember == "Yes" ? "No" : "Yes")}
 
   return (
     <div className={`fixed left-0 top-0 h-screen w-screen overflow-hidden overflow-y-scroll px-10 py-[10px] lg:px-0 ${""}`}>
       <p className={clsx("m-auto my-10 text-center text-5xl font-bold sm:w-[60%]")}>
-        Welcome to programming <span className={"text-main_color"}>Diary.</span>
+        Welcome to programming <span className={"text-light_blue"}>Diary.</span>
       </p>
       <form className={"relative m-auto rounded-xl border border-black bg-white p-10 text-black sm:w-[500px]"} onSubmit={handleAddingUsers}>
         <p className="mb-5 text-center text-2xl">Start with loggin in</p>

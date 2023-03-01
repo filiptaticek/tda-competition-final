@@ -10,7 +10,7 @@ import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
 
 export const AddUserForm = ()=>{
 
-  const { mode, token } = useSelector((state: State) => state)
+  const { token } = useSelector((state: State) => state)
   const [buttonText, setButtonText] = useState<string>("Add user")
   const [buttonColor, setButtonColor] = useState<string>("bg-button_green")
   const [showForm,setFormShown] = useState<boolean>(false)
@@ -25,19 +25,24 @@ export const AddUserForm = ()=>{
   const handleAddingUsers = async (event:any)  =>{
     event?.preventDefault()
     const nasObjekt = {name,surname,id:1,username,email,password,admin:admin=="Yes"?true:false}
-    const toCoPrislo = await postRequest(nasObjekt,"programmer", token)
-    if (toCoPrislo){
-      dispatch(addSingleUser(toCoPrislo)) 
-      setFormShown(false)
-      setFirstName(""),setSurname(""),setUsername(""),setEmail(""),setPassword(""),setAdmin("No")
+    if (!email.includes("@")){
+      setButtonText("Invalid email")
+      setButtonColor("bg-button_red")
+      setTimeout(() => {setButtonText("Add user"),setButtonColor("bg-button_green")}, 3000)
     }
     else {
-      setButtonText("This email or username are already in use")
-      setButtonColor("bg-button_red")
-      setTimeout(() => {setButtonText("Log in "),setButtonColor("bg-button_green")}, 3000)
-    }
-  }
-
+      const toCoPrislo = await postRequest(nasObjekt,"programmer", token)
+      if (toCoPrislo){
+        dispatch(addSingleUser(toCoPrislo)) 
+        setFormShown(false)
+        setFirstName(""),setSurname(""),setUsername(""),setEmail(""),setPassword(""),setAdmin("No")
+      }
+      else {
+        setButtonText("This email or username are already in use")
+        setButtonColor("bg-button_red")
+        setTimeout(() => {setButtonText("Log in "),setButtonColor("bg-button_green")}, 3000)
+      }}}
+    
   const handleFirstName = (event:any) => {
     const word = event.target.value
     if (isOnlyLetters(word)){
@@ -72,7 +77,7 @@ export const AddUserForm = ()=>{
   return(
     <>
       <div className="m-auto mb-8 flex w-[300px] lg:mb-2">
-        <BlueWhiteButton className={`${mode?"bg-white text-main_color":"bg-main_color text-white"} m-auto`} onClick={()=>setFormShown(true)} text="Add users" />
+        <BlueWhiteButton onClick={()=>setFormShown(true)} text="Add users" />
       </div>
       {showForm&&
       <UniversalForm className="pt-[60px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>

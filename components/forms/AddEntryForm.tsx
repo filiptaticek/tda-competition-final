@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Language, MinutesSpent, Rating, ITag } from "../../src/types"
 import { addSingleRecord } from "../../src/store/actions"
-import { sntz, getEstheticDate,postRequest } from "../../src/functions"
+import { sntz, getEstheticDate,postRequest, capitalize } from "../../src/functions"
 import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton } from "../formParts"
@@ -36,20 +36,20 @@ export const AddEntryForm = ({date}:{date:string})=>{
     setShowForm(false)
     const toCoPrislo = await postRequest(data,"record",token)
     dispatch(addSingleRecord(toCoPrislo))
-    setProgrammingLanguage("Python"),setTimeSpent(1 as MinutesSpent),setRating(1),setDescription("")
+    setProgrammingLanguage("Python"),setTimeSpent(1 as MinutesSpent),setRating(1),setDescription(""), setOwnLanguage("")
   }
 
   return (
     <div>
       {new Date() > new Date(date)?
-        <div className={clsx(addPostButtonProps,"cursor-pointer border-t-2 hover:bg-[#3FA5FF]",mode?"border-white bg-[#FFFFFF] text-main_color":"border-b-[1px] border-black text-white")} onClick={()=>setShowForm(!showForm)}>+</div>
+        <div className={clsx(addPostButtonProps,"cursor-pointer border-t-2",mode?"border-white bg-[#FFFFFF] text-main_color hover:brightness-[80%]":"border-b-[1px] border-black bg-light_blue text-white hover:opacity-80")} onClick={()=>setShowForm(!showForm)}>+</div>
         :
-        <div className={clsx(addPostButtonProps,"border-t-2",mode?"bg-[#FFFFFF]":"border-black text-main_color")}>+</div>
+        <div className={clsx(addPostButtonProps,"border-t-2",mode?"bg-[#FFFFFF]":"border-black bg-light_blue text-light_blue")}>+</div>
       }
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>New entry on day <br/><strong>{getEstheticDate(date)}</strong></>} onSubmit={handleSubmit}>
         <div className="w-full">
-          <SelectProgrammingLanguage text="programming language" ownLanguage value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value as Language))} />
+          <SelectProgrammingLanguage text="programming language" ownLanguage value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value) as Language)} />
           {
             programming_language!="Python"&&
                 programming_language!="C++"&&
@@ -58,7 +58,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
                   text="Your own programming language:" 
                   required 
                   value={own_language} 
-                  onChange={(event:any) => setOwnLanguage(sntz(event.target.value))} 
+                  onChange={(event:any) => setOwnLanguage(sntz(capitalize(event.target.value)))} 
                 />
           }
           <UniversalInput required type="number" text="Time spent in minutes" extrastyle="h-10" min={1} value={time_spent} onChange={(event:any) => setTimeSpent(sntz(Number(event.target.value) as MinutesSpent))}/>

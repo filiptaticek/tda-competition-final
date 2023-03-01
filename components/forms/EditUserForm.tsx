@@ -40,10 +40,8 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
   const handlePassword = (event:any) => {setPassword(sntz(event.target.value))}
   const handleAdmin = () => {setAdmin(adminState=="Yes"?"No":"Yes")}
 
-  const handleEditingUser = (event:any)=>{ //KLÍČOVÁ FUNKCE PRO EDITACI USERŮ
-    event?.preventDefault() //stránka se nerefreshne
-    
-    /* TOTO BYCH TAM POSÍLAL KDYBY TO FUNGOVALO
+  const handleEditingUser = async (event:any)=>{
+    event?.preventDefault() 
     const updatedProgrammer = {
       name:nameState,
       surname:surnameState,
@@ -52,34 +50,36 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
       admin:adminState=="Yes"?true:false,
       id:id,
       password:passwordState===""?null:passwordState
-    }*/
-
-    if (emailState.includes("@")){ //zkontroluji že email je validní
-
-      const fakeUpdatedProgrammer = { //Fake user
-        admin: false,
-        email:"karlik.tucnak@ksi.cz",
-        id:4,
-        name: "Karel",
-        password: null,
-        surname: "Hoax",
-        username: "karlik97ads",
+    }
+    if (emailState.includes("@")){
+      const vysloto = await putRequest("programmer",id,updatedProgrammer,token)
+      if(!vysloto){
+        setEditButtonText("Email / username in use"),setEditButtonColor("bg-button_red")
+        setTimeout(() => {
+          setEditButtonText("Edit user"),
+          setEditButtonColor("bg-button_green")
+        }, 3000)
       }
-
-      putRequest("programmer",4,fakeUpdatedProgrammer,token) //posílám putRequest 
-      console.log(fakeUpdatedProgrammer)
-      dispatch(updateSingleUser(id,fakeUpdatedProgrammer)) //toto už jen mění state aplikace
-      id==user.id&&dispatch(setUser(fakeUpdatedProgrammer))
-      closeForm()
+      else{
+        dispatch(updateSingleUser(id,updatedProgrammer))
+        if (id==user.id){
+          dispatch(setUser(updatedProgrammer))
+          const karelString = window.localStorage.getItem("loggedNoteappUser")
+          if (karelString!==null){
+            const karel = JSON.parse(karelString)
+            window.localStorage.clear()
+            window.localStorage.setItem("loggedNoteappUser", JSON.stringify({token:karel.token,user:updatedProgrammer}))
+          }
+        }
+        closeForm()
+      }
     }
     else (
       setEditButtonText("Add @ to email"),setEditButtonColor("bg-button_red"),
       setTimeout(() => {
         setEditButtonText("Edit user"),
         setEditButtonColor("bg-button_green")
-      }, 3000)
-    )
-  }
+      }, 3000))}
 
   const handleDeletingUser = (event:any)=>{
     event?.preventDefault()
@@ -103,10 +103,10 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
       <UniversalInput required={true} text="Fill in the username" value={usernameState} onChange={handleUsername} />
       <UniversalInput required={true} text="Fill in the email" value={emailState} onChange={handleEmail} />
       <UniversalInput type="password" text="Fill in new password if you wish to change it" value={passwordState} onChange={handlePassword} />
-      <SelectYesNo text="Is the user admin?" value={adminState} onChange={handleAdmin} />
+      {user.username!==username&&<SelectYesNo text="Is the user admin?" value={adminState} onChange={handleAdmin} />}
       <div className="mt-8 flex">
-        <FormButton type="submit" text={editButtonText} className={clsx("mr-2 duration-500",editButtonColor)} />
-        <FormButton onClick={handleDeletingUser} className="bg-button_red duration-500" text={deleteButtonText}/>
+        <FormButton type="submit" text={editButtonText} className={clsx("duration-500",editButtonColor)} />
+        {user.username!==username&&<FormButton onClick={handleDeletingUser} className="ml-2 bg-button_red duration-500" text={deleteButtonText}/>}
       </div>
     </UniversalForm>
   )

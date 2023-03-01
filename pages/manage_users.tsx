@@ -8,7 +8,7 @@ import { Page } from "../components/Page"
 import { IUser } from "../src/types"
 import { getRequest } from "../src/functions"
 import { setUsers } from "../src/store/actions"
-
+import Link from "next/link"
 
 export default function UsersPage() {
   const users = useSelector((state:any) => state.users)
@@ -46,7 +46,12 @@ export default function UsersPage() {
             )
           })}
         </>:
-        <p className="m-auto my-10 w-[60%] text-center text-5xl font-bold">You have to be admin in order to reach this page</p>
+        <>
+          <p className="m-auto my-10 w-[60%] text-center text-5xl font-bold">You have to be admin in order to reach this page</p>
+          <div className="flex">
+            <Link className="m-auto rounded-2xl bg-light_blue px-5 py-2 font-bold text-white hover:opacity-80" href="/">Back to home page</Link>
+          </div>
+        </>
       }
     </Page>
   )

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useDispatch,useSelector } from "react-redux"
 import { MinutesSpent, Rating, ITag, State } from "../../src/types"
 import { removeSingleRecord, updateSingleRecord } from "../../src/store/actions"
-import { deleteRequest, getEstheticDate,sntz, putRequest } from "../../src/functions/index.js"
+import { deleteRequest, getEstheticDate,sntz, putRequest, capitalize } from "../../src/functions/index.js"
 import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage,FormButton } from "../formParts"
@@ -27,8 +27,8 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
   const { mode, tags, user, token } = useSelector((state: State) => state)
   const [showForm, setShowForm] = useState<boolean>(false)
   const pPL = postProgrammingLanguage 
-  const [programming_language, setProgrammingLanguage] = useState<string>(pPL=="python"?"python":pPL=="Javascript"?"Javascript":pPL=="C++"?"C++":"")
-  const [own_language, setOwnLanguage] = useState<string>(pPL=="python"?"":pPL=="Javascript"?"":pPL=="C++"?"":pPL)
+  const [programming_language, setProgrammingLanguage] = useState<string>(pPL=="Python"?"Python":pPL=="Javascript"?"Javascript":pPL=="C++"?"C++":"")
+  const [own_language, setOwnLanguage] = useState<string>(pPL=="Python"?"":pPL=="Javascript"?"":pPL=="C++"?"":pPL)
   const [time_spent, setMinutesSpent] = useState<MinutesSpent>(postMinutesSpent)
   const [rating, setRating] = useState<Rating>(postRating)
   const [description, setDescription] = useState<string>(postComment)
@@ -88,7 +88,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
                   text="Your own programming language:" 
                   required 
                   value={own_language} 
-                  onChange={(event:any) => setOwnLanguage(sntz(event.target.value))} 
+                  onChange={(event:any) => setOwnLanguage(sntz(capitalize(event.target.value)))} 
                 />
               }
               <UniversalInput required type="number" text="Time spent in minutes" min={1} value={time_spent} onChange={(event:any) => setMinutesSpent(sntz(Number(event.target.value) as MinutesSpent))} extrastyle="h-10" /> 

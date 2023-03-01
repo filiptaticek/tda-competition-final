@@ -15,15 +15,16 @@ export const Tag = ({ name, color, description, id }: ITag) => {
   const mode = useSelector((state: any) => state.mode)
 
   return (
-    <div
-      className={clsx("m-1 h-[300px] w-[150px] rounded-2xl border-2 px-2 py-5 lg:m-1 hover:bg-[#3FA5FF]", returnTagColor(color), mode ? "border-white" : "border-black")}
-    >
-      <p className="w-full text-center text-xl font-bold text-white">{name}</p>
-      <p className="h-[200px] text-center text-xl text-white">{description}</p>
-      <div className="h-fit w-full">
-        <img onClick={() => setFormShown(true)} src="upravit_zaznam_bily.png" className="m-auto mt-2 h-7 cursor-pointer" />
+    <>
+      <div
+        className={clsx("m-1 h-[300px] w-[150px] rounded-2xl border-2 px-2 py-5 hover:brightness-[90%] lg:m-1", returnTagColor(color), mode ? "border-white" : "border-black")}>
+        <p className="w-full text-center text-xl font-bold text-white">{name}</p>
+        <p className="h-[200px] text-center text-xl text-white">{description}</p>
+        <div className="h-fit w-full">
+          <img onClick={() => setFormShown(true)} src="upravit_zaznam_bily.png" className="m-auto mt-2 h-7 cursor-pointer" />
+        </div>
       </div>
-      {showForm && (
+      {showForm&&(
         <EditTagForm
           name={name}
           color={color}
@@ -34,6 +35,6 @@ export const Tag = ({ name, color, description, id }: ITag) => {
           }}
         />
       )}
-    </div>
+    </>
   )
 }

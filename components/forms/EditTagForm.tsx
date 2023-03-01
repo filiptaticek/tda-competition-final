@@ -39,7 +39,7 @@ export const EditTagForm = ({name,description,color,id, closeForm}:any)=>{
       <UniversalInput required={true} max={true} text="Edit the name of the tag" value={tagName} onChange={(event:any)=>{setName(sntz(event.target.value))}}/> 
       <UniversalInput required={true} text="Edit the description of the tag" value={tagDescription} onChange={(event:any)=>{setDescription(sntz(event.target.value))}}/> 
       <SelectColor color={color} value={tagColor} onChange={(event:any)=>{setColor(event.target.value)}} text="Edit the color of your tag" />
-      <div className="flex mt-8">
+      <div className="mt-8 flex">
         <FormButton type="submit" text="Edit form" className="mr-2 bg-button_green" />
         <FormButton onClick={handleDeletingTag} className="bg-button_red" text="Delete"/>
       </div>

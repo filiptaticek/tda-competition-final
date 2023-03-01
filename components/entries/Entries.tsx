@@ -1,7 +1,7 @@
 import { inputSameProperties } from "../../src/constants"
 import { IDiaryEntry, ITag, Rating, State } from "../../src/types"
 import { Description } from "../Description"
-import { FormButton, SelectProgrammingLanguage, SelectRating, UniversalInput} from "../formParts"
+import { FormButton, SelectRating, UniversalInput} from "../formParts"
 import { SortEntriesForm, UniversalForm } from "../forms"
 import { Entry } from "./Entry"
 import { useState } from "react"
@@ -10,7 +10,7 @@ import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
 
 export const Entries = () => {
   //STATE
-  const { mode, tags, records } = useSelector((state: State) => state)
+  const { tags, records } = useSelector((state: State) => state)
   const [filters, setFiltersShown] = useState<boolean>(false) //should the filters form be shown?
   const [sorting, setSortingShown] = useState<boolean>(false) //should the filters form be shown?
   const [minimalDate, setMinimalDate] = useState<string | undefined>(undefined) //DATE filter inputs
@@ -67,16 +67,11 @@ export const Entries = () => {
     <div>
       <div className="m-auto mb-8 flex w-[300px] font-bold lg:mb-2">
         <BlueWhiteButton
-          className={`mr-2 ${
-            mode ? "bg-white text-main_color" : "bg-main_color text-white"
-          }`}
+          className="mr-2"
           onClick={() => setFiltersShown(true)}
           text="Filter entries"
         />
         <BlueWhiteButton
-          className={
-            mode ? "bg-white text-main_color" : "bg-main_color text-white"
-          }
           onClick={() => setSortingShown(true)}
           text="Sort entries"
         />
@@ -119,11 +114,11 @@ export const Entries = () => {
               value={maximalTime}
               onChange={handleMaximalTime}
             />
-            <SelectProgrammingLanguage
+            <UniversalInput
               text="Programming language"
               value={programmingLanguage}
               onChange={handleProgrammingLanguage}
-              bonusOption={true}
+              //bonusOption={true}
             />
             <SelectRating
               text="Minimal rating"
@@ -169,57 +164,25 @@ export const Entries = () => {
         {records.map(
           (entry: IDiaryEntry
           ) => {
-            if (
-              programmingLanguageFilter &&
-              entry.programming_language !== programmingLanguageFilter
-            ) {
-              return false
-            }
-            if (
-              dateFilter &&
-              !(entry.date >= dateFilter[0] && entry.date <= dateFilter[1])
-            ) {
-              return false
-            }
-            if (
-              timeFilter &&
-              !(
-                entry.time_spent > timeFilter[0] &&
-                entry.time_spent < timeFilter[1]
-              )
-            ) {
-              return false
-            }
-            if (
-              !(
-                entry.rating >= ratingFilter[0] &&
-                entry.rating <= ratingFilter[1]
-              )
-            ) {
-              return false
-            }
-            if (tagsFilter && !entry.tag_ids) {
-              return false
-            }
-            if (
-              tagsFilter &&
-              tagsFilter.some((tag) => entry.tag_ids.includes(tag.id) === false)
-            ) {
-              return false
-            } else
-              return (
-                <Entry
-                  date={entry.date}
-                  programming_language={entry.programming_language}
-                  rating={entry.rating}
-                  description={entry.description}
-                  time_spent={entry.time_spent}
-                  key={entry.id}
-                  id={entry.id}
-                  programmer_id={entry.programmer_id}
-                  tag_ids={entry.tag_ids}
-                />
-              )
+            if (programmingLanguageFilter &&entry.programming_language !== programmingLanguageFilter) {return false}
+            if (dateFilter &&!(entry.date >= dateFilter[0] && entry.date <= dateFilter[1])) {return false}
+            if (timeFilter &&!(entry.time_spent > timeFilter[0] &&entry.time_spent < timeFilter[1])) {return false}
+            if (!(entry.rating >= ratingFilter[0] &&entry.rating <= ratingFilter[1])) {return false}
+            if (tagsFilter && !entry.tag_ids) {return false}
+            if (tagsFilter &&tagsFilter.some((tag) => entry.tag_ids.includes(tag.id) === false)) {return false} 
+            else return (
+              <Entry
+                date={entry.date}
+                programming_language={entry.programming_language}
+                rating={entry.rating}
+                description={entry.description}
+                time_spent={entry.time_spent}
+                key={entry.id}
+                id={entry.id}
+                programmer_id={entry.programmer_id}
+                tag_ids={entry.tag_ids}
+              />
+            )
           }
         )}
       </div>

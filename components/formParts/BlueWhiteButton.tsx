@@ -3,7 +3,7 @@ import { Button } from "../../src/types"
 import { useSelector } from "react-redux"
 
 interface IFormButton {
-    className:string
+    className?:string
     text:string
     onClick?:any
     type?:Button,
@@ -17,8 +17,8 @@ export const BlueWhiteButton = ({className,text,onClick,type}:IFormButton)=>{
   return(
     <button 
       className={clsx(
-        "m-auto w-[50%] rounded-2xl px-5 py-2 font-bold text-white",
-        mode?"bg-white text-main_color hover:opacity-80":"bg-main_color hover:bg-[#3FA5FF]", 
+        "m-auto w-[50%] rounded-2xl px-5 py-2 font-bold text-white hover:opacity-80",
+        mode?"bg-white text-entry_color":"bg-light_blue", 
         className
       )}
       onClick={onClick}
