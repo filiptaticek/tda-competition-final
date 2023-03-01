@@ -14,6 +14,6 @@ export const postRequest = async (data: IDiaryEntry|IUser|ITag|any,path:string,t
     log&&console.log(response.data)
     return(response.data)
   } catch (error) {
-    //console.error(error)
+    log&&console.log(error)
   }
 }

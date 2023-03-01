@@ -26,7 +26,6 @@ export const LoginPage = () => {
       remember == "Yes" && window.localStorage.setItem("loggedNoteappUser", JSON.stringify(prihlaseni))
       dispatch(setUser(prihlaseni.user))
       dispatch(setToken(prihlaseni.token))
-      console.log(prihlaseni.token)
     } else {
       setButtonText("Wrong credentials")
       setButtonColor("bg-button_red")
