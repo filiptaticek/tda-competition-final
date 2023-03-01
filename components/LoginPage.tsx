@@ -22,7 +22,6 @@ export const LoginPage = () => {
     event.preventDefault()
     const prihlaseni = await postRequest({ login: username, password }, "login")
     if (prihlaseni) {
-      console.log("Toto ukládám, ",prihlaseni)
       remember == "Yes" && window.localStorage.setItem("loggedNoteappUser", JSON.stringify(prihlaseni))
       dispatch(setUser(prihlaseni.user))
       dispatch(setToken(prihlaseni.token))
