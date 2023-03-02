@@ -35,7 +35,7 @@ export const MyAccount = () => {
     event.preventDefault()
     if (token){
       const formData = {"file":selectedFile}
-      const poslano = await postRequest(formData,"import",token, true, true)
+      const poslano = await postRequest(formData,"import",token, true)
       if (poslano){
         setInfoText(
           poslano==="Success"?

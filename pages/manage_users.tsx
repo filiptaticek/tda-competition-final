@@ -9,11 +9,10 @@ import { IUser } from "../src/types"
 import { getRequest } from "../src/functions"
 import { setUsers } from "../src/store/actions"
 import Link from "next/link"
+import clsx from "clsx"
 
 export default function UsersPage() {
-  const users = useSelector((state:any) => state.users)
-  const user = useSelector((state:any) => state.user)
-  const token = useSelector((state:any) => state.token)
+  const {users, user, token, mode} = useSelector((state:any) => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export default function UsersPage() {
           })}
         </>:
         <>
-          <p className="m-auto my-10 w-[60%] text-center text-5xl font-bold">You have to be admin in order to reach this page</p>
+          <p className={clsx("m-auto my-10 w-[60%] text-center text-5xl font-bold",mode?"text-white":"text-black")}>You have to be admin in order to reach this page</p>
           <div className="flex">
             <Link className="m-auto rounded-2xl bg-light_blue px-5 py-2 font-bold text-white hover:opacity-80" href="/">Back to home page</Link>
           </div>
