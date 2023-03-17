@@ -31,13 +31,12 @@ export const AddUserForm = ()=>{
       setTimeout(() => {setButtonText("Add user"),setButtonColor("bg-button_green")}, 3000)
     }
     else {
-      const toCoPrislo = await postRequest(nasObjekt,"programmer", token)
-      if (toCoPrislo){
+      try {
+        const toCoPrislo = await postRequest(nasObjekt,"programmer", token)
         dispatch(addSingleUser(toCoPrislo)) 
         setFormShown(false)
         setFirstName(""),setSurname(""),setUsername(""),setEmail(""),setPassword(""),setAdmin("No")
-      }
-      else {
+      } catch (error) {
         setButtonText("This email or username are already in use")
         setButtonColor("bg-button_red")
         setTimeout(() => {setButtonText("Log in "),setButtonColor("bg-button_green")}, 3000)
