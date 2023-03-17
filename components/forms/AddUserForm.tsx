@@ -7,6 +7,7 @@ import { sntz,capitalize, isOnlyLetters,postRequest } from "../../src/functions"
 import clsx from "clsx"
 import { State } from "../../src/types"
 import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
+import { FieldsRequired } from "../formParts/FieldsRequired"
 
 export const AddUserForm = ()=>{
 
@@ -86,6 +87,9 @@ export const AddUserForm = ()=>{
         <UniversalInput required={true} text="Fill in the email" value={email} onChange={handleEmail} />
         <UniversalInput type="password" required={true} text="Fill in the password" value={password} onChange={handlePassword} />
         <SelectYesNo text="Is the user admin?" value={admin} onChange={handleAdmin} />
+        <div className="mt-4">
+          <FieldsRequired />
+        </div>
         <div className="mt-8 flex">
           <FormButton className={clsx(buttonColor,"duration-500")} type="submit" text={buttonText}/>
         </div>

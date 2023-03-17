@@ -6,6 +6,7 @@ import { capitalize, postRequest,sntz } from "../../src/functions"
 import { SelectColor, FormButton, UniversalInput } from "../formParts"
 import { Color, State } from "../../src/types"
 import { BlueWhiteButton } from "../formParts/BlueWhiteButton"
+import { FieldsRequired } from "../formParts/FieldsRequired"
 
 export const AddTagForm = ()=>{
 
@@ -39,6 +40,7 @@ export const AddTagForm = ()=>{
         <UniversalInput required={true} max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
         <UniversalInput required={true} text="Fill in the description of the tag" value={description} onChange={(event:any)=>{setDescription(sntz(event.target.value))}} />
         <SelectColor text="Choose from eight different colors" value={color} onChange={(event:any)=>{setColor(sntz(event.target.value))}} />
+        <FieldsRequired />
         <div className="mt-8 flex">
           <FormButton className="bg-button_green" type="submit" text="Add the tag"/>
         </div>

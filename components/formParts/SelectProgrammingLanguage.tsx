@@ -13,7 +13,7 @@ export const SelectProgrammingLanguage = ({text,value,onChange,bonusOption,ownLa
 
   return(
     <>
-      <Description text={text} />
+      <Description text={text+" *"} />
       <select 
         className={inputSameProperties} 
         value={value} 

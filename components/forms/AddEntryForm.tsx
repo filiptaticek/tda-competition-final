@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Language, MinutesSpent, Rating, ITag } from "../../src/types"
@@ -9,6 +10,7 @@ import { UniversalInput, SelectRating, SelectProgrammingLanguage, FormButton } f
 import { inputSameProperties, addPostButtonProps } from "../../src/constants"
 import clsx from "clsx"
 import { State } from "../../src/types"
+import { FieldsRequired } from "../formParts/FieldsRequired"
 
 export const AddEntryForm = ({date}:{date:string})=>{
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -49,7 +51,7 @@ export const AddEntryForm = ({date}:{date:string})=>{
       {showForm&&
       <UniversalForm closeForm={()=>{setShowForm(false)}} header={<>New entry on day <br/><strong>{getEstheticDate(date)}</strong></>} onSubmit={handleSubmit}>
         <div className="w-full">
-          <SelectProgrammingLanguage text="programming language" ownLanguage value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value) as Language)} />
+          <SelectProgrammingLanguage text="Programming language" ownLanguage value={programming_language} onChange={(event:any) => setProgrammingLanguage(sntz(event.target.value) as Language)} />
           {
             programming_language!="Python"&&
                 programming_language!="C++"&&
@@ -77,12 +79,13 @@ export const AddEntryForm = ({date}:{date:string})=>{
               </div>
             ))}
           </div>
-          <Description text="Your comment" />
+          <Description text="Your comment *" />
           <textarea
             required
             className={inputSameProperties} 
             value={description} 
             onChange={(event) => setDescription(sntz(event.target.value))} />
+          <FieldsRequired />
           <div className="mt-8 flex">
             <FormButton className="bg-button_green" type="submit" text="Send"/>
           </div>

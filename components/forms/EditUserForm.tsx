@@ -7,6 +7,7 @@ import { UniversalInput, FormButton } from "../formParts"
 import { SelectYesNo } from "../formParts/SelectYesNo"
 import { IUser, State } from "../../src/types"
 import clsx from "clsx"
+import { FieldsRequired } from "../formParts/FieldsRequired"
 
 export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}:IUser&{closeForm:any})=>{
 
@@ -98,12 +99,13 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
 
   return(
     <UniversalForm className="pt-[60px]" header={<>Edit user <strong> {name} {surname}</strong></>} onSubmit={handleEditingUser} closeForm={closeForm}>
-      <UniversalInput text="Edit the first name of the user" value={nameState} onChange={handleFirstName}/> 
-      <UniversalInput text="Edit the surname of the user" value={surnameState} onChange={handleSurname}/> 
-      <UniversalInput required={true} text="Fill in the username" value={usernameState} onChange={handleUsername} />
-      <UniversalInput required={true} text="Fill in the email" value={emailState} onChange={handleEmail} />
-      <UniversalInput type="password" text="Fill in new password if you wish to change it" value={passwordState} onChange={handlePassword} />
+      <UniversalInput required text="Edit the first name of the user" value={nameState} onChange={handleFirstName}/> 
+      <UniversalInput required text="Edit the surname of the user" value={surnameState} onChange={handleSurname}/> 
+      <UniversalInput required text="Edit the username" value={usernameState} onChange={handleUsername} />
+      <UniversalInput required text="Edit the email" value={emailState} onChange={handleEmail} />
+      <UniversalInput type="password" text="Edit password if you wish to change it" value={passwordState} onChange={handlePassword} />
       {user.username!==username&&<SelectYesNo text="Is the user admin?" value={adminState} onChange={handleAdmin} />}
+      <FieldsRequired />
       <div className="mt-8 flex">
         <FormButton type="submit" text={editButtonText} className={clsx("duration-500",editButtonColor)} />
         {user.username!==username&&<FormButton onClick={handleDeletingUser} className="ml-2 bg-button_red duration-500" text={deleteButtonText}/>}

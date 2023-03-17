@@ -9,6 +9,7 @@ import { Description } from "../Description"
 import { UniversalForm } from "./UniversalForm"
 import { UniversalInput, SelectRating, SelectProgrammingLanguage,FormButton } from "../formParts"
 import { inputSameProperties } from "../../src/constants"
+import { FieldsRequired } from "../formParts/FieldsRequired"
 
 interface IEditEntryForm {
     date:string,
@@ -109,6 +110,7 @@ export const EditEntryForm = ({postId,date,postProgrammingLanguage,postMinutesSp
               </div>
               <Description text="Your comment" />
               <textarea required className={inputSameProperties} value={description} onChange={(event) => setDescription(sntz(event.target.value))} />
+              <FieldsRequired />
               <div className="mt-2 flex">
                 <FormButton type="submit" text="Edit" className="mr-2 bg-button_green" />
                 <FormButton onClick={handleDeletingEntry} className="bg-button_red" text="Delete"/>
