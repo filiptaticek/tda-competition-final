@@ -26,6 +26,7 @@ export default function UsersPage() {
 
   return (
     <Page>
+      <title>Programming Diary | Homepage</title>
       {user.admin?
         <>
           <Header />

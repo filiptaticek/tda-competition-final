@@ -22,6 +22,7 @@ export default function Home() {
 
   return (
     <Page>
+      <title>Programming diary | Homepage</title>
       <Header />
       <CallendarEntries />
     </Page>

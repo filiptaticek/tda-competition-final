@@ -9,6 +9,7 @@ import { postRequest, sntz } from "../src/functions"
 import { setToken, setUser } from "../src/store/actions"
 import { FormButton, UniversalInput } from "./formParts"
 import { SelectYesNo } from "./formParts/SelectYesNo"
+import { Page } from "./Page"
 
 export const LoginPage = () => {
   const [username, setFirstName] = useState<string>("")
@@ -20,12 +21,15 @@ export const LoginPage = () => {
 
   const handleAddingUsers = async (event: any) => {
     event.preventDefault()
-    const prihlaseni = await postRequest({ login: username, password }, "login")
-    if (prihlaseni) {
-      remember == "Yes" && window.localStorage.setItem("loggedNoteappUser", JSON.stringify(prihlaseni))
-      dispatch(setUser(prihlaseni.user))
-      dispatch(setToken(prihlaseni.token))
-    } else {
+    try{
+      const prihlaseni = await postRequest({ login: username, password }, "login")
+      if (prihlaseni) {
+        remember == "Yes" && window.localStorage.setItem("loggedNoteappUser", JSON.stringify(prihlaseni))
+        dispatch(setUser(prihlaseni.user))
+        dispatch(setToken(prihlaseni.token))
+      }
+    } 
+    catch(error) {
       setButtonText("Wrong credentials")
       setButtonColor("bg-button_red")
       setTimeout(() => {
@@ -39,7 +43,10 @@ export const LoginPage = () => {
   const handleRemember = () => {setRemember(remember == "Yes" ? "No" : "Yes")}
 
   return (
-    <div className={`fixed left-0 top-0 h-screen w-screen overflow-hidden overflow-y-scroll px-10 py-[10px] lg:px-0 ${""}`}>
+    <Page>
+      <header>
+        <title>Programming Diary | Login</title>
+      </header>
       <p className={clsx("m-auto my-10 text-center text-5xl font-bold sm:w-[60%]")}>
         Welcome to programming <span className={"text-light_blue"}>Diary.</span>
       </p>
@@ -54,6 +61,6 @@ export const LoginPage = () => {
           </div>
         </div>
       </form>
-    </div>
+    </Page>
   )
 }

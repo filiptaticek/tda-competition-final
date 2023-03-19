@@ -25,6 +25,7 @@ export default function TagsPage() {
 
   return (
     <Page>
+      <title>Programming diary | Tags</title>
       <Header />
       <AddTagForm />
       <div className="m-auto mb-10 w-fit max-w-[1110px] flex-wrap place-items-center sm:flex">

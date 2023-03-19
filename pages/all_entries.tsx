@@ -24,6 +24,7 @@ export default function AllEntriesPage() {
 
   return (
     <Page>
+      <title>Programming diary | All entries</title>
       <Header />
       <Entries />
     </Page>
