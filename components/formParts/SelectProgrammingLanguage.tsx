@@ -6,7 +6,7 @@ interface ISelectProgrammingLanguage {
     value:any,
     onChange:any,
     bonusOption?:boolean,
-    ownLanguage?:boolean
+    ownLanguage?:boolean,
 }
 
 export const SelectProgrammingLanguage = ({text,value,onChange,bonusOption,ownLanguage}:ISelectProgrammingLanguage)=>{

@@ -81,7 +81,7 @@ export const AddUserForm = ()=>{
       </div>
       {showForm&&
       <UniversalForm className="pt-[60px]" header="Add new user" closeForm={()=>setFormShown(false)} onSubmit={handleAddingUsers}>
-        <UniversalInput required={true} text="Fill in the first name" value={name} onChange={handleFirstName} />
+        <UniversalInput autofocus required={true} text="Fill in the first name" value={name} onChange={handleFirstName} />
         <UniversalInput required={true} text="Fill in the surname" value={surname} onChange={handleSurname} />
         <UniversalInput required={true} text="Fill in the username" value={username} onChange={handleUsername} />
         <UniversalInput required={true} text="Fill in the email" value={email} onChange={handleEmail} />

@@ -37,7 +37,7 @@ export const AddTagForm = ()=>{
       </div>
       {showForm&&
       <UniversalForm className="pt-[150px]" header="Add new tag" closeForm={()=>setFormShown(false)} onSubmit={handleAddingTags}>
-        <UniversalInput required={true} max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
+        <UniversalInput autofocus required={true} max={true} text="Fill in the name of the tag" value={name} onChange={handleName} />
         <UniversalInput required={true} text="Fill in the description of the tag" value={description} onChange={(event:any)=>{setDescription(sntz(event.target.value))}} />
         <SelectColor text="Choose from eight different colors" value={color} onChange={(event:any)=>{setColor(sntz(event.target.value))}} />
         <FieldsRequired />

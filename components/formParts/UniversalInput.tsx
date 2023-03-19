@@ -11,9 +11,10 @@ interface IUniversalInput {
     extrastyle?:string,
     type?:any,
     required?:boolean,
+    autofocus?:boolean
 }
 
-export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max, required}:IUniversalInput)=>{
+export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max, required, autofocus}:IUniversalInput)=>{
   
   return(
     <>
@@ -26,6 +27,7 @@ export const UniversalInput = ({text,min,value,onChange,extrastyle,type, max, re
         value={value} 
         onChange={onChange} 
         required={required?true:false}
+        autoFocus={autofocus&&true}
       />
     </>
   )

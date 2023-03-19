@@ -99,7 +99,7 @@ export const EditUserForm = ({closeForm,id,name,surname, email, username, admin}
 
   return(
     <UniversalForm className="pt-[60px]" header={<>Edit user <strong> {name} {surname}</strong></>} onSubmit={handleEditingUser} closeForm={closeForm}>
-      <UniversalInput required text="Edit the first name of the user" value={nameState} onChange={handleFirstName}/> 
+      <UniversalInput autofocus required text="Edit the first name of the user" value={nameState} onChange={handleFirstName}/> 
       <UniversalInput required text="Edit the surname of the user" value={surnameState} onChange={handleSurname}/> 
       <UniversalInput required text="Edit the username" value={usernameState} onChange={handleUsername} />
       <UniversalInput required text="Edit the email" value={emailState} onChange={handleEmail} />
