@@ -5,13 +5,7 @@ import { createWrapper } from "next-redux-wrapper"
 import combineReducer from "./reducers"
 
 const initalState = {
-  records:[],
   users:[],
-  user:false,
-  tags:[],
-  page:"home",
-  mode:false,
-  token:null
 }
 
 const middleware = [thunk]

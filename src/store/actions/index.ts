@@ -1,73 +1,5 @@
-import { IDiaryEntry, ITag, IUser } from "../../types"
+import { IUser } from "../../types"
 import { AnyAction } from "redux"
-import { Page } from "../reducers/page_reducer"
-
-//RECORDS ACTIONS
-
-export const setRecords = (records:Array<IDiaryEntry>): AnyAction => {
-  return {
-    type: "SET_RECORDS",
-    records:records
-  }
-}
-
-export const addSingleRecord = (newrecord:IDiaryEntry): AnyAction => {
-  return {
-    type: "ADD_RECORD",
-    newrecord:newrecord
-  }
-}
-
-export const removeSingleRecord = (deletedrecord_id:number): AnyAction => {
-  return {
-    type: "REMOVE_RECORD",
-    deletedrecord_id:deletedrecord_id
-  }
-}
-
-export const updateSingleRecord = (updatedrecord_id:number,newrecord:IDiaryEntry): AnyAction => {
-  return {
-    type: "UPDATE_RECORD",
-    updatedrecord_id:updatedrecord_id,
-    newrecord:newrecord
-  }
-}
-
-export const sortEntriesFromOldest = (): AnyAction => {
-  return {
-    type: "SORT_RECORDS_FROM_OLDEST"
-  }
-}
-
-export const sortEntriesFromNewest = (): AnyAction => {
-  return {
-    type: "SORT_RECORDS_FROM_NEWEST"
-  }
-}
-
-export const sortEntriesFromLowestRating = (): AnyAction => {
-  return {
-    type: "SORT_RECORDS_FROM_LOWEST_RATING"
-  }
-}
-
-export const sortEntriesFromHighestRating = (): AnyAction => {
-  return {
-    type: "SORT_RECORDS_FROM_HIGHEST_RATING"
-  }
-}
-
-export const sortEntriesFromShortest = (): AnyAction => {
-  return {
-    type: "SORT_RECORDS_FROM_SHORTEST"
-  }
-}
-
-export const sortEntriesFromLongest = (): AnyAction => {
-  return {
-    type: "SORT_RECORDS_FROM_LONGEST"
-  }
-}
 
 export const setUsers = (users:Array<IUser>): AnyAction => {
   return {
@@ -98,64 +30,8 @@ export const updateSingleUser = (updated_user_id:number,newrecord:IUser): AnyAct
   }
 }
 
-//TAGS ACTIONS
-
-export const setTags = (tags:Array<ITag>): AnyAction => {
-  return {
-    type: "SET_TAGS",
-    tags:tags
-  }
-}
-
-export const addSingleTag = (newtag:ITag): AnyAction =>{
-  return {
-    type: "ADD_TAG",
-    newtag:newtag
-  }
-}
-
-export const removeSingleTag = (deleted_tag_id:number): AnyAction => {
-  return {
-    type: "REMOVE_TAG",
-    deleted_tag_id:deleted_tag_id
-  }
-}
-
-export const updateSingleTag = (updated_tag_id:number,new_tag:ITag): AnyAction => {
-  return {
-    type: "UPDATE_TAG",
-    updated_tag_id:updated_tag_id,
-    new_tag:new_tag
-  }
-}
-
-//PAGE ACTIONS
-export const setPage = (page:Page): AnyAction => {
-  return {
-    type: "SET_PAGE",
-    page:page
-  }
-}
-
-//MODE ACTIONS
 export const toggleMode = (): AnyAction => {
   return {
     type: "TOGGLE_DARK_MODE"
-  }
-}
-
-//USER ACTION
-export const setUser = (newuser:IUser|null): AnyAction => {
-  return {
-    type: "SET_USER",
-    newuser:newuser
-  }
-}
-
-//USER ACTION
-export const setToken = (newtoken:string): AnyAction => {
-  return {
-    type: "SET_TOKEN",
-    newtoken:newtoken
   }
 }

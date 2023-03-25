@@ -1,8 +1,6 @@
 import clsx from "clsx"
 import { useDispatch, useSelector } from "react-redux"
-
 import { toggleMode } from "../src/store/actions"
-import { MyAccount } from "./MyAccount"
 import { Sidebar } from "./sidebar/Sidebar"
 
 /* eslint-disable jsx-a11y/alt-text */
@@ -22,7 +20,6 @@ export const Header = () => {
           <p className="m-auto flex w-fit">Programming. <span className={!mode ? "text-light_blue hover:opacity-80" : "text-white"}>&nbsp;Diary</span></p>
         </div>
         <div className="flex w-[20%] justify-end">
-          <MyAccount />
           <img
             className="h-[40px] w-[40px] cursor-pointer"
             src={mode ? "zmena_modu_bila.png" : "zmena_modu.png"}
@@ -37,7 +34,6 @@ export const Header = () => {
             <Sidebar/>
           </div>
           <div className="flex w-[50%] justify-end">
-            <MyAccount />
             <img className="w-[40px] cursor-pointer" src={mode ? "zmena_modu_bila.png" : "zmena_modu.png"} onClick={() => dispatch(toggleMode())} />
           </div>
         </div>

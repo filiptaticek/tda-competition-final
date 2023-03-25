@@ -8,7 +8,7 @@ import clsx from "clsx"
 
 export const Sidebar = ({hidden}:{hidden?:boolean})=>{
 
-  const { mode, user } = useSelector((state: State) => state)
+  const { mode } = useSelector((state: State) => state)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return(
@@ -24,20 +24,10 @@ export const Sidebar = ({hidden}:{hidden?:boolean})=>{
       >
         <div className={` ${isOpen?"block":"hidden"} text-2xl`}>
           <img className="fixed top-[20px] left-[280px] w-[50px] cursor-pointer" src={"zavrit_stranku.png"} onClick={()=>setIsOpen(false)}/>
-          <SideBarLink text="Calendar" href="/" />
+          <SideBarLink text="Home" href="/" />
           <br/>
           <br/>
-          <SideBarLink text="All Entries" href="/all_entries" />
-          <br/>
-          <br/>
-          {user.admin&&
-          <>
-            <SideBarLink text="Manage users" href="/manage_users" />
-            <br/>
-            <br/>
-          </>
-          }
-          <SideBarLink text="Tags" href="/tags" />
+          <SideBarLink text="Some other page" href="/page" />
         </div>
       </div>
     </div>
