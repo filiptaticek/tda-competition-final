@@ -1,8 +1,7 @@
-import { Header } from "../components/Header"
 import { Page } from "../components/Page"
+import { Header } from "../components/Header"
 
-export default function Home() {
-
+export default function OtherPage () {
   return (
     <Page>
       <title>CHANGE IT | Homepage</title>

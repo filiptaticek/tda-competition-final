@@ -3,7 +3,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 TEAM: Zukünftige Gewinner
 TEAM MEMBERS: Filip Tatíček, Martin Doušek
 
-
 ## Getting Started
 
 First, run the development server:

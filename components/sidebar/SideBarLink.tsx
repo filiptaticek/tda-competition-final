@@ -1,24 +1,22 @@
 import Link from "next/link"
-import { useSelector } from "react-redux"
 
 interface ISideBarLink {
-    text:string,
-    href:string
+  text: string
+  href: string
+  page: string
 }
 
-export const SideBarLink = ({text,href}:ISideBarLink)=>{
-
-  const page = useSelector((state:any) => state.page)
+export const SideBarLink = ({ text, href, page }: ISideBarLink) => {
 
   return (
-    <Link 
+    <Link
       className={`hover:font-bold 
-      ${page==="home"&&text==="Calendar"?"font-bold" : ""}
-      ${page==="all_entries"&&text==="All Entries"?"font-bold":""}
-      ${page==="tags"&&text==="Tags" ? "font-bold" : ""}
-      ${page==="manage_users"&&text==="Manage users" ? "font-bold" : ""}
-
-      `} 
-      href={href}>{text} </Link>
+      ${page === "/other_page" && text === "Other page" ? "font-bold" : ""}
+      ${page === "/" && text === "Home" ? "font-bold" : ""}
+      `}
+      href={href}
+    >
+      {text}{" "}
+    </Link>
   )
 }

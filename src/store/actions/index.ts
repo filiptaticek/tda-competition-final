@@ -1,32 +1,33 @@
-import { IUser } from "../../types"
 import { AnyAction } from "redux"
 
-export const setUsers = (users:Array<IUser>): AnyAction => {
+import { IUser } from "../../types"
+
+export const setUsers = (users: Array<IUser>): AnyAction => {
   return {
     type: "SET_USERS",
-    users:users
+    users: users
   }
 }
 
-export const addSingleUser = (newuser:IUser): AnyAction =>{
+export const addSingleUser = (newuser: IUser): AnyAction => {
   return {
     type: "ADD_USER",
-    newuser:newuser
+    newuser: newuser
   }
 }
 
-export const removeSingleUser = (deleteduser_id:number): AnyAction => {
+export const removeSingleUser = (deleteduser_id: number): AnyAction => {
   return {
     type: "REMOVE_USER",
-    deleteduser_id:deleteduser_id
+    deleteduser_id: deleteduser_id
   }
 }
 
-export const updateSingleUser = (updated_user_id:number,newrecord:IUser): AnyAction => {
+export const updateSingleUser = (updated_user_id: number, newrecord: IUser): AnyAction => {
   return {
     type: "UPDATE_USER",
-    updated_user_id:updated_user_id,
-    newrecord:newrecord
+    updated_user_id: updated_user_id,
+    newrecord: newrecord
   }
 }
 
