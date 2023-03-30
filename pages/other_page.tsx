@@ -1,12 +1,13 @@
 import { Page } from "../components/Page"
 import { Header } from "../components/Header"
+import { ResponsiveText } from "../components/ReponsiveText"
 
 export default function OtherPage () {
   return (
     <Page>
       <title>CHANGE IT | Homepage</title>
       <Header />
-      <p>Start with editing this page!</p>
+      <ResponsiveText>Start with editing this page!</ResponsiveText>
     </Page>
   )
 }

@@ -32,7 +32,7 @@ export const Sidebar = ({ hidden }: { hidden?: boolean }) => {
         className={`
       ${isOpen ? "w-[350px] p-20" : "w-0"} ${
       mode ? isOpen && "border border-white bg-main_color" : "bg-light_blue"
-    } fixed top-0 left-0 z-10 h-full text-white duration-300`}
+    } fixed left-0 top-0 z-10 h-full text-white duration-300`}
       >
         <motion.div 
           animate={isOpen ? "open" : "closed"}

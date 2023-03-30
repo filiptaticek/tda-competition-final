@@ -1,5 +1,6 @@
 import { Header } from "../components/Header"
 import { Page } from "../components/Page"
+import { ResponsiveText } from "../components/ReponsiveText"
 
 export default function Home() {
 
@@ -7,7 +8,7 @@ export default function Home() {
     <Page>
       <title>CHANGE IT | Homepage</title>
       <Header />
-      <p>Start with editing this page!</p>
+      <ResponsiveText>Start with editing this page!</ResponsiveText>
     </Page>
   )
 }

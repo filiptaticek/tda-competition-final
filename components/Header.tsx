@@ -22,7 +22,7 @@ export const Header = () => {
         </div>
         <div className={clsx("w-[60%] text-center text-5xl font-bold", mode ? "text-white" : "")}>
           <p className="m-auto flex w-fit">
-            Programming. <span className={!mode ? "text-light_blue hover:opacity-80" : "text-white"}>&nbsp;Diary</span>
+            CHANGE. <span className={!mode ? "text-light_blue hover:opacity-80" : "text-white"}>&nbsp;THE TEXT</span>
           </p>
         </div>
         <div className="flex w-[20%] justify-end">
@@ -47,8 +47,8 @@ export const Header = () => {
           </div>
         </div>
         <p className={clsx("mb-8 mt-4 w-full text-center text-4xl font-bold md:hidden", mode ? "text-white" : "")}>
-          Programming
-          <span className={clsx(!mode ? "text-light_blue" : "text-white", "block")}>Diary.</span>
+          CHANGE
+          <span className={clsx(!mode ? "text-light_blue" : "text-white", "block")}>THE TEXT.</span>
         </p>
       </>
     </div>
