@@ -1,15 +1,10 @@
 import axios from "axios"
 import { baseUrl } from "../../constants"
-import { IDiaryEntry, ITag, IUser } from "../../types"
 
-export const putRequest = async (path:string,id: number, data: IDiaryEntry|IUser|ITag, token:string)=> {
-  
-  const headers = {
-    "x-access-token": token
-  }
+export const putRequest = async (path:string,id: number, data: any)=> {
 
   try {
-    const response = await axios.put(`${baseUrl}/${path}/${id}`, data, {headers})
+    const response = await axios.put(`${baseUrl}/${path}/${id}`, data)
     return(response.data)
   } catch (error) {
     console.error(error)

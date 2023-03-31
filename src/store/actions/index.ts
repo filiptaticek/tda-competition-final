@@ -1,6 +1,6 @@
 import { AnyAction } from "redux"
 
-import { ISticknote, IUser } from "../../types"
+import { ISticknote } from "../../types"
 
 export const setNotes = (notes: Array<ISticknote>): AnyAction => {
   return {
@@ -16,16 +16,16 @@ export const addSingleNote = (newnote: ISticknote): AnyAction => {
   }
 }
 
-export const removeSingleUser = (deleteduser_id: number): AnyAction => {
+export const removeSingleNote = (deleteduser_id: number): AnyAction => {
   return {
-    type: "REMOVE_USER",
+    type: "REMOVE_NOTE",
     deleteduser_id: deleteduser_id
   }
 }
 
-export const updateSingleUser = (updated_user_id: number, newrecord: IUser): AnyAction => {
+export const updateSingleNote = (updated_user_id: number, newrecord: ISticknote): AnyAction => {
   return {
-    type: "UPDATE_USER",
+    type: "UPDATE_NOTE",
     updated_user_id: updated_user_id,
     newrecord: newrecord
   }

@@ -10,6 +10,7 @@ export const Sticknotes = ({data}:{data:ISticknote[]})=>{
       {data.map((item)=>{
         return(
           <Sticknote 
+            id={item.id}
             color={item.color}
             key={item.id}
             content={item.content}

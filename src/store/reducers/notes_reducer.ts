@@ -8,13 +8,12 @@ export const notesReducer = (state: ISticknote[] = [], action: any) => {
   case "ADD_NOTE": {
     return [action.newnote, ...state]
   }
-  /*
-  case "REMOVE_USER": {
-    return state.filter((user: IUser) => user.id !== action.deleteduser_id)
+  case "REMOVE_NOTE": {
+    return state.filter((user: ISticknote) => user.id !== action.deleteduser_id)
   }
-  case "UPDATE_USER": {
-    return state.map((record: IUser) => (record.id !== action.updated_user_id ? record : action.newrecord))
-  }*/
+  case "UPDATE_NOTE": {
+    return state.map((record: ISticknote) => (record.id !== action.updated_user_id ? record : action.newrecord))
+  }
   default:
     return state
   }

@@ -6,6 +6,7 @@ import { Color } from "../src/types"
 import { addSingleNote } from "../src/store/actions"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
+import { motion } from "framer-motion"
 
 export const NewNote = () => {
 
@@ -62,19 +63,38 @@ export const NewNote = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={clsx("m-1 h-[250px] w-[19%] border border-black p-5",getLighterColor(colorState))}>
-      <input 
-        className="w-full border border-black bg-transparent"
+    <motion.form 
+      whileHover={{ y: -10 }}
+      onSubmit={handleSubmit} 
+      className={clsx("m-1 h-[250px] w-[19%] p-5",getLighterColor(colorState))}
+    >
+      <textarea 
+        maxLength={20}
+        required
+        className="mt-2 h-[25px] w-full bg-transparent font-bold"
         placeholder={t("Add_user") as string}
         onChange={handleAuthorChange}
+        value={authorState}
       />
       <br/>
-      <input 
+      <textarea 
+        maxLength={120}
+        required
         placeholder={t("Add_content") as string}
-        className="h-[150px] w-full overflow-scroll border border-black bg-transparent text-left" 
+        className="h-[100px] w-full overflow-scroll rounded-md bg-transparent" 
         onChange={handleContentChange}
+        value={contentState}
       />  
-      <SelectColor text="Choose from eight different colors" value={colorState} onChange={(event:any)=>{setColorState(event.target.value)}} />
-      <button className="rounded-md border border-black" type="submit">Submit</button>
-    </form>)
+      <div className="flex w-full">
+        <SelectColor text="Choose from eight different colors" value={colorState} onChange={(event:any)=>{setColorState(event.target.value)}} />
+      </div>
+      <div className="mt-2 flex w-full rounded-md">
+        <button className="m-auto" type="submit">
+          <motion.img 
+            whileHover={{ scale:1.5 }}
+            src="/tick.png"
+          />
+        </button>
+      </div>
+    </motion.form>)
 }

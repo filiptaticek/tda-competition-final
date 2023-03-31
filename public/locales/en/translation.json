@@ -1,5 +1,14 @@
 {
     "About_us":"This page was made by programming team of Filip Tatíček on frontend and Martin Doušek on backend. If you have any feedback how to improve our page, feel free to contact us on fili.taticek@gmail.com",
-    "Add_content":"Write in the content of your new note",
-    "Add_user":"Write in the author of your new note"
+    "Add_content":"Write in the content",
+    "Add_user":"Write in the author",
+    "Unsaved_data":"Unsaved data!",
+    "System_version":"Version of system",
+    "number_of_commits":"Number of commits",
+    "basic_commits":"Basic commits",
+    "Last_commit":"Last commit description",
+    "Uptime":"Uptime",
+    "Boot_time":"Boot time",
+    "Usage":"Resource usage",
+    "Disc":"Disc"
 }
