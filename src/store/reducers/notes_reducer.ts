@@ -1,19 +1,20 @@
-import { IUser } from "../../types"
+import { ISticknote } from "../../types"
 
-export const usersReducer = (state: IUser[] = [], action: any) => {
+export const notesReducer = (state: ISticknote[] = [], action: any) => {
   switch (action.type) {
-  case "SET_USERS": {
-    return action.users ? action.users : []
+  case "SET_NOTES": {
+    return action.notes ? action.notes : []
   }
-  case "ADD_USER": {
-    return [action.newuser, ...state]
+  case "ADD_NOTE": {
+    return [action.newnote, ...state]
   }
+  /*
   case "REMOVE_USER": {
     return state.filter((user: IUser) => user.id !== action.deleteduser_id)
   }
   case "UPDATE_USER": {
     return state.map((record: IUser) => (record.id !== action.updated_user_id ? record : action.newrecord))
-  }
+  }*/
   default:
     return state
   }

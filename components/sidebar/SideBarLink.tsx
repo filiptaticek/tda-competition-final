@@ -11,7 +11,7 @@ export const SideBarLink = ({ text, href, page }: ISideBarLink) => {
   return (
     <Link
       className={`hover:font-bold 
-      ${page === "/other_page" && text === "Other page" ? "font-bold" : ""}
+      ${page === "/statistics" && text === "Statistics" ? "font-bold" : ""}
       ${page === "/about_us" && text === "About us" ? "font-bold" : ""}
       ${page === "/" && text === "Home" ? "font-bold" : ""}
       `}

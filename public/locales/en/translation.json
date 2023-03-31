@@ -1,4 +1,5 @@
 {
-    "Introduction": "CHANGE THE TEXT HERE.",
-    "About_us":"This page was made by programming team of Filip Tatíček on frontend and Martin Doušek on backend. If you have any feedback how to improve our page, feel free to contact us on fili.taticek@gmail.com"
+    "About_us":"This page was made by programming team of Filip Tatíček on frontend and Martin Doušek on backend. If you have any feedback how to improve our page, feel free to contact us on fili.taticek@gmail.com",
+    "Add_content":"Write in the content of your new note",
+    "Add_user":"Write in the author of your new note"
 }

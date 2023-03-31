@@ -5,9 +5,9 @@ import { ResponsiveText } from "../components/ReponsiveText"
 export default function OtherPage () {
   return (
     <Page>
-      <title>CHANGE IT | Homepage</title>
+      <title>Sticknotes | Statistics</title>
       <Header />
-      <ResponsiveText>Start with editing this page!</ResponsiveText>
+      <ResponsiveText>This is statistics page!</ResponsiveText>
     </Page>
   )
 }

@@ -1,18 +1,18 @@
 import { AnyAction } from "redux"
 
-import { IUser } from "../../types"
+import { ISticknote, IUser } from "../../types"
 
-export const setUsers = (users: Array<IUser>): AnyAction => {
+export const setNotes = (notes: Array<ISticknote>): AnyAction => {
   return {
-    type: "SET_USERS",
-    users: users
+    type: "SET_NOTES",
+    notes: notes
   }
 }
 
-export const addSingleUser = (newuser: IUser): AnyAction => {
+export const addSingleNote = (newnote: ISticknote): AnyAction => {
   return {
-    type: "ADD_USER",
-    newuser: newuser
+    type: "ADD_NOTE",
+    newnote: newnote
   }
 }
 
