@@ -28,7 +28,7 @@ export const UniversalForm = ({ header, onSubmit, children, closeForm, className
       <form className={"relative m-auto w-[300px] rounded-xl border border-black bg-white p-10 text-black sm:w-[500px]"} onSubmit={onSubmit}>
         <motion.img           
           whileHover={{ scale:1.3 }}
-          className="relative left-[220px] bottom-[15px] cursor-pointer sm:left-[415px]" src="zavrit_formular.png" onClick={closeForm}
+          className="relative bottom-[15px] left-[220px] cursor-pointer sm:left-[415px]" src="zavrit_formular.png" onClick={closeForm}
         />
         <p className="mb-5 text-center text-2xl">{header}</p>
         <div className="overflow-hidden">{children}</div>
