@@ -9,6 +9,7 @@ import { deleteRequest } from "../src/functions/api/delete"
 import { useTranslation } from "react-i18next"
 import { SelectColor } from "./formParts"
 import { Color } from "../src/types"
+import { sntz } from "../src/functions/api"
 
 export const Sticknote = ({ content, author, color, id }: { content: string; author: string, color:any,id:number }) => {
 
@@ -20,7 +21,7 @@ export const Sticknote = ({ content, author, color, id }: { content: string; aut
   const {t} = useTranslation()
   
   const handleContentChange = (event: any) => {
-    setContentState(event.target.value)
+    setContentState(sntz(event.target.value))
     setErrorMesage(t("Unsaved_data") as string)
   }
 
@@ -30,7 +31,7 @@ export const Sticknote = ({ content, author, color, id }: { content: string; aut
   }
 
   const handleAuthorChange = (event: any) => {
-    setAuthorState(event.target.value)
+    setAuthorState(sntz(event.target.value))
     setErrorMesage(t("Unsaved_data") as string)
   }
 

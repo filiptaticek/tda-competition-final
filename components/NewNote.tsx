@@ -7,6 +7,7 @@ import { addSingleNote } from "../src/store/actions"
 import { useDispatch } from "react-redux"
 import { useTranslation } from "react-i18next"
 import { motion } from "framer-motion"
+import { sntz } from "../src/functions/api"
 
 export const NewNote = () => {
 
@@ -40,11 +41,11 @@ export const NewNote = () => {
   }
 
   const handleContentChange = (event: any) => {
-    setContentState(event.target.value)
+    setContentState(sntz(event.target.value))
   }
     
   const handleAuthorChange = (event: any) => {
-    setAuthorState(event.target.value)
+    setAuthorState(sntz(event.target.value))
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

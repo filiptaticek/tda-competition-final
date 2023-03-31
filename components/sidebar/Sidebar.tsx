@@ -46,7 +46,7 @@ export const Sidebar = ({ hidden }: { hidden?: boolean }) => {
           <SideBarLink page={router.pathname} text="Statistics" href="/statistics" />
           <br />
           <br />
-          <SideBarLink page={router.pathname} text="About us" href="/about_us" />
+          <SideBarLink page={router.pathname} text="Information" href="/information" />
         </motion.div>
       </div>
     </div>

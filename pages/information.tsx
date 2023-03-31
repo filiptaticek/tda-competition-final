@@ -9,7 +9,7 @@ export default function AboutUs () {
 
   return (
     <Page>
-      <title>Sticknotes | Homepage</title>
+      <title>Sticknotes | Information</title>
       <Header />
       <ResponsiveText className="text-center">{t("About_us")}</ResponsiveText>
     </Page>
