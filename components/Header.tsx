@@ -55,7 +55,8 @@ export const Header = () => {
             <Sidebar />
           </div>
           <div className="flex w-[50%] justify-end">
-            <img className="w-[40px] cursor-pointer" src={mode ? "/icons/zmena_modu_bila.png" : "/icons/zmena_modu.png"} onClick={() => dispatch(toggleMode())} />
+            <img className="mr-2 h-[40px] cursor-pointer" src={i18n.language =="en" ? "cs.png" : "en.png"}             onClick={() => changeLanguage(i18n.language =="cs" ? "en" : "cs")} />
+            <img className="w-[40px] cursor-pointer" src={mode ? "zmena_modu_bila.png" : "zmena_modu.png"} onClick={() => dispatch(toggleMode())} />
           </div>
         </div>
         <p className={clsx("mb-8 mt-4 w-full text-center text-4xl font-bold md:hidden", mode ? "text-white" : "")}>
