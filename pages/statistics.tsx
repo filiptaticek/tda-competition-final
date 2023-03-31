@@ -134,13 +134,13 @@ export default function OtherPage () {
             {t("Usage")}
           </ResponsiveText><br/>
           <ResponsiveText className="text-center text-xl">
-            <span className="font-bold">CPU:</span> {cpuLoad}
+            <span className="font-bold">CPU:</span> {cpuLoad}%
           </ResponsiveText>
           <ResponsiveText className="text-center text-xl">
-            <span className="font-bold">RAM:</span> {ramUsage}
+            <span className="font-bold">RAM:</span> {ramUsage}%
           </ResponsiveText>
           <ResponsiveText className="text-center text-xl">
-            <span className="font-bold">{t("Disc")}:</span> {discUsage}
+            <span className="font-bold">{t("Disc")}:</span> {discUsage}%
           </ResponsiveText>
         </HalfContainer>
       </div>
