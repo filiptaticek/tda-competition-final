@@ -7,7 +7,6 @@ interface ISideBarLink {
 }
 
 export const SideBarLink = ({ text, href, page }: ISideBarLink) => {
-
   return (
     <Link
       className={`hover:font-bold 
@@ -15,8 +14,7 @@ export const SideBarLink = ({ text, href, page }: ISideBarLink) => {
       ${page === "/information" && text === "Information" ? "font-bold" : ""}
       ${page === "/" && text === "Home" ? "font-bold" : ""}
       `}
-      href={href}
-    >
+      href={href}>
       {text}{" "}
     </Link>
   )

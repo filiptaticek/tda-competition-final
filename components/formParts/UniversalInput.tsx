@@ -15,7 +15,17 @@ interface IUniversalInput {
   autofocus?: boolean
 }
 
-export const UniversalInput = ({ text, min, value, onChange, extrastyle, type, max, required, autofocus }: IUniversalInput) => {
+export const UniversalInput = ({
+  text,
+  min,
+  value,
+  onChange,
+  extrastyle,
+  type,
+  max,
+  required,
+  autofocus
+}: IUniversalInput) => {
   return (
     <>
       <Description text={text + (required ? " *" : "")} />
