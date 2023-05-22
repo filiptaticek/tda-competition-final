@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import { useState } from "react"
@@ -84,7 +85,7 @@ export const NewNote = () => {
       <textarea
         maxLength={20}
         required
-        className="mt-2 h-[25px] w-full bg-transparent font-bold"
+        className="mt-2 h-[25px] w-full resize-none bg-transparent font-bold"
         placeholder={t("Add_user") as string}
         onChange={handleAuthorChange}
         value={authorState}
@@ -94,7 +95,7 @@ export const NewNote = () => {
         maxLength={120}
         required
         placeholder={t("Add_content") as string}
-        className="h-[100px] w-full overflow-scroll rounded-md bg-transparent"
+        className="h-[100px] w-full resize-none overflow-scroll rounded-md bg-transparent"
         onChange={handleContentChange}
         value={contentState}
       />

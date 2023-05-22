@@ -109,7 +109,7 @@ export const Sticknote = ({
       <br />
       <textarea
         maxLength={120}
-        className="h-[70px] w-full overflow-scroll bg-transparent"
+        className="h-[70px] w-full resize-none overflow-scroll bg-transparent"
         value={contentState}
         onChange={handleContentChange}
         onBlur={handleSubmit}
